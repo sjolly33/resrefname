@@ -7,10 +7,10 @@
     <artifactId>projet</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>net.projet.ws.client</groupId>
-  <artifactId>client</artifactId>
+  <groupId>net.projet.ws.api</groupId>
+  <artifactId>api</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>client</name>
+  <name>api</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -18,12 +18,8 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-     <groupId>log4j</groupId>
-     <artifactId>log4j</artifactId>
-    </dependency>
   </dependencies>
   <build>
-    <finalName>client</finalName>
+    <finalName>api</finalName>
   </build>
 </project>
