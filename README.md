@@ -10,3 +10,8 @@ Travail :
 Dev 1 : Front-End
 Dev 2 : Back-End
 Dev 1 & 2 : Discussion Archi + API
+
+Cmd :
+mvn clean (avant les git add)
+mvn clean install (~compilation + exécution)
+mvn jetty:run (~lancement du server)
