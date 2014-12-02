@@ -13,45 +13,78 @@ import javax.persistence.*;
 
 @XmlRootElement(name = "work")
 @Entity
+@Inheritance
+@DiscriminatorColumn(name="WorkType")
 @Table(name="WORK")
-public class Work extends IMuseum(){
-	@Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int workID;
+public abstract class Work extends IMuseum{
 
-	@Column(name="TITLE",nullable=false)
-	private String title;
+	@Column(name="Dimension")
+	private List<float> _dimension = new ArrayList<float>(3);
 
-	@Column(name="DESCRIPTION",nullable=false)
-	private String description;
+	@Column(name="Author")
+	private Author _author;
 
-	@Column(name="RefMuseum", nullable=false)
-	private IMuseum ref;
+	@Column(name="Date")
+	private Date _date;
 
-	@XmlElement
-	public int getCollectionID() {
-		return collectionID;
-	}
+	@Column(name="Resume")
+	private String _resume;
 
-	public void setCollectionID(int id){
-		this.collectionID = id;	
-	}
+	@Column(name="Particularities")
+	protected Particularities _particularities;
 
 	@XmlElement
- 	public String getDescription() {
- 		return description;
+ 	public List<float> getDimension() {
+ 		return new ArrayList(_dimension);
  	}
 
- 	public void setDescription(String description) {
- 		this.description = description;
+ 	public void setDimension(List<float> dimension){
+ 		_dimension = new ArrayList(dimension);
+ 	}
+
+ 	public void setDimension(float x, float y, float z) {
+ 		_dimension[0] = x;
+ 		_dimension[1] = y;
+ 		_dimension[2] = z;
+ 	}
+
+	@XmlElement
+ 	public String getAuthor(){
+ 		return "";
+ 	}
+
+ 	public void setAuthor(Author author){
+ 		_author = author;
  	}
 
  	@XmlElement
- 	public IMuseum getRefMuseum() {
- 		return ref;
+ 	public String getResume(){
+ 		return _resume;
  	}
 
- 	public void setRefMuseum(IMuseum ref) {
- 		this.ref = ref;
+ 	public void setResume(String resume){
+ 		_resume = resume;
  	}
+
+ 	@XmlElement
+ 	public Date getDate(){
+ 		return _date;
+ 	}
+
+ 	public void setDate(Date date){
+ 		_date = date;
+ 	}
+
+ 	@XmlElement
+ 	public Particularities getParticularities(){
+ 		return _particularities;
+ 	}
+
+ 	public void setParticularities(Particularities particularities){
+ 		_particularities = particularities;
+ 	}
+
+ 	public void addParticularity(Particularity particularity){
+		_particularities.addParticularity(particularity);
+	}
 }

@@ -12,19 +12,14 @@ import javax.persistence.*;
 @XmlRootElement(name = "collection")
 @Entity
 @Table(name="COLLECTION")
-public class Collection extends IMuseum(){
+public class Collection extends IMuseum{
+	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int collectionID;
-
-	@Column(name="TITLE",nullable=false)
-	private String title;
-
-	@Column(name="DESCRIPTION",nullable=false)
-	private String description;
+	private int _collectionID;
 
 	@Column(name="RefMuseum", nullable=false)
-	private IMuseum ref;
+	private IMuseum _ref;
 
 	@XmlElement
 	public int getCollectionID() {
@@ -34,15 +29,6 @@ public class Collection extends IMuseum(){
 	public void setCollectionID(int id){
 		this.collectionID = id;	
 	}
-
-	@XmlElement
- 	public String getDescription() {
- 		return description;
- 	}
-
- 	public void setDescription(String description) {
- 		this.description = description;
- 	}
 
  	@XmlElement
  	public IMuseum getRefMuseum() {

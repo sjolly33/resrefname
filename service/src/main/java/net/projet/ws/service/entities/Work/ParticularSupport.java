@@ -9,7 +9,10 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import javax.persistence.*;	
 
-@MappedSuperClass
-public abstract class Particularity{
+@XmlRootElement(name = "support")
+@Entity
+@DiscriminatorValue("Type")
+@Table(name="SUPPORT")
+public class ParticularSupport{
 	
 }

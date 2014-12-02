@@ -10,6 +10,43 @@ import org.apache.log4j.Logger;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class IMuseum(){
+public abstract class IMuseum{
+
+	@Id 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int _elementID;
 	
+	@Column(name="TITLE",nullable=false)
+	private String title;
+
+	@Column(name="DESCRIPTION",nullable=false)
+	private String description;
+
+	@XmlElement
+	public int getID(){
+		return _elementID;
+	}
+
+	public void setID(int id){
+		_elementID = id;
+	}
+
+	@XmlElement
+ 	public String getTitle() {
+ 		return title;
+ 	}
+
+ 	public void setTitle(String title) {
+ 		this.title = title;
+ 	}
+
+	@XmlElement
+ 	public String getDescription() {
+ 		return description;
+ 	}
+
+ 	public void setDescription(String description) {
+ 		this.description = description;
+ 	}
 }
+
