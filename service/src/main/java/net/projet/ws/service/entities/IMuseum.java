@@ -9,6 +9,7 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import javax.persistence.*;
 
+@MappedSuperclass
 public abstract class IMuseum(){
 	
 }
