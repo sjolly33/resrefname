@@ -1,4 +1,4 @@
-package net.projet.ws.service.entities.Collection;
+package net.projet.ws.service.entities.Work;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,13 +9,13 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import javax.persistence.*;
 
-@XmlRootElement(name = "collection")
+@XmlRootElement(name = "work")
 @Entity
-@Table(name="COLLECTION")
-public class Collection extends IMuseum(){
+@Table(name="WORK")
+public class Work implements IMuseum(){
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int collectionID;
+	private int workID;
 
 	@Column(name="TITLE",nullable=false)
 	private String title;
