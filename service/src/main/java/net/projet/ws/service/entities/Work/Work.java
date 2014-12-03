@@ -18,6 +18,11 @@ import javax.persistence.*;
 @Table(name="WORK")
 public abstract class Work extends IMuseum{
 
+	@Id 
+	@Column(name="workID", nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int _workID;
+
 	@Column(name="Dimension")
 	private List<float> _dimension = new ArrayList<float>(3);
 
@@ -30,8 +35,10 @@ public abstract class Work extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="WORK_PARTICULARITY", joinColumns=@JoinColumn(name="workID", referencedColumnName="workID"), inverseJoinColumns=@JoinColumn(name="ParticularID", referencedColumnName="ParticularID"))
 	@Column(name="Particularities")
-	protected Particularities _particularities;
+	protected List<Particularities> _particularities;
 
 	@XmlElement
  	public List<float> getDimension() {
@@ -83,8 +90,4 @@ public abstract class Work extends IMuseum{
  	public void setParticularities(Particularities particularities){
  		_particularities = particularities;
  	}
-
- 	public void addParticularity(Particularity particularity){
-		_particularities.addParticularity(particularity);
-	}
 }

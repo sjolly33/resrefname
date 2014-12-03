@@ -11,10 +11,6 @@ import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class IMuseum{
-
-	@Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _elementID;
 	
 	@Column(name="TITLE",nullable=false)
 	private String title;

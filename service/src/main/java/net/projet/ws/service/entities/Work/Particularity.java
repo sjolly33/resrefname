@@ -16,7 +16,8 @@ import javax.persistence.*;
 @Table(name="PARTICULARITY")
 public abstract class Particularity{
 	
-	@Id 
+	@Id
+	@Column(name="ParticularID", nullable=false) 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int _particularID;
 

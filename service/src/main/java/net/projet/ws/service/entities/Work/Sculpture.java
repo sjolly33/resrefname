@@ -15,11 +15,4 @@ import javax.persistence.*;
 @Table(name="SCULPTURE")
 public class Sculpture extends Work{
 
-	public void addParticularity(ParticularTech tech){
-		return; //TODO Error
-	}
-
-	public void addParticularity(ParticularSupport support){
-		_particularities.addParticularity(support);
-	}
 }
