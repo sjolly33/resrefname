@@ -28,3 +28,24 @@ mvn clean (avant les git add)
 mvn clean install (~compilation + exécution)
 
 mvn jetty:run (~lancement du server)
+
+
+////////////////////////////////////////////////////////
+
+Structuration : 
+
+Work *<->1 Author
+
+Work 1<->* Picture
+
+Work *->* Particularity
+
+Museum 1->* IMuseum
+
+Museum 1->* Author
+
+CollectionWork 1->* Work
+
+CollectionPicture 1->* Picture
+
+NB : Si le temps, sortir Comments & tags de IMuseum pour table à part => plus rapide pour recherche

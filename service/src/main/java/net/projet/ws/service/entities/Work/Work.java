@@ -19,14 +19,15 @@ import javax.persistence.*;
 public abstract class Work extends IMuseum{
 
 	@Id 
-	@Column(name="workID", nullable=false)
+	@Column(name="WorkID", nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int _workID;
 
 	@Column(name="Dimension")
 	private List<float> _dimension = new ArrayList<float>(3);
 
-	@Column(name="Author")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Column(name="AuthorRef")
 	private Author _author;
 
 	@Column(name="Date")
@@ -35,10 +36,23 @@ public abstract class Work extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
+	@OneToMany(fetch=FetchType.EAGER)
+	@Column(name="PictureRef")
+	private List<Picture> _pictures;
+
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="WORK_PARTICULARITY", joinColumns=@JoinColumn(name="workID", referencedColumnName="workID"), inverseJoinColumns=@JoinColumn(name="ParticularID", referencedColumnName="ParticularID"))
 	@Column(name="Particularities")
 	protected List<Particularities> _particularities;
+
+	@XmlElement
+ 	public int getID() {
+ 		return _workID;
+ 	}
+
+ 	public void setID(int id){
+ 		_workID = id;
+ 	}
 
 	@XmlElement
  	public List<float> getDimension() {
@@ -56,13 +70,13 @@ public abstract class Work extends IMuseum{
  	}
 
 	@XmlElement
- 	public String getAuthor(){
- 		return "";
- 	}
+	public Author getAuthor(){
+		return _author;
+	}
 
- 	public void setAuthor(Author author){
- 		_author = author;
- 	}
+	public void setAuthor(Author author){
+		_author = author;
+	}
 
  	@XmlElement
  	public String getResume(){
@@ -82,12 +96,21 @@ public abstract class Work extends IMuseum{
  		_date = date;
  	}
 
- 	@XmlElement
- 	public Particularities getParticularities(){
- 		return _particularities;
+  	@XmlElement
+ 	public List<Particularities> getParticularities(){
+ 		return new ArrayList<Particularities>(_particularities);
  	}
 
- 	public void setParticularities(Particularities particularities){
- 		_particularities = particularities;
+ 	public void setParticularities(List<Particularities> particularities){
+ 		_particularities = new ArrayList<Particularities>(particularities);
+ 	}
+
+ 	@XmlElement
+ 	public List<Picture> getPicture(){
+ 		return new ArrayList<Picture>(_pictures);
+ 	}
+
+ 	public void setPicture(List<Picture> picture){
+ 		_picture = picture;
  	}
 }

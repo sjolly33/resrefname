@@ -32,9 +32,31 @@ public class Museum{
 	@Column(name="INFORMATION")
 	private String _information;
 
-	@OneToMany(mappedBy="CollectionID",targetEntity=Order.class, fetch=FetchType.EAGER)
-	@Column(name="Collection")
-	private List<CollectionMuseum> _collections;
+	@OneToMany(fetch=FetchType.EAGER)
+	@Column(name="ELEMENT")
+	private List<IMuseum> _elements;
+
+	@OneToMany(fetch=FetchType.EAGER)
+	@Column(name="AUTHOR")
+	private List<Author> _authors;
+
+	@XmlElement
+	public List<Author> getAuthors(){
+		return new ArrayList(_authors);
+	}
+
+	public void setAuthors(List<Author> author){
+		_authors = new ArrayList(author);
+	}
+
+	@XmlElement
+	public List<IMuseum> getElements(){
+		return new ArrayList(_elements);
+	}
+
+	public void setElements(List<IMuseum> elements){
+		_elements = new ArrayList(elements);
+	}
 
 	@XmlElement
 	public int getID(){

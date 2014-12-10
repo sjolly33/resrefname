@@ -16,12 +16,12 @@ import javax.persistence.*;
 public class Paint extends Work{
 
 	//TODO : Once
-	public void addParticularity(ParticularTech tech){
-		_particularities.addParticularity(tech);
-	}
+	//public void addParticularity(ParticularTech tech){
+//		_particularities.addParticularity(tech);
+	//}
 	
 	//TODO : Once
-	public void addParticularity(ParticularSupport support){
-		_particularities.addParticularity(support);
-	}
+	//public void addParticularity(ParticularSupport support){
+	//	_particularities.addParticularity(support);
+	//}
 }
