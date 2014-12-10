@@ -1,6 +1,9 @@
 package net.projet.ws.service.entities.Work;
 
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Worker.Author;
+
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +12,10 @@ import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
 @XmlRootElement(name = "work")
@@ -24,11 +31,11 @@ public abstract class Work extends IMuseum{
 	private int _workID;
 
 	@Column(name="Dimension")
-	private List<float> _dimension = new ArrayList<float>(3);
+	private List<Float> _dimension = new ArrayList<Float>(3);
 
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Column(name="AuthorRef")
-	private Author _author;
+	@JoinColumn(name = "AuthorRef")
+	private Author _authorRef;
 
 	@Column(name="Date")
 	private Date _date;
@@ -36,14 +43,14 @@ public abstract class Work extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="_workRef")
 	@Column(name="PictureRef")
 	private List<Picture> _pictures;
 
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="WORK_PARTICULARITY", joinColumns=@JoinColumn(name="workID", referencedColumnName="workID"), inverseJoinColumns=@JoinColumn(name="ParticularID", referencedColumnName="ParticularID"))
 	@Column(name="Particularities")
-	protected List<Particularities> _particularities;
+	protected List<Particularity> _particularities;
 
 	@XmlElement
  	public int getID() {
@@ -55,27 +62,27 @@ public abstract class Work extends IMuseum{
  	}
 
 	@XmlElement
- 	public List<float> getDimension() {
+ 	public List<Float> getDimension() {
  		return new ArrayList(_dimension);
  	}
 
- 	public void setDimension(List<float> dimension){
+ 	public void setDimension(List<Float> dimension){
  		_dimension = new ArrayList(dimension);
  	}
 
- 	public void setDimension(float x, float y, float z) {
- 		_dimension[0] = x;
- 		_dimension[1] = y;
- 		_dimension[2] = z;
+ 	public void setDimension(Float x, Float y, Float z) {
+ 		_dimension.set(0,x);
+ 		_dimension.set(1,y);
+ 		_dimension.set(2,z);
  	}
 
 	@XmlElement
 	public Author getAuthor(){
-		return _author;
+		return _authorRef;
 	}
 
 	public void setAuthor(Author author){
-		_author = author;
+		_authorRef = author;
 	}
 
  	@XmlElement
@@ -97,12 +104,12 @@ public abstract class Work extends IMuseum{
  	}
 
   	@XmlElement
- 	public List<Particularities> getParticularities(){
- 		return new ArrayList<Particularities>(_particularities);
+ 	public List<Particularity> getParticularities(){
+ 		return new ArrayList<Particularity>(_particularities);
  	}
 
- 	public void setParticularities(List<Particularities> particularities){
- 		_particularities = new ArrayList<Particularities>(particularities);
+ 	public void setParticularities(List<Particularity> particularities){
+ 		_particularities = new ArrayList<Particularity>(particularities);
  	}
 
  	@XmlElement
@@ -111,6 +118,6 @@ public abstract class Work extends IMuseum{
  	}
 
  	public void setPicture(List<Picture> picture){
- 		_picture = picture;
+ 		_pictures = picture;
  	}
 }

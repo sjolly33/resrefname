@@ -1,0 +1,16 @@
+org/rest/service/filters/JpaUtil.class
+net/projet/ws/service/entities/Collection/CollectionWork.class
+net/projet/ws/service/entities/Work/ParticularTech.class
+net/projet/ws/service/entities/Work/Sculpture.class
+net/projet/ws/service/entities/Worker/Author.class
+net/projet/ws/service/entities/IMuseum.class
+org/rest/service/filters/JpaFilter.class
+net/projet/ws/service/entities/Work/Work.class
+net/projet/ws/service/entities/Work/ParticularSupport.class
+net/projet/ws/service/entities/Picture/Picture.class
+net/projet/ws/service/entities/Collection/CollectionMuseum.class
+net/projet/ws/service/entities/Collection/CollectionPicture.class
+net/projet/ws/service/entities/Museum.class
+net/projet/ws/service/entities/MuseumSample.class
+net/projet/ws/service/entities/Work/Particularity.class
+net/projet/ws/service/entities/Work/Paint.class

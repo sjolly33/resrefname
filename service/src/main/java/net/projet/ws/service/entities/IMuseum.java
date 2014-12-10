@@ -7,6 +7,10 @@ import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -61,7 +65,7 @@ public abstract class IMuseum{
  		return _comment;
  	}
 
- 	public void setDescription(String comment) {
+ 	public void setComment(String comment) {
  		this._comment = comment;
  	}
 

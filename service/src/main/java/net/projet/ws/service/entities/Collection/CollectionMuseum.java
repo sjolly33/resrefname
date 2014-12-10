@@ -1,5 +1,7 @@
 package net.projet.ws.service.entities.Collection;
 
+import net.projet.ws.service.entities.IMuseum;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -7,6 +9,10 @@ import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
 @XmlRootElement(name = "collection")
@@ -23,10 +29,10 @@ public abstract class CollectionMuseum extends IMuseum{
 
 	@XmlElement
 	public int getCollectionID() {
-		return collectionID;
+		return _collectionID;
 	}
 
 	public void setCollectionID(int id){
-		this.collectionID = id;	
+		this._collectionID = id;	
 	}
 }

@@ -1,0 +1,16 @@
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Picture/Picture.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/filters/JpaFilter.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/Sculpture.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/IMuseum.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Museum.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Collection/CollectionWork.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Collection/CollectionMuseum.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/MuseumSample.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/Work.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/Paint.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/filters/JpaUtil.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Worker/Author.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/Particularity.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/ParticularTech.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Work/ParticularSupport.java
+/home/dechu/projet/resrefname/service/src/main/java/net/projet/ws/service/entities/Collection/CollectionPicture.java

@@ -1,6 +1,7 @@
-package net.projet.ws.service.entities.Work;
+package net.projet.ws.service.entities.Worker;
 
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Work.Work;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +10,10 @@ import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
 @XmlRootElement(name = "author")
@@ -27,7 +32,7 @@ public class Author{
 	@Column(name="adress")
 	private String _adress;
 
-	@OneToMany(mappedBy="AuthorRef")
+	@OneToMany(mappedBy="_authorRef")
 	@Column(name="WorkRef")
 	private List<Work> _worksRef;
 
@@ -50,7 +55,7 @@ public class Author{
  	}
 
 	@XmlElement
- 	public int getAdress() {
+ 	public String getAdress() {
  		return _adress;
  	}
 

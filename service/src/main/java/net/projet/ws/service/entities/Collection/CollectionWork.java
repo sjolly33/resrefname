@@ -1,6 +1,6 @@
 package net.projet.ws.service.entities.Collection;
 
-import net.projet.ws.service.entities.Work;
+import net.projet.ws.service.entities.Work.Work;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +9,10 @@ import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
 @XmlRootElement(name = "collectionWork")
@@ -18,7 +22,6 @@ import javax.persistence.*;
 public class CollectionWork extends CollectionMuseum{
 
 	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(mappedBy="WorkID",targetEntity=Order.class, fetch=FetchType.EAGER)
 	@Column(name="WorkID", nullable=false)
 	private List<Work> _works;
 
