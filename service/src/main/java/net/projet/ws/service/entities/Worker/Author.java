@@ -32,7 +32,7 @@ public class Author{
 	@Column(name="adress")
 	private String _adress;
 
-	@OneToMany(mappedBy="_authorRef")
+	@OneToMany(mappedBy="_authorRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@Column(name="WorkRef")
 	private List<Work> _worksRef;
 

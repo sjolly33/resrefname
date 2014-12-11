@@ -33,7 +33,7 @@ public abstract class Work extends IMuseum{
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "AuthorRef")
 	private Author _authorRef;
 
@@ -43,11 +43,11 @@ public abstract class Work extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
-	@OneToMany(mappedBy="_workRef")
+	@OneToMany(mappedBy="_workRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@Column(name="PictureRef")
 	private List<Picture> _pictures;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinTable(name="WORK_PARTICULARITY", joinColumns=@JoinColumn(name="workID", referencedColumnName="workID"), inverseJoinColumns=@JoinColumn(name="ParticularID", referencedColumnName="ParticularID"))
 	@Column(name="Particularities")
 	protected List<Particularity> _particularities;

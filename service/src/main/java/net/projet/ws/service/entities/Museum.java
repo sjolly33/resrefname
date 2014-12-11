@@ -38,11 +38,11 @@ public class Museum{
 	@Column(name="INFORMATION")
 	private String _information;
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
 	@Column(name="ELEMENT")
 	private List<IMuseum> _elements;
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
 	@Column(name="AUTHOR")
 	private List<Author> _authors;
 

@@ -33,7 +33,7 @@ public abstract class Picture extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "WorkRef")
 	private Work _workRef;
 
