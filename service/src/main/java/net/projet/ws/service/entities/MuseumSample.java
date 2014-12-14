@@ -16,4 +16,5 @@ import javax.persistence.*;
 @Path("/museum")
 
 public class MuseumSample{
+	
 }

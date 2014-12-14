@@ -7,7 +7,7 @@
      <!-- Register resources and providers under com.vogella.jersey.first package. -->
     <init-param>
         <param-name>jersey.config.server.provider.packages</param-name>
-        <param-value><!--org.rest.service.entities--></param-value>
+        <param-value>net.projet.ws.service.entities</param-value>
     </init-param>
     <init-param>
     	<param-name>jersey.config.server.provider.scanning.recursive</param-name>
@@ -15,14 +15,14 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  <servlet-mapping>
+  <servlet-mapping<name />
     <servlet-name>jersey</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
   
   <filter>
    <filter-name>JPA</filter-name>
-   <filter-class></filter-class>
+   <filter-class>net.projet.ws.service.filters.JpaFilter</filter-class>
   </filter>
 
   <filter-mapping>

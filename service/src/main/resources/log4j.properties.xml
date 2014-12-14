@@ -12,4 +12,5 @@
  log4j.logger.org.dbunit=INFO
 
  # AppTest
- # log4j.logger.org.rest.service.filters=ALL
+ log4j.logger.net.projet.ws.service.filters=ALL
+ log4j.logger.net.projet.ws.service.entities=ALL

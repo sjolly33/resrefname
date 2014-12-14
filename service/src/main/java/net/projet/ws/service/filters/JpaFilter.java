@@ -1,4 +1,4 @@
-package org.rest.service.filters;
+package net.projet.ws.service.filters;
 import org.apache.log4j.Logger;
  import javax.persistence.EntityManager;
  import javax.persistence.EntityManagerFactory;

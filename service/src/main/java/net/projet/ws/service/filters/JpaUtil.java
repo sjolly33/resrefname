@@ -1,4 +1,4 @@
-package org.rest.service.filters;
+package net.projet.ws.service.filters;
 import javax.persistence.EntityManager;
 
  public class JpaUtil {
