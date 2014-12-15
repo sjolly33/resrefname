@@ -1,5 +1,9 @@
 package net.projet.ws.service.entities;
 
+import net.projet.ws.service.filters.JpaUtil;
+
+import javax.ws.rs.core.Response;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -58,8 +62,8 @@ public class MuseumSampleTest{
  	}
 
 	@GET
-	@Path("/museums")
-	@Produces("application/xml")
+	@Path("/json/museums")
+	@Produces("application/json")
 	public List<MuseumTest> listMuseums(){
 		LOG.info("getMuseums");
 		return new ArrayList(museums);

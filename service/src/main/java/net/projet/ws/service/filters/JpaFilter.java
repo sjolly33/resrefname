@@ -34,7 +34,7 @@ import org.apache.log4j.Logger;
 
  public void init(FilterConfig config) {
  destroy();
- emf =Persistence.createEntityManagerFactory("Albums");
+ emf =Persistence.createEntityManagerFactory("Museum");
  }
 
  public void destroy(){
