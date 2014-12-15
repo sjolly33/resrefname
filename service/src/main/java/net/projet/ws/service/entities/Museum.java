@@ -42,19 +42,6 @@ public class Museum{
 	@Column(name="ELEMENT")
 	private List<IMuseum> _elements;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
-	@Column(name="AUTHOR")
-	private List<Author> _authors;
-
-	@XmlElement
-	public List<Author> getAuthors(){
-		return new ArrayList(_authors);
-	}
-
-	public void setAuthors(List<Author> author){
-		_authors = new ArrayList(author);
-	}
-
 	@XmlElement
 	public List<IMuseum> getElements(){
 		return new ArrayList(_elements);
