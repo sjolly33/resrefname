@@ -5,6 +5,9 @@
  <persistence-unit name="Museum" transaction-type="RESOURCE_LOCAL" >
  <provider> org.eclipse.persistence.jpa.PersistenceProvider </provider>
  <class> net.projet.ws.service.entities.MuseumTest </class>
+ <class> net.projet.ws.service.entities.ElementTest </class>
+ <class> net.projet.ws.service.entities.IMuseum </class>
+
  <!--<class> net.projet.ws.service.entities.Museum </class>-->
  <non-jta-data-source>java:comp/env/jdbc/H2DB</non-jta-data-source>
  <properties>

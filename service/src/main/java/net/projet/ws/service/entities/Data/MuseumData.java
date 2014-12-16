@@ -25,6 +25,12 @@ public class MuseumData{
 
 	static {
 
+	Museum museum1 = new Museum();
+	museum1.setName("Museum");
+	museum1.setTheme("Hazard");
+	museum1.setAdress("NY");
+	museum1.setPictures(PictureData.initPictures());
+	museums.add(museum1);
 	
 	EntityManager em = JpaUtil.getEntityManager();
 	EntityTransaction tx = null;
@@ -47,6 +53,15 @@ public class MuseumData{
 
 	public static List<Museum> getMuseums(){
 		LOG.info("getMuseums");
-		return new ArrayList(museums);
+		return new ArrayList<Museum>(museums);
+	}
+
+	public static Museum getMuseum(int id){
+		LOG.info("getMuseum");
+		for(int i=0;i<museums.size();++i){
+			if(museums.get(i).getID() == idMuseum)
+				return museums.get(i);
+		}
+		return museums.get(0);
 	}
 }

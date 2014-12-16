@@ -1,8 +1,5 @@
 package net.projet.ws.service.entities;
 
-import net.projet.ws.service.entities.Collection.CollectionMuseum;
-import net.projet.ws.service.entities.Worker.Author;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -16,39 +13,35 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
-
-@XmlRootElement(name = "museum")
+@XmlRootElement(name = "elementTest")
 @Entity
-@Table(name="MUSEUM")
-public class Museum{
+@DiscriminatorValue("test")
+@Table(name="ELEMENTS")
+public class ElementTest extends IMuseum{
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _museumID;
+	private int _element;
 	
-	@Column(name="NAME",nullable=false)
+	@Column(name="NAME")
 	private String _name;
 
-	@Column(name="THEME", nullable=false)
+	@Column(name="THEME")
 	private String _theme;
 
-	@Column(name="ADRESS", nullable=false)
+	@Column(name="ADRESS")
 	private String _adress;
 
 	@Column(name="INFORMATION")
 	private String _information;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
-	@JoinColumn(name="PICTURES")
-	private List<Picture> _pictures;
-
 	@XmlElement
 	public int getID(){
-		return _museumID;
+		return _element;
 	}
 
 	public void setID(int id){
-		_museumID = id;
+		_element = id;
 	}
 
 	@XmlElement
@@ -86,14 +79,4 @@ public class Museum{
  	public void setAdress(String adress){
  		_adress = adress;
  	}
-
- 	@XmlElement
- 	public List<Picture> getPictures(){
- 		return new ArrayList<Picture>(_pictures);
- 	}
-
- 	public void setPictures(List<Picture> pictures){
- 		_pictures = new ArrayList<Picture>(pictures);
- 	}
 }
-

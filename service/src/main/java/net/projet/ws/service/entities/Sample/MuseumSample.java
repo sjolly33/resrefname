@@ -17,4 +17,18 @@ import javax.persistence.*;
 
 public class MuseumSample{
 	
+	@GET
+	@Path("/json/museums")
+	@Produces("application/json")
+	public List<MuseumTest> listMuseums(){
+		return MuseumData.getMuseums();
+	}
+
+	@GET
+	@Path("/json/museum/{id}")
+	@Produces("application/json")
+	public MuseumTest getMuseum(@PathParam("id") int museumID){
+		return MuseumData.getMuseum(museumID);
+	}
+
 }

@@ -1,6 +1,8 @@
 package net.projet.ws.service.entities.Sample;
 
 import net.projet.ws.service.entities.Data.MuseumDataTest;
+import net.projet.ws.service.entities.ElementTest;
+import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.MuseumTest;
 import net.projet.ws.service.filters.JpaUtil;
 
@@ -28,5 +30,19 @@ public class MuseumSampleTest{
 	@Produces("application/json")
 	public List<MuseumTest> listMuseums(){
 		return MuseumDataTest.getMuseums();
+	}
+
+	@GET
+	@Path("/json/museum/{id}")
+	@Produces("application/json")
+	public MuseumTest getMuseum(@PathParam("id") int museumID){
+		return MuseumDataTest.getMuseum(museumID);
+	}
+
+	@GET
+	@Path("/json/museum/{id}/elements")
+	@Produces("application/json")
+	public List<ElementTest> listElements(@PathParam("id") int museumID){
+		return MuseumDataTest.getListElements(museumID);
 	}
 }

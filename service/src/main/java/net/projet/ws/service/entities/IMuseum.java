@@ -15,16 +15,11 @@ import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class IMuseum{
-	
-	@Id 
-	@Column(name="ElementID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _elementID;
 
-	@Column(name="TITLE",nullable=false)
+	@Column(name="TITLE")
 	private String _title;
 
-	@Column(name="DESCRIPTION",nullable=false)
+	@Column(name="DESCRIPTION")
 	private String _description;
 
 	@Column(name="COMMENT")
@@ -32,15 +27,6 @@ public abstract class IMuseum{
 
 	@Column(name="TAGS")
 	private String _tags;
-
-	@XmlElement
- 	public int getElement() {
- 		return _elementID;
- 	}
-
- 	public void setElement(int element) {
- 		this._elementID = element;
- 	}
 
 	@XmlElement
  	public String getTitle() {

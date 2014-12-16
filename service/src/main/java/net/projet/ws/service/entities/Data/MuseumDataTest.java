@@ -1,6 +1,8 @@
 package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.MuseumTest;
+import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.ElementTest;
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -31,7 +33,21 @@ public class MuseumDataTest{
  	museum1.setTheme("HipHop");
  	museum1.setAdress("quelque_part");
  	museum1.setInformation("dedeideidiednediez");
- 	museums.add(museum1);
+ 	List<ElementTest> elements = new ArrayList<ElementTest>();
+ 	ElementTest element1 = new ElementTest();
+ 	element1.setName("titi");
+ 	elements.add(element1);
+ 	museum1.setElements(elements);
+
+ 	/*List<IMuseum> elements = new ArrayList<IMuseum>();
+ 	ElementTest element1 = new ElementTest();
+	element1.setName("element1");
+	elements.add((IMuseum)element1);
+	ElementTest element2 = new ElementTest();
+	element2.setName("element2");
+	elements.add((IMuseum)element2);
+	museum1.setElements(elements);*/
+	museums.add(museum1);
 
  	MuseumTest museum2 = new MuseumTest();
  	museum2.setID(2);
@@ -62,6 +78,27 @@ public class MuseumDataTest{
 
 	public static List<MuseumTest> getMuseums(){
 		LOG.info("getMuseums");
-		return new ArrayList(museums);
+		return new ArrayList<MuseumTest>(museums);
+	}
+
+	public static MuseumTest getMuseum(int idMuseum){
+		LOG.info("getMuseum");
+		for(int i=0;i<museums.size();++i){
+			if(museums.get(i).getID() == idMuseum)
+				return museums.get(i);
+		}
+		return museums.get(0);
+	}
+
+	public static List<ElementTest> getListElements(int idMuseum){
+		LOG.info("getMuseumElements");
+		List<ElementTest> elements = new ArrayList<ElementTest>();
+		for(int i=0; i<museums.size();++i){
+			if(museums.get(i).getID() == idMuseum){
+				elements = new ArrayList<ElementTest>(museums.get(i).getElements());
+				break;
+			}
+		}
+		return elements;
 	}
 }

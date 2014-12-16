@@ -34,6 +34,19 @@ public class MuseumTest{
 	@Column(name="INFORMATION")
 	private String _information;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@JoinColumn(name="ELEMENT")
+	private List<ElementTest> _elements;
+
+	@XmlElement
+	public List<ElementTest> getElements(){
+		return _elements;
+	}
+
+	public void setElements(List<ElementTest> elements){
+		_elements = new ArrayList(elements);
+	}
+
 	@XmlElement
 	public int getID(){
 		return _museumID;

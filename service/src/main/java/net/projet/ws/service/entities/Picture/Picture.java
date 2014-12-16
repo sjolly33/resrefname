@@ -20,7 +20,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance
 @Table(name="PICTURE")
-public abstract class Picture extends IMuseum{
+public class Picture extends IMuseum{
 
 	@Id 
 	@Column(name="PictureID", nullable=false)
