@@ -32,6 +32,15 @@ public abstract class Particularity{
 	private String _information;
 
 	@XmlElement
+	public int getID(){
+		return _particularID;
+	}
+
+	public void setID(int id){
+		_particularID = id;
+	}
+
+	@XmlElement
 	public String getName(){
 		return _name;
 	}

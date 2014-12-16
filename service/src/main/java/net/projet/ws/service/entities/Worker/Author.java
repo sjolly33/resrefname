@@ -33,7 +33,7 @@ public class Author{
 	private String _adress;
 
 	@OneToMany(mappedBy="_authorRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@Column(name="WorkRef")
+	@JoinColumn(name="WorkRef")
 	private List<Work> _worksRef;
 
 	@XmlElement

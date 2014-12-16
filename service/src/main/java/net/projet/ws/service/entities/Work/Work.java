@@ -37,19 +37,18 @@ public abstract class Work extends IMuseum{
 	@JoinColumn(name = "AuthorRef")
 	private Author _authorRef;
 
-	@Column(name="Date")
+	@Temporal(TemporalType.DATE)
 	private Date _date;
 
 	@Column(name="Resume")
 	private String _resume;
-
+/*
 	@OneToMany(mappedBy="_workRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@Column(name="PictureRef")
+	@JoinColumn(name="PictureRef")
 	private List<Picture> _pictures;
-
-	@ManyToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinTable(name="WORK_PARTICULARITY", joinColumns=@JoinColumn(name="workID", referencedColumnName="workID"), inverseJoinColumns=@JoinColumn(name="ParticularID", referencedColumnName="ParticularID"))
-	@Column(name="Particularities")
+*/
+	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="Particularities")
 	protected List<Particularity> _particularities;
 
 	@XmlElement
@@ -111,7 +110,7 @@ public abstract class Work extends IMuseum{
  	public void setParticularities(List<Particularity> particularities){
  		_particularities = new ArrayList<Particularity>(particularities);
  	}
-
+/*
  	@XmlElement
  	public List<Picture> getPicture(){
  		return new ArrayList<Picture>(_pictures);
@@ -119,5 +118,5 @@ public abstract class Work extends IMuseum{
 
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
- 	}
+ 	}*/
 }

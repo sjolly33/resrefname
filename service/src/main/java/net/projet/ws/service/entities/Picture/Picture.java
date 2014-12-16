@@ -2,6 +2,7 @@ package net.projet.ws.service.entities.Picture;
 
 import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Collection.CollectionPicture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,15 +28,20 @@ public class Picture extends IMuseum{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int _pictureID;
 
-	@Column(name="Date")
+	@Temporal(TemporalType.DATE)
 	private Date _date;
 
 	@Column(name="Resume")
 	private String _resume;
-
+/*
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "WorkRef")
 	private Work _workRef;
+*/
+
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  	@JoinColumn(name="Collection", nullable=true)
+  	private CollectionPicture _collection;
 
 	@XmlElement
  	public int getID() {
@@ -62,5 +68,10 @@ public class Picture extends IMuseum{
 
  	public void setDate(Date date){
  		_date = date;
+ 	}
+
+ 	@XmlElement
+ 	public CollectionPicture getCollection(){
+ 		return _collection;
  	}
 }

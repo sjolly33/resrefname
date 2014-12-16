@@ -29,16 +29,27 @@ mvn clean install (~compilation + exécution)
 
 mvn jetty:run (~lancement du server)
 
+////////////////////////////////////////////////////////
+
+Dossiers : 
+
+/entities : Tout ce qui concerne le model
+
+/entities/Data : Les données disponibles à l'initialisation
+/entities/Sample : Les commandes 
+
+/filters : Tout ce qui concerne les filtres (EM, etc)
+
 
 ////////////////////////////////////////////////////////
 
-Structuration : 
+Model : 
 
 Work *<->1 Author
 
 Work 1<->* Picture
 
-Work *->* Particularity
+Work 1->* Particularity
 
 Museum 1->* IMuseum
 
@@ -46,6 +57,6 @@ Museum 1->* Author
 
 CollectionWork 1->* Work
 
-CollectionPicture 1->* Picture
+CollectionPicture 1<->* Picture
 
-NB : Si le temps, sortir Comments & tags de IMuseum pour table à part => plus rapide pour recherche
+NB : Si le temps, sortir Comments & tags de IMuseum pour table à part => plus rapide pour recherche ; table de jointure entre Work<->Picture et Work<->Particularity

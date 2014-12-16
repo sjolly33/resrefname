@@ -1,6 +1,7 @@
 package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.Museum;
+import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -29,6 +30,7 @@ public class MuseumData{
 	museum1.setName("Museum");
 	museum1.setTheme("Hazard");
 	museum1.setAdress("NY");
+
 	museum1.setPictures(PictureData.initPictures());
 	museums.add(museum1);
 	
@@ -59,7 +61,7 @@ public class MuseumData{
 	public static Museum getMuseum(int id){
 		LOG.info("getMuseum");
 		for(int i=0;i<museums.size();++i){
-			if(museums.get(i).getID() == idMuseum)
+			if(museums.get(i).getID() == id)
 				return museums.get(i);
 		}
 		return museums.get(0);

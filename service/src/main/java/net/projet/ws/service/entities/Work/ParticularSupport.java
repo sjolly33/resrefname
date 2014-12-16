@@ -17,6 +17,6 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("Type")
 @Table(name="SUPPORT")
-public class ParticularSupport{
+public class ParticularSupport extends Particularity{
 	
 }

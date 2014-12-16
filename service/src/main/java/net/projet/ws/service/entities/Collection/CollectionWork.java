@@ -22,7 +22,7 @@ import javax.persistence.*;
 public class CollectionWork extends CollectionMuseum{
 
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@Column(name="WorkID")
+	@JoinColumn(name="WorkID")
 	private List<Work> _works;
 
  	@XmlElement

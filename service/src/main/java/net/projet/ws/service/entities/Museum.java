@@ -2,6 +2,8 @@ package net.projet.ws.service.entities;
 
 import net.projet.ws.service.entities.Collection.CollectionMuseum;
 import net.projet.ws.service.entities.Worker.Author;
+import net.projet.ws.service.entities.Picture.Picture;
+
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
