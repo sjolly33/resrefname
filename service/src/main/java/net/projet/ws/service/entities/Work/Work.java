@@ -2,6 +2,7 @@ package net.projet.ws.service.entities.Work;
 
 import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Worker.Author;
 
 
@@ -32,25 +33,29 @@ public abstract class Work extends IMuseum{
 
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
-
+/*
 	@ManyToOne(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "AuthorRef")
+	@JoinColumn(name = "AuthorRef", nullable = true)
 	private Author _authorRef;
-
+*/
 	@Temporal(TemporalType.DATE)
 	private Date _date;
 
 	@Column(name="Resume")
 	private String _resume;
-/*
-	@OneToMany(mappedBy="_workRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="PictureRef")
-	private List<Picture> _pictures;
-*/
-	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="Particularities")
-	protected List<Particularity> _particularities;
 
+	@OneToMany(mappedBy="_workRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="PictureRef", nullable=true)
+	private List<Picture> _pictures;
+
+	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  	@JoinColumn(name="Collection", nullable=true)
+  	private CollectionWork _collection;
+/*
+	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="Particularities", nullable=true)
+	protected List<Particularity> _particularities;
+*/
 	@XmlElement
  	public int getID() {
  		return _workID;
@@ -74,7 +79,7 @@ public abstract class Work extends IMuseum{
  		_dimension.set(1,y);
  		_dimension.set(2,z);
  	}
-
+/*
 	@XmlElement
 	public Author getAuthor(){
 		return _authorRef;
@@ -83,7 +88,7 @@ public abstract class Work extends IMuseum{
 	public void setAuthor(Author author){
 		_authorRef = author;
 	}
-
+*/
  	@XmlElement
  	public String getResume(){
  		return _resume;
@@ -101,7 +106,7 @@ public abstract class Work extends IMuseum{
  	public void setDate(Date date){
  		_date = date;
  	}
-
+/*
   	@XmlElement
  	public List<Particularity> getParticularities(){
  		return new ArrayList<Particularity>(_particularities);
@@ -109,8 +114,8 @@ public abstract class Work extends IMuseum{
 
  	public void setParticularities(List<Particularity> particularities){
  		_particularities = new ArrayList<Particularity>(particularities);
- 	}
-/*
+ 	}*/
+
  	@XmlElement
  	public List<Picture> getPicture(){
  		return new ArrayList<Picture>(_pictures);
@@ -118,5 +123,10 @@ public abstract class Work extends IMuseum{
 
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
- 	}*/
+ 	}
+
+ 	@XmlElement
+ 	public CollectionWork getCollection(){
+ 		return _collection;
+ 	}
 }

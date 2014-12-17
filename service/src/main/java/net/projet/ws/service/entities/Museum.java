@@ -44,6 +44,10 @@ public class Museum{
 	@JoinColumn(name="PICTURES")
 	private List<Picture> _pictures;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@JoinColumn(name="WORKS")
+	private List<Picture> _works;
+
 	@XmlElement
 	public int getID(){
 		return _museumID;
@@ -96,6 +100,15 @@ public class Museum{
 
  	public void setPictures(List<Picture> pictures){
  		_pictures = new ArrayList<Picture>(pictures);
+ 	}
+
+ 	@XmlElement
+ 	public List<Work> getWorks(){
+ 		return new ArrayList<Work>(_works);
+ 	}
+
+ 	public void setWorks(List<Work> works){
+ 		_works = new ArrayList<Work>(works);
  	}
 }
 

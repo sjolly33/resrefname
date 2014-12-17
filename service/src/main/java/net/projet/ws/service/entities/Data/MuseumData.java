@@ -2,6 +2,7 @@ package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -26,12 +27,24 @@ public class MuseumData{
 
 	static {
 
-	Museum museum1 = new Museum();
-	museum1.setName("Museum");
-	museum1.setTheme("Hazard");
-	museum1.setAdress("NY");
+		Museum museum1 = new Museum();
+		museum1.setName("Museum");
+		museum1.setTheme("Hazard");
+		museum1.setAdress("NY");
 
-	museum1.setPictures(PictureData.initPictures());
+		museum1.setPictures(PictureData.initPictures());
+		museum1.setWorks(WorkData.initWorks());
+
+		List<Works> works = museum1.getWorks();
+		List<Pictures> pictures = museum1.getPictures();
+		for(int i=0;i<pictures.size();++i){
+			pictures.setWork(works.get(0));
+		}
+		museum1.setPictures(pcitures);
+
+	}
+
+
 	museums.add(museum1);
 	
 	EntityManager em = JpaUtil.getEntityManager();
