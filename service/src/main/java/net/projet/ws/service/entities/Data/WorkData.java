@@ -29,7 +29,7 @@ public class WorkData{
 		Work work1 = new Paint();
 		work1.setTitle("THE paint");
 		work1.setDescription("Work en souvenir de qqchose");
-		works.add(Work1);
+		works.add(work1);
 		Work work2 = new Paint();
 		works.add(work2);
 		return new ArrayList<Work>(works);

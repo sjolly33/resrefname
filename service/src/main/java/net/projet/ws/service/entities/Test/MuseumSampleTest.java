@@ -1,10 +1,4 @@
-package net.projet.ws.service.entities.Sample;
-
-import net.projet.ws.service.entities.Data.MuseumDataTest;
-import net.projet.ws.service.entities.ElementTest;
-import net.projet.ws.service.entities.IMuseum;
-import net.projet.ws.service.entities.MuseumTest;
-import net.projet.ws.service.filters.JpaUtil;
+package net.projet.ws.service.entities.Test;
 
 import javax.ws.rs.core.Response;
 

@@ -1,4 +1,6 @@
-package net.projet.ws.service.entities;
+package net.projet.ws.service.entities.Test;
+
+import net.projet.ws.service.entities.IMuseum;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

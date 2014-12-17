@@ -2,6 +2,7 @@ package net.projet.ws.service.entities;
 
 import net.projet.ws.service.entities.Collection.CollectionMuseum;
 import net.projet.ws.service.entities.Worker.Author;
+import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Picture.Picture;
 
 
@@ -46,7 +47,7 @@ public class Museum{
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
 	@JoinColumn(name="WORKS")
-	private List<Picture> _works;
+	private List<Work> _works;
 
 	@XmlElement
 	public int getID(){

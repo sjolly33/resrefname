@@ -43,14 +43,6 @@ public abstract class Work extends IMuseum{
 
 	@Column(name="Resume")
 	private String _resume;
-
-	@OneToMany(mappedBy="_workRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="PictureRef", nullable=true)
-	private List<Picture> _pictures;
-
-	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-  	@JoinColumn(name="Collection", nullable=true)
-  	private CollectionWork _collection;
 /*
 	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="Particularities", nullable=true)
@@ -115,7 +107,7 @@ public abstract class Work extends IMuseum{
  	public void setParticularities(List<Particularity> particularities){
  		_particularities = new ArrayList<Particularity>(particularities);
  	}*/
-
+/*
  	@XmlElement
  	public List<Picture> getPicture(){
  		return new ArrayList<Picture>(_pictures);
@@ -124,9 +116,5 @@ public abstract class Work extends IMuseum{
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
  	}
-
- 	@XmlElement
- 	public CollectionWork getCollection(){
- 		return _collection;
- 	}
+*/
 }

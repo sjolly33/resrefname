@@ -1,9 +1,9 @@
-package net.projet.ws.service.entities.Sample;
+package net.projet.ws.service.entities;
 
-import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Data.MuseumData;
 import net.projet.ws.service.entities.Data.PictureData;
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Work.Work;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -20,7 +20,7 @@ import javax.persistence.*;
 
 @Path("/museum")
 
-public class MuseumSample{
+public class MuseumRoot{
 	
 	@GET
 	@Path("/museums")
@@ -56,6 +56,42 @@ public class MuseumSample{
 			}
 		}
 		return pictures.get(0);
+	}
+
+	@GET
+	@Path("/{id}/works")
+	@Produces("application/json")
+	public List<Work> getWorks(@PathParam("id") int museumID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		return museum.getWorks();
+	}
+
+	@GET
+	@Path("/{id_museum}/work/{id_work}")
+	@Produces("application/json")
+	public Work getWork(@PathParam("id_museum") int museumID, @PathParam("id_work") int workID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<Work> works = museum.getWorks();
+		for(int i=0;i<works.size();++i){
+			if(works.get(i).getID() == workID){
+				return works.get(i);
+			}
+		}
+		return works.get(0);
+	}
+
+	@GET
+	@Path("/{id_museum}/picture/{id_picture}/work")
+	@Produces("application/json")
+	public Work getWorkByPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<Picture> pictures = museum.getPictures();
+		for(int i=0;i<pictures.size();++i){
+			if(pictures.get(i).getID() == pictureID){
+				return pictures.get(i).getWork();
+			}
+		}
+		return pictures.get(0).getWork();
 	}
 
 }

@@ -1,4 +1,4 @@
-package net.projet.ws.service.entities;
+package net.projet.ws.service.entities.Test;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

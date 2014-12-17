@@ -35,34 +35,31 @@ public class MuseumData{
 		museum1.setPictures(PictureData.initPictures());
 		museum1.setWorks(WorkData.initWorks());
 
-		List<Works> works = museum1.getWorks();
-		List<Pictures> pictures = museum1.getPictures();
+		List<Work> works = museum1.getWorks();
+		List<Picture> pictures = museum1.getPictures();
 		for(int i=0;i<pictures.size();++i){
-			pictures.setWork(works.get(0));
+			pictures.get(i).setWork(works.get(0));
 		}
-		museum1.setPictures(pcitures);
+		museum1.setPictures(pictures);
 
-	}
-
-
-	museums.add(museum1);
-	
-	EntityManager em = JpaUtil.getEntityManager();
-	EntityTransaction tx = null;
-	try{
-		tx = em.getTransaction();
-		tx.begin();
-		for(int i=0;i<museums.size();++i){
-			em.persist(museums.get(i));
+		museums.add(museum1);
+		
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			for(int i=0;i<museums.size();++i){
+				em.persist(museums.get(i));
+			}
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
 		}
-		tx.commit();
-	}catch(Exception re)
-	{
-		if(tx!=null)
-			LOG.error("Something went wrong; Discard all partial changes");
-		tx.rollback();
-	}finally{
-	}
 
  	}
 

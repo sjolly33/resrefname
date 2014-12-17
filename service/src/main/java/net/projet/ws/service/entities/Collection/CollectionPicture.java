@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Table(name="COLLECTIONPICTURE")
 public class CollectionPicture extends CollectionMuseum{
 
-	@OneToMany(mappedBy="_collection", cascade=CascadeType.ALL) //Collection is a set of existing pictures... 
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Collection is a set of existing pictures... 
 	private List<Picture> _pictures;
 
  	@XmlElement
