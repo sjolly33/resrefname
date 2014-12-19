@@ -34,9 +34,10 @@ public class Picture extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Picture cannot exist without Work...
-	@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
-	private Work _workRef;
+	@ManyToOne(cascade=CascadeType.ALL) //Picture cannot exist without Work...
+	@JoinColumn(name="Work_ID")
+	//@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
+	private Work work;
 
 	@XmlElement
  	public int getID() {
@@ -67,11 +68,11 @@ public class Picture extends IMuseum{
 
  	@XmlElement
  	public Work getWork(){
- 		return _workRef;
+ 		return work;
  	}
 
  	public void setWork(Work work){
- 		_workRef = work;
+ 		this.work = work;
  	}
 
 }

@@ -2,6 +2,7 @@ package net.projet.ws.service.entities;
 
 import net.projet.ws.service.entities.Data.MuseumData;
 import net.projet.ws.service.entities.Data.PictureData;
+import net.projet.ws.service.entities.Data.WorkData;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
 
@@ -40,8 +41,7 @@ public class MuseumRoot{
 	@Path("/{id}/pictures")
 	@Produces("application/json")
 	public List<Picture> getPictures(@PathParam("id") int museumID){
-		Museum museum = MuseumData.getMuseum(museumID);
-		return museum.getPictures();
+		return (MuseumData.getMuseum(museumID)).getPictures();
 	}
 
 	@GET
@@ -50,12 +50,7 @@ public class MuseumRoot{
 	public Picture getPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Picture> pictures = museum.getPictures();
-		for(int i=0;i<pictures.size();++i){
-			if(pictures.get(i).getID() == pictureID){
-				return pictures.get(i);
-			}
-		}
-		return pictures.get(0);
+		return PictureData.getPicture(pictures, pictureID);
 	}
 
 	@GET
@@ -72,12 +67,7 @@ public class MuseumRoot{
 	public Work getWork(@PathParam("id_museum") int museumID, @PathParam("id_work") int workID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Work> works = museum.getWorks();
-		for(int i=0;i<works.size();++i){
-			if(works.get(i).getID() == workID){
-				return works.get(i);
-			}
-		}
-		return works.get(0);
+		return WorkData.getWork(works, workID);
 	}
 
 	@GET
@@ -86,12 +76,7 @@ public class MuseumRoot{
 	public Work getWorkByPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Picture> pictures = museum.getPictures();
-		for(int i=0;i<pictures.size();++i){
-			if(pictures.get(i).getID() == pictureID){
-				return pictures.get(i).getWork();
-			}
-		}
-		return pictures.get(0).getWork();
+		Picture picture = PictureData.getPicture(pictures, pictureID);
+		return picture.getWork();
 	}
-
 }

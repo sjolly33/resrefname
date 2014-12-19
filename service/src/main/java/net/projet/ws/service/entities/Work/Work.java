@@ -24,7 +24,7 @@ import javax.persistence.*;
 @Inheritance
 @DiscriminatorColumn(name="WorkType")
 @Table(name="WORK")
-public abstract class Work extends IMuseum{
+public class Work extends IMuseum{
 
 	@Id 
 	@Column(name="WorkID", nullable=false)
@@ -38,6 +38,11 @@ public abstract class Work extends IMuseum{
 	@JoinColumn(name = "AuthorRef", nullable = true)
 	private Author _authorRef;
 */
+
+	//@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="_workRef")
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
+	private List<Picture> _pictures = new ArrayList<Picture>();
+	
 	@Temporal(TemporalType.DATE)
 	private Date _date;
 
@@ -107,7 +112,7 @@ public abstract class Work extends IMuseum{
  	public void setParticularities(List<Particularity> particularities){
  		_particularities = new ArrayList<Particularity>(particularities);
  	}*/
-/*
+
  	@XmlElement
  	public List<Picture> getPicture(){
  		return new ArrayList<Picture>(_pictures);
@@ -116,5 +121,5 @@ public abstract class Work extends IMuseum{
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
  	}
-*/
+
 }

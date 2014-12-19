@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.persistence.criteria.*;
+
 
 public class WorkData{
 	private static List<Work> works = new ArrayList<Work>();
@@ -37,15 +39,51 @@ public class WorkData{
 
 	public static List<Work> getWorks(){
 		LOG.info("getWorks");
-		return new ArrayList<Work>(works);
+		List<Work> works = new ArrayList<Work>();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+        	CriteriaQuery<Work> cq = cb.createQuery(Work.class);
+        	Root<Work> rootEntry = cq.from(Work.class);
+        	CriteriaQuery<Work> all = cq.select(rootEntry);
+        	TypedQuery<Work> allQuery = em.createQuery(all);
+        	works = allQuery.getResultList();
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return works;
 	}
 
-	public static Work getWork(int id){
+	public static Work getWork(List<Work> works, int id){
 		LOG.info("getWork");
-		for(int i=0;i<works.size();++i){
-			if(works.get(i).getID() == id)
-				return works.get(i);
+		int index = 0;
+		Work work = new Work();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			work = em.find(Work.class, id);
+			index = works.indexOf(work);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
 		}
-		return works.get(0);
+		if(index != -1)
+			return work;
+		else
+			return new Work();
 	}
 }

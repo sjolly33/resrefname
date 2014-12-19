@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.persistence.criteria.*;
 
 public class PictureData{
 	private static List<Picture> pictures = new ArrayList<Picture>();
@@ -37,15 +38,51 @@ public class PictureData{
 
 	public static List<Picture> getPictures(){
 		LOG.info("getPictures");
-		return new ArrayList<Picture>(pictures);
+		List<Picture> pictures = new ArrayList<Picture>();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+        	CriteriaQuery<Picture> cq = cb.createQuery(Picture.class);
+        	Root<Picture> rootEntry = cq.from(Picture.class);
+        	CriteriaQuery<Picture> all = cq.select(rootEntry);
+        	TypedQuery<Picture> allQuery = em.createQuery(all);
+        	pictures = allQuery.getResultList();
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return pictures;
 	}
 
-	public static Picture getPicture(int id){
+	public static Picture getPicture(List<Picture> pictures, int id){
 		LOG.info("getPicture");
-		for(int i=0;i<pictures.size();++i){
-			if(pictures.get(i).getID() == id)
-				return pictures.get(i);
+		int index = 0;
+		Picture picture = new Picture();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			picture = em.find(Picture.class, id);
+			index = pictures.indexOf(picture);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
 		}
-		return pictures.get(0);
+		if(index != -1)
+			return picture;
+		else
+			return new Picture();
 	}
 }
