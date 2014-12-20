@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 import javax.persistence.criteria.*;
 
+import javax.ws.rs.core.Response;
+
 public class MuseumData{
 	private static List<Museum> museums = new ArrayList<Museum>();
 	
@@ -112,5 +114,21 @@ public class MuseumData{
 		}finally{
 		}
 		return museum;
+	}
+
+	public static Response addMuseum(Museum museum){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.persist(museum);
+			LOG.debug("Add a new museum ");
+			return Response.ok(museum).build();
+		} catch (RuntimeException re) {
+			LOG.error("add museum failed", re);
+			return Response.status(400).entity("museum create failed!").build();
+		}finally{
+			tx.commit();
+		}
 	}
 }

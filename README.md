@@ -39,9 +39,9 @@ MuseumRoot.java : Chemin d'accès aux éléments
 
 ModelBDD : 
 
-Work *<->1 Author (ou Work *-> Author)
+Work *<->1 Author
 
-Work 1<-* Picture
+Work 1<->* Picture
 
 Work 1->* Particularity
 

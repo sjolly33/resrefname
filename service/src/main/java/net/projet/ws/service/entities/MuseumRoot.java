@@ -7,6 +7,7 @@ import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -18,6 +19,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+
+import javax.ws.rs.core.Response;
+
 
 @Path("/museum")
 
@@ -78,5 +82,12 @@ public class MuseumRoot{
 		List<Picture> pictures = museum.getPictures();
 		Picture picture = PictureData.getPicture(pictures, pictureID);
 		return picture.getWork();
+	}
+
+	@POST
+	@Path("/new/museum")
+	@Produces("application/json")
+	public Response addMuseum(Museum museum){
+		return MuseumData.addMuseum(museum);
 	}
 }
