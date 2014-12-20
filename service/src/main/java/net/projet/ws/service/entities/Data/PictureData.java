@@ -1,6 +1,7 @@
 package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -84,5 +85,21 @@ public class PictureData{
 			return picture;
 		else
 			return new Picture();
+	}
+	public static Response addPicture(Picture picture){
+		LOG.info("addPicturePersist");
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.persist(picture);
+			LOG.debug("Add a new picture ");
+			return Response.ok(picture).build();
+		} catch (RuntimeException re) {
+			LOG.error("add picture failed", re);
+			return Response.status(400).entity("picture create failed!").build();
+		}finally{
+			tx.commit();
+		}
 	}
 }

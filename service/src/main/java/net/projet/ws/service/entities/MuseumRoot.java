@@ -86,8 +86,54 @@ public class MuseumRoot{
 
 	@POST
 	@Path("/new/museum")
-	@Produces("application/json")
+	@Consumes("application/json")
 	public Response addMuseum(Museum museum){
 		return MuseumData.addMuseum(museum);
 	}
+
+	@POST
+	@Path("{id_museum}/new/picture")
+	@Consumes("application/json")
+	public Response addPicture(@PathParam("id_museum") int museumID, Picture picture){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = PictureData.addPicture(picture);
+		List<Picture> pictures = museum.getPictures();
+		pictures.add(picture);
+		museum.setPictures(pictures);
+		MuseumData.addMuseum(museum);
+		return res;
+	}
+
+	@POST
+	@Path("{id_museum}/new/work")
+	@Consumes("application/json")
+	public Response addWork(@PathParam("id_museum") int museumID, Work work){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = WorkData.addWork(work);
+		List<Work> works = museum.getWorks();
+		works.add(work);
+		museum.setWorks(works);
+		MuseumData.addMuseum(museum);
+		return res;
+	}
+/*
+	@PUT
+	@Path("{id_museum}/picture/{id_picture}/new/work")
+	@Consumes("application/json")
+	public Response addWorkToPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Work work){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<Picture> pictures = museum.getPictures();
+		Picture picture = new Picture();
+		picture = PictureData.getPicture(pictures, pictureID);
+		pictures.remove(picture);
+
+		Response res = WorkData.addWork(work);
+		picture.setWork(work);
+		
+		picture = PictureData.update(picture);
+		pictures.add(picture);
+		museum.setPictures(pictures);
+		MuseumData.addMuseum(museum);
+		return res;
+	}*/
 }

@@ -86,4 +86,21 @@ public class WorkData{
 		else
 			return new Work();
 	}
+
+	public static Response addWork(Work work){
+		LOG.info("addWorkPersist");
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.persist(work);
+			LOG.debug("Add a new work ");
+			return Response.ok(work).build();
+		} catch (RuntimeException re) {
+			LOG.error("add work failed", re);
+			return Response.status(400).entity("work create failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
 }
