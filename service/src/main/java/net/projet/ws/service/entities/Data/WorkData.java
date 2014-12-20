@@ -103,4 +103,19 @@ public class WorkData{
 			tx.commit();
 		}
 	}
+
+	public static Work updateWork(Work work){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.merge(work);
+			LOG.debug("merge a work ");
+		} catch (RuntimeException re) {
+			LOG.error("merge work failed", re);
+		}finally{
+			tx.commit();
+		}
+		return work;
+	}
 }

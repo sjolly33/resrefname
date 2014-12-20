@@ -131,4 +131,19 @@ public class MuseumData{
 			tx.commit();
 		}
 	}
+
+	public static Museum updateMuseum(Museum museum){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.merge(museum);
+			LOG.debug("merge a museum ");
+		} catch (RuntimeException re) {
+			LOG.error("merge museum failed", re);
+		}finally{
+			tx.commit();
+		}
+		return museum;
+	}
 }

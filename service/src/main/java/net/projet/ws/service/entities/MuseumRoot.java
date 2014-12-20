@@ -8,9 +8,11 @@ import net.projet.ws.service.entities.Work.Work;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
@@ -92,48 +94,88 @@ public class MuseumRoot{
 	}
 
 	@POST
-	@Path("{id_museum}/new/picture")
+	@Path("/new/picture")
 	@Consumes("application/json")
-	public Response addPicture(@PathParam("id_museum") int museumID, Picture picture){
+	public Response addPicture(Picture picture){
+		return PictureData.addPicture(picture);
+	}
+
+	@POST
+	@Path("/new/work")
+	@Consumes("application/json")
+	public Response addWork(Work work){
+		return WorkData.addWork(work);
+	}
+
+	@POST
+	@Path("/{id_museum}/new/picture")
+	@Consumes("application/json")
+	public Response addPictureToMuseum(@PathParam("id_museum") int museumID, Picture picture){
 		Museum museum = MuseumData.getMuseum(museumID);
 		Response res = PictureData.addPicture(picture);
 		List<Picture> pictures = museum.getPictures();
 		pictures.add(picture);
 		museum.setPictures(pictures);
-		MuseumData.addMuseum(museum);
+		//MuseumData.addMuseum(museum);
+		MuseumData.updateMuseum(museum);
 		return res;
 	}
 
 	@POST
-	@Path("{id_museum}/new/work")
+	@Path("/{id_museum}/new/work")
 	@Consumes("application/json")
-	public Response addWork(@PathParam("id_museum") int museumID, Work work){
+	public Response addWorkToMuseum(@PathParam("id_museum") int museumID, Work work){
 		Museum museum = MuseumData.getMuseum(museumID);
 		Response res = WorkData.addWork(work);
 		List<Work> works = museum.getWorks();
 		works.add(work);
 		museum.setWorks(works);
-		MuseumData.addMuseum(museum);
+		MuseumData.updateMuseum(museum);
 		return res;
 	}
-/*
-	@PUT
-	@Path("{id_museum}/picture/{id_picture}/new/work")
+
+	//Pas necessaire
+	@POST
+	@Path("/{id_museum}/picture/{id_picture}/new/work")
 	@Consumes("application/json")
-	public Response addWorkToPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Work work){
+	public Response addWorkToPictureToMuseum(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Work work){
+		Response res = WorkData.addWork(work);
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Picture> pictures = museum.getPictures();
-		Picture picture = new Picture();
-		picture = PictureData.getPicture(pictures, pictureID);
-		pictures.remove(picture);
 
-		Response res = WorkData.addWork(work);
+		Picture picture = PictureData.getPicture(pictures, pictureID);
 		picture.setWork(work);
+		picture = PictureData.updatePicture(picture);
 		
-		picture = PictureData.update(picture);
-		pictures.add(picture);
 		museum.setPictures(pictures);
-		MuseumData.addMuseum(museum);
+		MuseumData.updateMuseum(museum);
 		return res;
-	}*/
+	}
+
+
+	@PUT
+	@Path("/update/museum")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Museum updateMuseum(Museum museum){
+		return MuseumData.updateMuseum(museum);
+	}
+
+	@PUT
+	@Path("/update/picture")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Picture updatePicture(Picture picture){
+		return PictureData.updatePicture(picture);
+	}
+
+	@PUT
+	@Path("/update/work")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Work updateWork(Work work){
+		return WorkData.updateWork(work);
+	}
+
+	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT
 }

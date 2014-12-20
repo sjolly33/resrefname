@@ -86,6 +86,7 @@ public class PictureData{
 		else
 			return new Picture();
 	}
+	
 	public static Response addPicture(Picture picture){
 		LOG.info("addPicturePersist");
 		EntityManager em= JpaUtil.getEntityManager();
@@ -101,5 +102,41 @@ public class PictureData{
 		}finally{
 			tx.commit();
 		}
+	}
+
+	public static Picture getPicture(int id){
+		LOG.info("getPicture");
+		int index = 0;
+		Picture picture = new Picture();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			picture = em.find(Picture.class, id);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return picture;
+	}
+
+	public static Picture updatePicture(Picture picture){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.merge(picture);
+			LOG.debug("merge a picture ");
+		} catch (RuntimeException re) {
+			LOG.error("merge picture failed", re);
+		}finally{
+			tx.commit();
+		}
+		return picture;
 	}
 }
