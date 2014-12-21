@@ -137,16 +137,17 @@ public class CollectionData{
 		
 		return collections;
 	}
-/*
-	public static Museum getMuseum(int id){
-		LOG.info("getMuseum");
-		Museum museum = new Museum();
+
+	public static CollectionPicture getCollectionPicture(int id){
+		LOG.info("getcPicture");
+		int index = 0;
+		CollectionPicture cPicture = new CollectionPicture();
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
 			tx = em.getTransaction();
 			tx.begin();
-			museum = em.find(Museum.class, id);
+			cPicture = em.find(CollectionPicture.class, id);
 			tx.commit();
 		}catch(Exception re)
 		{
@@ -155,37 +156,143 @@ public class CollectionData{
 			tx.rollback();
 		}finally{
 		}
-		return museum;
+		return cPicture;
 	}
 
-	public static Response addMuseum(Museum museum){
-		EntityManager em= JpaUtil.getEntityManager();
-		EntityTransaction tx=em.getTransaction();
+	public static CollectionWork getCollectionWork(int id){
+		LOG.info("getcPicture");
+		int index = 0;
+		CollectionWork cWork = new CollectionWork();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
 		try{
+			tx = em.getTransaction();
 			tx.begin();
-			em.persist(museum);
-			LOG.debug("Add a new museum ");
-			return Response.ok(museum).build();
+			cWork = em.find(CollectionWork.class, id);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return cWork;
+	}
+
+	public static CollectionPicture getCollectionPicture(List<CollectionPicture> cPictures, int id){
+		LOG.info("getcPicture");
+		int index = 0;
+		CollectionPicture cPicture = new CollectionPicture();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			cPicture = em.find(CollectionPicture.class, id);
+			index = cPictures.indexOf(cPicture);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		if(index != -1)
+			return cPicture;
+		else
+			return new CollectionPicture();
+	}
+
+	public static CollectionWork getCollectionWork(List<CollectionWork> cWorks, int id){
+		LOG.info("getcWork");
+		int index = 0;
+		CollectionWork cWork = new CollectionWork();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			cWork = em.find(CollectionWork.class, id);
+			index = cWorks.indexOf(cWork);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		if(index != -1)
+			return cWork;
+		else
+			return new CollectionWork();
+	}
+
+	public static Response addCollectionPicture(CollectionPicture cPicture){
+		LOG.info("addCollectionPicture");
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			em.persist(cPicture);
+			LOG.debug("Add a new CollectionPicture ");
+			return Response.ok(cPicture).build();
 		} catch (RuntimeException re) {
-			LOG.error("add museum failed", re);
-			return Response.status(400).entity("museum create failed!").build();
+			LOG.error("add collectionPicture failed", re);
+			return Response.status(400).entity("collectionPicture create failed!").build();
 		}finally{
 			tx.commit();
 		}
 	}
 
-	public static Museum updateMuseum(Museum museum){
+	public static Response addCollectionWork(CollectionWork cWork){
+		LOG.info("addCollectionWork");
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			em.persist(cWork);
+			LOG.debug("Add a new collectionWork ");
+			return Response.ok(cWork).build();
+		} catch (RuntimeException re) {
+			LOG.error("add collectionWork failed", re);
+			return Response.status(400).entity("collectionWork create failed!").build();
+		}finally{
+			tx.commit();
+		}
+	}
+
+	public static CollectionPicture updateCollectionPicture(CollectionPicture cPicture){
 		EntityManager em= JpaUtil.getEntityManager();
 		EntityTransaction tx=em.getTransaction();
 		try{
 			tx.begin();
-			em.merge(museum);
-			LOG.debug("merge a museum ");
+			em.merge(cPicture);
+			LOG.debug("merge a collectionPicture ");
 		} catch (RuntimeException re) {
-			LOG.error("merge museum failed", re);
+			LOG.error("merge collectionPicture failed", re);
 		}finally{
 			tx.commit();
 		}
-		return museum;
-	}*/
+		return cPicture;
+	}
+
+	public static CollectionWork updateCollectionWork(CollectionWork cWork){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.merge(cWork);
+			LOG.debug("merge a collectionWork ");
+		} catch (RuntimeException re) {
+			LOG.error("merge collectionWork failed", re);
+		}finally{
+			tx.commit();
+		}
+		return cWork;
+	}
 }

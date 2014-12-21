@@ -3,8 +3,11 @@ package net.projet.ws.service.entities;
 import net.projet.ws.service.entities.Data.MuseumData;
 import net.projet.ws.service.entities.Data.PictureData;
 import net.projet.ws.service.entities.Data.WorkData;
+import net.projet.ws.service.entities.Data.CollectionData;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Collection.CollectionWork;
+import net.projet.ws.service.entities.Collection.CollectionPicture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -68,6 +71,22 @@ public class MuseumRoot{
 	}
 
 	@GET
+	@Path("/{id}/collectionsWork")
+	@Produces("application/json")
+	public List<CollectionWork> getCollectionsWork(@PathParam("id") int museumID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		return museum.getCollectionsWorks();
+	}
+
+	@GET
+	@Path("/{id}/collectionsPicture")
+	@Produces("application/json")
+	public List<CollectionPicture> getCollectionsPicture(@PathParam("id") int museumID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		return museum.getCollectionsPictures();
+	}
+
+	@GET
 	@Path("/{id_museum}/work/{id_work}")
 	@Produces("application/json")
 	public Work getWork(@PathParam("id_museum") int museumID, @PathParam("id_work") int workID){
@@ -84,6 +103,24 @@ public class MuseumRoot{
 		List<Picture> pictures = museum.getPictures();
 		Picture picture = PictureData.getPicture(pictures, pictureID);
 		return picture.getWork();
+	}
+
+	@GET
+	@Path("/{id}/collectionWork/{id_cWork}")
+	@Produces("application/json")
+	public CollectionWork getCollectionWork(@PathParam("id") int museumID, @PathParam("id_cWork") int cWorkID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<CollectionWork> cWorks = museum.getCollectionsWorks();
+		return CollectionData.getCollectionWork(cWorks, cWorkID);
+	}
+
+	@GET
+	@Path("/{id}/collectionPicture/{id_cPicture}")
+	@Produces("application/json")
+	public CollectionPicture getCollectionPicture(@PathParam("id") int museumID, @PathParam("id_cPicture") int cPictureID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<CollectionPicture> cPictures = museum.getCollectionsPictures();
+		return CollectionData.getCollectionPicture(cPictures, cPictureID);
 	}
 
 	@POST
@@ -111,14 +148,14 @@ public class MuseumRoot{
 	@Path("/new/collectionPicture")
 	@Consumes("application/json")
 	public Response addCollectionPicture(CollectionPicture collectionPicture){
-		//return CollectionData.addCollectionPicture(collectionPicture);
+		return CollectionData.addCollectionPicture(collectionPicture);
 	}
 
 	@POST
 	@Path("/new/collectionWork")
 	@Consumes("application/json")
 	public Response addCollectionWork(CollectionWork collectionWork){
-		//return CollectionData.addCollectionWork(collectionWork);
+		return CollectionData.addCollectionWork(collectionWork);
 	}
 
 	@POST
@@ -144,6 +181,32 @@ public class MuseumRoot{
 		List<Work> works = museum.getWorks();
 		works.add(work);
 		museum.setWorks(works);
+		MuseumData.updateMuseum(museum);
+		return res;
+	}
+
+	@POST
+	@Path("/{id_museum}/new/collectionPicture")
+	@Consumes("application/json")
+	public Response addCollectionPictureToMuseum(@PathParam("id_museum") int museumID, CollectionPicture collectionPicture){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = CollectionData.addCollectionPicture(collectionPicture);
+		List<CollectionPicture> collectionPictures = museum.getCollectionsPictures();
+		collectionPictures.add(collectionPicture);
+		museum.setCollectionsPictures(collectionPictures);
+		MuseumData.updateMuseum(museum);
+		return res;
+	}
+
+	@POST
+	@Path("/{id_museum}/new/collectionWork")
+	@Consumes("application/json")
+	public Response addCollectionWorkToMuseum(@PathParam("id_museum") int museumID, CollectionWork collectionWork){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = CollectionData.addCollectionWork(collectionWork);
+		List<CollectionWork> collectionWorks = museum.getCollectionsWorks();
+		collectionWorks.add(collectionWork);
+		museum.setCollectionsWorks(collectionWorks);
 		MuseumData.updateMuseum(museum);
 		return res;
 	}
@@ -189,6 +252,22 @@ public class MuseumRoot{
 	@Consumes("application/json")
 	public Work updateWork(Work work){
 		return WorkData.updateWork(work);
+	}
+
+	@PUT
+	@Path("/update/collectionPicture")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public CollectionPicture updateCollectionPicture(CollectionPicture cPicture){
+		return CollectionData.updateCollectionPicture(cPicture);
+	}
+
+	@PUT
+	@Path("/update/collectionWork")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public CollectionWork updateCollectionWork(CollectionWork cWork){
+		return CollectionData.updateCollectionWork(cWork);
 	}
 
 	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT
