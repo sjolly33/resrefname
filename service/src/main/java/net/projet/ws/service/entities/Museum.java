@@ -1,6 +1,8 @@
 package net.projet.ws.service.entities;
 
 import net.projet.ws.service.entities.Collection.CollectionMuseum;
+import net.projet.ws.service.entities.Collection.CollectionPicture;
+import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Picture.Picture;
@@ -48,6 +50,14 @@ public class Museum{
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
 	@JoinColumn(name="WORKS")
 	private List<Work> _works;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@JoinColumn(name="CollectionPicture")
+	private List<CollectionPicture> _picturesCollections;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@JoinColumn(name="CollectionWork")
+	private List<CollectionWork> _worksCollections;
 
 	@XmlElement
 	public int getID(){
@@ -110,6 +120,24 @@ public class Museum{
 
  	public void setWorks(List<Work> works){
  		_works = new ArrayList<Work>(works);
+ 	}
+
+ 	@XmlElement
+ 	public List<CollectionWork> getCollectionsWorks(){
+ 		return new ArrayList<CollectionWork>(_worksCollections);
+ 	}
+
+ 	public void setCollectionsWorks(List<CollectionWork> worksCollections){
+ 		_worksCollections = new ArrayList<CollectionWork>(worksCollections);
+ 	}
+
+ 	@XmlElement
+ 	public List<CollectionPicture> getCollectionsPictures(){
+ 		return new ArrayList<CollectionPicture>(_picturesCollections);
+ 	}
+
+ 	public void setCollectionsPictures(List<CollectionPicture> picturesCollections){
+ 		_picturesCollections = new ArrayList<CollectionPicture>(picturesCollections);
  	}
 }
 

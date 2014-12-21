@@ -108,6 +108,20 @@ public class MuseumRoot{
 	}
 
 	@POST
+	@Path("/new/collectionPicture")
+	@Consumes("application/json")
+	public Response addCollectionPicture(CollectionPicture collectionPicture){
+		//return CollectionData.addCollectionPicture(collectionPicture);
+	}
+
+	@POST
+	@Path("/new/collectionWork")
+	@Consumes("application/json")
+	public Response addCollectionWork(CollectionWork collectionWork){
+		//return CollectionData.addCollectionWork(collectionWork);
+	}
+
+	@POST
 	@Path("/{id_museum}/new/picture")
 	@Consumes("application/json")
 	public Response addPictureToMuseum(@PathParam("id_museum") int museumID, Picture picture){

@@ -3,6 +3,9 @@ package net.projet.ws.service.entities.Data;
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Collection.CollectionPicture;
+import net.projet.ws.service.entities.Collection.CollectionWork;
+
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -37,6 +40,21 @@ public class MuseumData{
 
 		museum1.setPictures(PictureData.initPictures());
 		museum1.setWorks(WorkData.initWorks());
+
+		museum1.setCollectionsWorks(CollectionData.initCollectionWork());
+		museum1.setCollectionsPictures(CollectionData.initCollectionPicture());
+
+		List<CollectionPicture> cPictures = museum1.getCollectionsPictures();
+		for(int i=0;i<cPictures.size();++i){
+			cPictures.get(i).setRefPicture(museum1.getPictures());
+		}
+		museum1.setCollectionsPictures(cPictures);
+
+		List<CollectionWork> cWorks = museum1.getCollectionsWorks();
+		for(int i=0;i<cWorks.size();++i){
+			cWorks.get(i).setRefWork(museum1.getWorks());
+		}
+		museum1.setCollectionsWorks(cWorks);
 
 		List<Work> works = museum1.getWorks();
 		List<Picture> pictures = museum1.getPictures();
