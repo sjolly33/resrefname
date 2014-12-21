@@ -3,6 +3,7 @@ package net.projet.ws.service.entities.Data;
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 
@@ -40,9 +41,25 @@ public class MuseumData{
 
 		museum1.setPictures(PictureData.initPictures());
 		museum1.setWorks(WorkData.initWorks());
+		museum1.setAuthors(AuthorData.initAuthors());
 
 		museum1.setCollectionsWorks(CollectionData.initCollectionWork());
 		museum1.setCollectionsPictures(CollectionData.initCollectionPicture());
+
+		List<Work> works = museum1.getWorks();
+		List<Author> authors = museum1.getAuthors();
+		for(int i=0;i<works.size();++i){
+			works.get(i).setAuthor(authors.get(0));
+		}
+		List<Picture> pictures = museum1.getPictures();
+		for(int i=0;i<pictures.size();++i){
+			pictures.get(i).setWork(works.get(0));
+		}
+		/*for(int i=0;i<works.size();++i){
+			works.get(i).setPicture(pictures);
+		}*/
+		museum1.setWorks(works);
+		museum1.setPictures(pictures);
 
 		List<CollectionPicture> cPictures = museum1.getCollectionsPictures();
 		for(int i=0;i<cPictures.size();++i){
@@ -55,17 +72,6 @@ public class MuseumData{
 			cWorks.get(i).setRefWork(museum1.getWorks());
 		}
 		museum1.setCollectionsWorks(cWorks);
-
-		List<Work> works = museum1.getWorks();
-		List<Picture> pictures = museum1.getPictures();
-		for(int i=0;i<pictures.size();++i){
-			pictures.get(i).setWork(works.get(0));
-		}
-		/*for(int i=0;i<works.size();++i){
-			works.get(i).setPicture(pictures);
-		}*/
-		museum1.setWorks(works);
-		museum1.setPictures(pictures);
 
 		museums.add(museum1);
 		
@@ -163,5 +169,19 @@ public class MuseumData{
 			tx.commit();
 		}
 		return museum;
+	}
+
+	public static void deleteMuseum(Museum museum){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(museum);
+			LOG.debug("delete a museum ");
+		} catch (RuntimeException re) {
+			LOG.error("delete museum failed", re);
+		}finally{
+			tx.commit();
+		}
 	}
 }

@@ -139,4 +139,18 @@ public class PictureData{
 		}
 		return picture;
 	}
+
+	public static void deletePicture(Picture picture){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(picture);
+			LOG.debug("delete a picture ");
+		} catch (RuntimeException re) {
+			LOG.error("delete picture failed", re);
+		}finally{
+			tx.commit();
+		}
+	}
 }

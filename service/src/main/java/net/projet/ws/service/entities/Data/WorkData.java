@@ -118,4 +118,18 @@ public class WorkData{
 		}
 		return work;
 	}
+
+	public static void deleteWork(Work work){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(work);
+			LOG.debug("delete a work ");
+		} catch (RuntimeException re) {
+			LOG.error("delete work failed", re);
+		}finally{
+			tx.commit();
+		}
+	}
 }

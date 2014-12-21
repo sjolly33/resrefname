@@ -33,11 +33,10 @@ public class Work extends IMuseum{
 
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
-/*
-	@ManyToOne(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "AuthorRef", nullable = true)
-	private Author _authorRef;
-*/
+
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "Author_ID")
+	private Author author;
 
 	//@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="_workRef")
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
@@ -76,16 +75,16 @@ public class Work extends IMuseum{
  		_dimension.set(1,y);
  		_dimension.set(2,z);
  	}
-/*
+
 	@XmlElement
 	public Author getAuthor(){
-		return _authorRef;
+		return author;
 	}
 
 	public void setAuthor(Author author){
-		_authorRef = author;
+		this.author = author;
 	}
-*/
+
  	@XmlElement
  	public String getResume(){
  		return _resume;

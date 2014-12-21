@@ -23,7 +23,7 @@ Fichiers :
 
 /entities : Tout ce qui concerne le model
 
-/entities/Data : Les données disponibles à l'initialisation
+/entities/Data : Les données disponibles à l'initialisation + link avec EntityManager
 
 /entities/Test : Jeux de données simple pour tester (avec routes, etc)
 

@@ -295,4 +295,32 @@ public class CollectionData{
 		}
 		return cWork;
 	}
+
+	public static void deleteCollectionPicture(CollectionPicture picture){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(picture);
+			LOG.debug("delete a picture ");
+		} catch (RuntimeException re) {
+			LOG.error("delete picture failed", re);
+		}finally{
+			tx.commit();
+		}
+	}
+
+	public static void deleteCollectionWork(CollectionWork work){
+		EntityManager em= JpaUtil.getEntityManager();
+		EntityTransaction tx=em.getTransaction();
+		try{
+			tx.begin();
+			em.remove(work);
+			LOG.debug("delete a work ");
+		} catch (RuntimeException re) {
+			LOG.error("delete work failed", re);
+		}finally{
+			tx.commit();
+		}
+	}
 }

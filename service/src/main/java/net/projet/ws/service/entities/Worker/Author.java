@@ -32,9 +32,8 @@ public class Author{
 	@Column(name="adress")
 	private String _adress;
 
-	@OneToMany(mappedBy="_authorRef", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="WorkRef")
-	private List<Work> _worksRef;
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
+	private List<Work> _worksRef = new ArrayList<Work>();
 
 	@XmlElement
  	public int getID() {
@@ -50,7 +49,7 @@ public class Author{
  		return _name;
  	}
 
- 	public void setID(String name){
+ 	public void setName(String name){
  		_name = name;
  	}
 

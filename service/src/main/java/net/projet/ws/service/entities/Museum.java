@@ -43,21 +43,25 @@ public class Museum{
 	@Column(name="INFORMATION")
 	private String _information;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
 	@JoinColumn(name="PICTURES")
 	private List<Picture> _pictures;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
 	@JoinColumn(name="WORKS")
 	private List<Work> _works;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
 	@JoinColumn(name="CollectionPicture")
 	private List<CollectionPicture> _picturesCollections;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Just listing so receive all consequences
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
 	@JoinColumn(name="CollectionWork")
 	private List<CollectionWork> _worksCollections;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
+	@JoinColumn(name="AUTHORS")
+	private List<Author> _authors;
 
 	@XmlElement
 	public int getID(){
@@ -138,6 +142,15 @@ public class Museum{
 
  	public void setCollectionsPictures(List<CollectionPicture> picturesCollections){
  		_picturesCollections = new ArrayList<CollectionPicture>(picturesCollections);
+ 	}
+
+ 	@XmlElement
+ 	public List<Author> getAuthors(){
+ 		return new ArrayList<Author>(_authors);
+ 	}
+
+ 	public void setAuthors(List<Author> authors){
+ 		_authors = new ArrayList<Author>(authors);
  	}
 }
 

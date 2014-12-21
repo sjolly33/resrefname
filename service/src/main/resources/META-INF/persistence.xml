@@ -22,7 +22,7 @@
  <class> net.projet.ws.service.entities.Collection.CollectionPicture </class>
  <class> net.projet.ws.service.entities.Collection.CollectionWork </class>
 
- <!--<class> net.projet.ws.service.entities.Worker.Author </class>-->
+ <class> net.projet.ws.service.entities.Worker.Author </class>
 
  <non-jta-data-source>java:comp/env/jdbc/H2DB</non-jta-data-source>
  <properties>

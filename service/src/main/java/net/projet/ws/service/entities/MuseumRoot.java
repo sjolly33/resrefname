@@ -3,15 +3,18 @@ package net.projet.ws.service.entities;
 import net.projet.ws.service.entities.Data.MuseumData;
 import net.projet.ws.service.entities.Data.PictureData;
 import net.projet.ws.service.entities.Data.WorkData;
+import net.projet.ws.service.entities.Data.AuthorData;
 import net.projet.ws.service.entities.Data.CollectionData;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -31,6 +34,8 @@ import javax.ws.rs.core.Response;
 @Path("/museum")
 
 public class MuseumRoot{
+
+	// GET to find entity. For a simplified uses, direct association to museum has been implemented
 	
 	@GET
 	@Path("/museums")
@@ -68,6 +73,23 @@ public class MuseumRoot{
 	public List<Work> getWorks(@PathParam("id") int museumID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		return museum.getWorks();
+	}
+
+	@GET
+	@Path("/{id}/authors")
+	@Produces("application/json")
+	public List<Author> getAuthors(@PathParam("id") int museumID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		return museum.getAuthors();
+	}
+
+	@GET
+	@Path("/{id}/author/{id_author}")
+	@Produces("application/json")
+	public Author getAuthor(@PathParam("id") int museumID, @PathParam("id") int authorID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		List<Author> authors = museum.getAuthors();
+		return AuthorData.getAuthor(authors, authorID);
 	}
 
 	@GET
@@ -123,6 +145,13 @@ public class MuseumRoot{
 		return CollectionData.getCollectionPicture(cPictures, cPictureID);
 	}
 
+
+
+///////////////////////////////////////////////////////////////////////////
+
+	// POST to create entity. For a simplified uses, direct association to museum has been implemented
+
+
 	@POST
 	@Path("/new/museum")
 	@Consumes("application/json")
@@ -159,6 +188,26 @@ public class MuseumRoot{
 	}
 
 	@POST
+	@Path("/new/author")
+	@Consumes("application/json")
+	public Response addAuthor(Author author){
+		return AuthorData.addAuthor(author);
+	}
+
+	@POST
+	@Path("{id_museum}/new/author")
+	@Consumes("application/json")
+	public Response addAuthorToMuseum(@PathParam("id_museum") int museumID, Author author){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = AuthorData.addAuthor(author);
+		List<Author> authors = museum.getAuthors();
+		authors.add(author);
+		museum.setAuthors(authors);
+		MuseumData.updateMuseum(museum);
+		return res;
+	}
+
+	@POST
 	@Path("/{id_museum}/new/picture")
 	@Consumes("application/json")
 	public Response addPictureToMuseum(@PathParam("id_museum") int museumID, Picture picture){
@@ -167,7 +216,6 @@ public class MuseumRoot{
 		List<Picture> pictures = museum.getPictures();
 		pictures.add(picture);
 		museum.setPictures(pictures);
-		//MuseumData.addMuseum(museum);
 		MuseumData.updateMuseum(museum);
 		return res;
 	}
@@ -230,6 +278,12 @@ public class MuseumRoot{
 	}
 
 
+
+///////////////////////////////////////////////////////////////////////////
+
+	// PUT operation used to modify an existing entity
+	// Need to send directly an object to update
+
 	@PUT
 	@Path("/update/museum")
 	@Produces("application/json")
@@ -268,6 +322,63 @@ public class MuseumRoot{
 	@Consumes("application/json")
 	public CollectionWork updateCollectionWork(CollectionWork cWork){
 		return CollectionData.updateCollectionWork(cWork);
+	}
+
+	@PUT
+	@Path("/update/author")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Author updateAuthor(Author author){
+		return AuthorData.updateAuthor(author);
+	}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+	// DELETE : It's only remove an entity into DB. No care about association
+	// Need to send directly an object to remove
+
+	@DELETE
+	@Path("/delete/museum")
+	@Consumes("application/json")
+	public void deleteMuseum(Museum museum){
+		MuseumData.deleteMuseum(museum);
+	}
+
+	@DELETE
+	@Path("/delete/picture")
+	@Consumes("application/json")
+	public void deletePicture(Picture picture){
+		PictureData.deletePicture(picture);
+	}
+
+	@DELETE
+	@Path("/delete/work")
+	@Consumes("application/json")
+	public void deleteWork(Work work){
+		WorkData.deleteWork(work);
+	}
+
+	@DELETE
+	@Path("/delete/collectionPicture")
+	@Consumes("application/json")
+	public void deleteCollectionPicture(CollectionPicture cPicture){
+		CollectionData.deleteCollectionPicture(cPicture);
+	}
+
+	@DELETE
+	@Path("/delete/collectionWork")
+	@Consumes("application/json")
+	public void deleteCollectionWork(CollectionWork cWork){
+		CollectionData.deleteCollectionWork(cWork);
+	}
+
+	@DELETE
+	@Path("/delete/author")
+	@Consumes("application/json")
+	public void deleteAuthor(Author author){
+		AuthorData.deleteAuthor(author);
 	}
 
 	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT
