@@ -15,6 +15,8 @@ import org.junit.Rule;
 import static org.junit.Assert.*;
 import java.io.*; 
 import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.CriteriaDelete;
 
 import org.dbunit.dataset.ITable;
 import org.dbunit.util.TableFormatter;
@@ -36,9 +38,11 @@ import java.sql.DriverManager;
 import org.apache.log4j.Logger;
 
 
-
 public class MuseumTest
-{
+{	
+
+	@Rule public TestName name = new TestName();
+	
 	private static EntityManager em;
 	private static EntityTransaction tx;
 	private static Logger LOG = Logger.getLogger(MuseumTest.class.getName());
@@ -57,19 +61,6 @@ public class MuseumTest
 		seedData();
 	}
 
-	@AfterClass
-	public static void closeEntityManager() throws Exception
-	{
-		em.close();
-	}
-
-	@Test
-	public final void testExecuted() 
-	{
-		LOG.info("testExecuted");
-		assertTrue(true);
-	}
-	
 	protected void seedData() throws Exception 
 	{
 		tx.begin();
@@ -92,6 +83,31 @@ public class MuseumTest
 		} finally {
 			tx.commit();
 		}
+	}
+
+	@After
+	public void afterTests() throws Exception {
+		Class driverClass = Class.forName("org.h2.Driver");
+		Connection jdbcConnection = DriverManager.getConnection("jdbc:h2:mem://localhost:9101/dbunit", "sa", "");
+		IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
+		connection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new H2DataTypeFactory());
+		// full database export
+		IDataSet fullDataSet = connection.createDataSet();
+		FlatXmlDataSet.write(fullDataSet, new FileOutputStream("target/"+name.getMethodName()+".xml"));
+		FlatDtdDataSet.write(connection.createDataSet(), new FileOutputStream("target/"+"test.dtd"));
+	}
+
+	@AfterClass
+	public static void closeEntityManager() throws Exception
+	{
+		em.close();
+	}
+
+	@Test
+	public final void testExecuted() 
+	{
+		LOG.info("testExecuted");
+		assertTrue(true);
 	}
 	
 	@Test
@@ -128,6 +144,53 @@ public class MuseumTest
 			em.persist(museum);
 		}catch (RuntimeException re) {
 			LOG.error("testCreateMuseum failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void removeOneMuseum() throws Exception {
+		LOG.info("removeOneMuseum");
+		try{
+			tx.begin();
+			/*CriteriaBuilder cb = em.getCriteriaBuilder();
+    		CriteriaDelete delete = cb.createCriteriaDelete(Museum.class);
+  			Root e = delete.from(Museum.class);
+  			delete.where(cb.lessThanOrEqualTo(e.get("ID"), 1));
+  			em.createQuery(delete).executeUpdate();*/
+  			Museum museum= new Museum();
+			museum.setName("museumTest");
+			museum.setTheme("lolCat");
+			museum.setAdress("WWW");
+			em.remove(museum);
+		}catch (RuntimeException re) {
+			LOG.error("removeOneMuseum failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void updateOneMuseum() throws Exception {
+		LOG.info("updateOneMuseum");
+		try{
+			tx.begin();
+			/*CriteriaBuilder cb = em.getCriteriaBuilder();
+  			CriteriaUpdate update = cb.createCriteriaUpdate(Museum.class);
+    		Root e = update.from(Museum.class);
+  			update.set("ADRESS", "Talence");
+  			update.where(cb.lessThanOrEqualTo(e.get("ID"), 1));
+  			em.createQuery(update).executeUpdate();*/
+  			Museum museum= new Museum();
+			museum.setName("museumTest");
+			museum.setTheme("lolCat");
+			museum.setAdress("Internet");
+  			em.merge(museum);
+		}catch (RuntimeException re) {
+			LOG.error("removeOneMuseum failed", re);
 			throw re;
 		}finally{
 			tx.commit();
