@@ -109,9 +109,25 @@ public class MuseumTest
 		LOG.info("testExecuted");
 		assertTrue(true);
 	}
+
+	@Test
+	public final void findMuseum() 
+	{
+		LOG.info("testFindMuseum");
+		try{
+			tx.begin();
+			Museum museum = em.find(Museum.class, 1);
+			assertEquals(museum.getID(), 1);
+		} catch (RuntimeException re) {
+			LOG.error("find all museums failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
 	
 	@Test
-	public final void testFindAllMuseum() 
+	public final void findAllMuseum() 
 	{
 		LOG.info("testFindAllMuseum");
 		try{
@@ -122,6 +138,7 @@ public class MuseumTest
         	CriteriaQuery<Museum> all = cq.select(rootEntry);
         	TypedQuery<Museum> allQuery = em.createQuery(all);
         	List<Museum> museums = allQuery.getResultList();
+        	assertEquals(museums.size(), 2);
 			LOG.debug("find all museums successful, result size: "+ museums.size());
 		} catch (RuntimeException re) {
 			LOG.error("find all museums failed", re);
@@ -132,16 +149,18 @@ public class MuseumTest
 	}
 	
 	@Test
-	public final void testCreateMuseum() throws Exception
+	public final void createMuseum() throws Exception
 	{
 		LOG.info("testCreateMuseum");
 		try{
 			tx.begin();
-			Museum museum= new Museum();
+			Museum museum = new Museum();
+			museum.setID(3);
 			museum.setName("museumTest");
 			museum.setTheme("lolCat");
 			museum.setAdress("WWW");
 			em.persist(museum);
+			assertTrue(em.find(Museum.class, 3) != null);
 		}catch (RuntimeException re) {
 			LOG.error("testCreateMuseum failed", re);
 			throw re;
@@ -155,16 +174,9 @@ public class MuseumTest
 		LOG.info("removeOneMuseum");
 		try{
 			tx.begin();
-			/*CriteriaBuilder cb = em.getCriteriaBuilder();
-    		CriteriaDelete delete = cb.createCriteriaDelete(Museum.class);
-  			Root e = delete.from(Museum.class);
-  			delete.where(cb.lessThanOrEqualTo(e.get("ID"), 1));
-  			em.createQuery(delete).executeUpdate();*/
-  			Museum museum= new Museum();
-			museum.setName("museumTest");
-			museum.setTheme("lolCat");
-			museum.setAdress("WWW");
+			Museum museum = em.find(Museum.class, 2);
 			em.remove(museum);
+			assertEquals((em.find(Museum.class, 2)), null);
 		}catch (RuntimeException re) {
 			LOG.error("removeOneMuseum failed", re);
 			throw re;
@@ -178,19 +190,12 @@ public class MuseumTest
 		LOG.info("updateOneMuseum");
 		try{
 			tx.begin();
-			/*CriteriaBuilder cb = em.getCriteriaBuilder();
-  			CriteriaUpdate update = cb.createCriteriaUpdate(Museum.class);
-    		Root e = update.from(Museum.class);
-  			update.set("ADRESS", "Talence");
-  			update.where(cb.lessThanOrEqualTo(e.get("ID"), 1));
-  			em.createQuery(update).executeUpdate();*/
-  			Museum museum= new Museum();
-			museum.setName("museumTest");
-			museum.setTheme("lolCat");
+  			Museum museum = em.find(Museum.class, 2);
 			museum.setAdress("Internet");
   			em.merge(museum);
+  			assertEquals((em.find(Museum.class, 2)).getAdress(), "Internet");
 		}catch (RuntimeException re) {
-			LOG.error("removeOneMuseum failed", re);
+			LOG.error("updateOneMuseum failed", re);
 			throw re;
 		}finally{
 			tx.commit();
