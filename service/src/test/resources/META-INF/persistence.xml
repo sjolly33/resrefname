@@ -1,0 +1,36 @@
+<persistence
+ xmlns="http://java.sun.com/xml/ns/persistence"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation= "http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+ <persistence-unit name="MuseumTest" transaction-type="RESOURCE_LOCAL" >
+ <provider> org.eclipse.persistence.jpa.PersistenceProvider </provider>
+ <!--<class> net.projet.ws.service.entities.MuseumTest </class>-->
+ <!--<class> net.projet.ws.service.entities.ElementTest </class>-->
+ <!--<class> net.projet.ws.service.entities.IMuseum </class>-->
+ <!--<class> net.projet.ws.service.entities.Museum </class>-->
+
+ <!--<class> net.projet.ws.service.entities.Picture.Picture </class>-->
+
+ <!--<class> net.projet.ws.service.entities.Work.Work </class>-->
+ <!--<class> net.projet.ws.service.entities.Work.Paint </class>-->
+ <!--<class> net.projet.ws.service.entities.Work.Sculpture </class>-->
+ <!--<class> net.projet.ws.service.entities.Work.ParticularSupport </class>-->
+ <!--<class> net.projet.ws.service.entities.Work.ParticularTech </class>-->
+ <!--<class> net.projet.ws.service.entities.Work.Particularity </class>-->
+
+ <!--<class> net.projet.ws.service.entities.Collection.CollectionMuseum </class>-->
+ <!--<class> net.projet.ws.service.entities.Collection.CollectionPicture </class>-->
+ <!--<class> net.projet.ws.service.entities.Collection.CollectionWork </class>-->
+
+ <!--<class> net.projet.ws.service.entities.Worker.Author </class>-->
+ <properties>
+ <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
+ <property name="eclipselink.ddl-generation" value="create-tables"/>
+ <property name="eclipselink.logging.level" value="FINE"/>
+ <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+ <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem://localhost:9101/dbunit;create=true"/>
+ <property name="javax.persistence.jdbc.user" value="sa"/>
+ <property name="javax.persistence.jdbc.password" value=""/>
+ </properties>
+ </persistence-unit>
+ </persistence>
