@@ -6,23 +6,23 @@
  <provider> org.eclipse.persistence.jpa.PersistenceProvider </provider>
  <!--<class> net.projet.ws.service.entities.MuseumTest </class>-->
  <!--<class> net.projet.ws.service.entities.ElementTest </class>-->
- <!--<class> net.projet.ws.service.entities.IMuseum </class>-->
- <!--<class> net.projet.ws.service.entities.Museum </class>-->
+ <class> net.projet.ws.service.entities.IMuseum </class>
+ <class> net.projet.ws.service.entities.Museum </class>
 
- <!--<class> net.projet.ws.service.entities.Picture.Picture </class>-->
+ <class> net.projet.ws.service.entities.Picture.Picture </class>
 
- <!--<class> net.projet.ws.service.entities.Work.Work </class>-->
- <!--<class> net.projet.ws.service.entities.Work.Paint </class>-->
- <!--<class> net.projet.ws.service.entities.Work.Sculpture </class>-->
+ <class> net.projet.ws.service.entities.Work.Work </class>
+ <class> net.projet.ws.service.entities.Work.Paint </class>
+ <class> net.projet.ws.service.entities.Work.Sculpture </class>
  <!--<class> net.projet.ws.service.entities.Work.ParticularSupport </class>-->
  <!--<class> net.projet.ws.service.entities.Work.ParticularTech </class>-->
  <!--<class> net.projet.ws.service.entities.Work.Particularity </class>-->
 
- <!--<class> net.projet.ws.service.entities.Collection.CollectionMuseum </class>-->
- <!--<class> net.projet.ws.service.entities.Collection.CollectionPicture </class>-->
- <!--<class> net.projet.ws.service.entities.Collection.CollectionWork </class>-->
+ <class> net.projet.ws.service.entities.Collection.CollectionMuseum </class>
+ <class> net.projet.ws.service.entities.Collection.CollectionPicture </class>
+ <class> net.projet.ws.service.entities.Collection.CollectionWork </class>
 
- <!--<class> net.projet.ws.service.entities.Worker.Author </class>-->
+ <class> net.projet.ws.service.entities.Worker.Author </class>
  <properties>
  <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
  <property name="eclipselink.ddl-generation" value="create-tables"/>

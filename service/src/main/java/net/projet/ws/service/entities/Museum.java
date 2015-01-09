@@ -29,6 +29,7 @@ public class Museum{
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID")
 	private int _museumID;
 	
 	@Column(name="NAME",nullable=false)

@@ -1,5 +1,8 @@
 package net.projet.ws.service;
 
+import net.projet.ws.service.filters.JpaUtil;
+import net.projet.ws.service.entities.Museum;
+
 import javax.persistence.*;
 import java.util.*;
 import org.junit.Test;
@@ -11,6 +14,7 @@ import org.junit.rules.TestName;
 import org.junit.Rule;
 import static org.junit.Assert.*;
 import java.io.*; 
+import javax.persistence.criteria.*;
 
 import org.dbunit.dataset.ITable;
 import org.dbunit.util.TableFormatter;
@@ -31,7 +35,6 @@ import java.sql.DriverManager;
 
 import org.apache.log4j.Logger;
 
-import net.projet.ws.service.filters.JpaUtil;
 
 
 public class MuseumTest
@@ -51,7 +54,7 @@ public class MuseumTest
 	public void initTransaction() throws Exception 
 	{
 		tx = em.getTransaction();
-		//seedData();
+		seedData();
 	}
 
 	@AfterClass
@@ -67,8 +70,6 @@ public class MuseumTest
 		assertTrue(true);
 	}
 	
-
-	/*
 	protected void seedData() throws Exception 
 	{
 		tx.begin();
@@ -92,25 +93,44 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
-	*/
-
-	/*
+	
 	@Test
-	public final void testFindAll() 
+	public final void testFindAllMuseum() 
 	{
-		LOG.info("testFindAll");
+		LOG.info("testFindAllMuseum");
 		try{
 			tx.begin();
-			List<User> list = em.createQuery("select u from User u").getResultList();
-			LOG.debug("find by example successful, result size: "+ list.size());
-			//assertEquals("did not get expected number of entities ", 5, list.size());
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+        	CriteriaQuery<Museum> cq = cb.createQuery(Museum.class);
+        	Root<Museum> rootEntry = cq.from(Museum.class);
+        	CriteriaQuery<Museum> all = cq.select(rootEntry);
+        	TypedQuery<Museum> allQuery = em.createQuery(all);
+        	List<Museum> museums = allQuery.getResultList();
+			LOG.debug("find all museums successful, result size: "+ museums.size());
 		} catch (RuntimeException re) {
-			LOG.error("find by example failed", re);
+			LOG.error("find all museums failed", re);
 			throw re;
 		}finally{
 			tx.commit();
 		}
 	}
-	*/
-
+	
+	@Test
+	public final void testCreateMuseum() throws Exception
+	{
+		LOG.info("testCreateMuseum");
+		try{
+			tx.begin();
+			Museum museum= new Museum();
+			museum.setName("museumTest");
+			museum.setTheme("lolCat");
+			museum.setAdress("WWW");
+			em.persist(museum);
+		}catch (RuntimeException re) {
+			LOG.error("testCreateMuseum failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
 }
