@@ -19,7 +19,7 @@ import javax.persistence.*;
 
 @XmlRootElement(name = "picture")
 @Entity
-@Inheritance
+//@Inheritance
 @Table(name="PICTURE")
 public class Picture extends IMuseum{
 

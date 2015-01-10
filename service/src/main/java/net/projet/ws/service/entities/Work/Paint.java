@@ -12,10 +12,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;	
-
+/*
 @XmlRootElement(name = "paint")
 @Entity
-@DiscriminatorValue("WorkType")
+//@DiscriminatorValue("WorkType")
 @Table(name="PAINT")
 public class Paint extends Work{
 
@@ -28,4 +28,4 @@ public class Paint extends Work{
 	//public void addParticularity(ParticularSupport support){
 	//	_particularities.addParticularity(support);
 	//}
-}
+}*/

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;	
-
+/*
 @XmlRootElement(name = "sculpture")
 @Entity
 @DiscriminatorValue("WorkType")
@@ -20,3 +20,4 @@ import javax.persistence.*;
 public class Sculpture extends Work{
 
 }
+*/

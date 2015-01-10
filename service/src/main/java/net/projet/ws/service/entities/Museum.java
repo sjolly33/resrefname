@@ -29,7 +29,7 @@ public class Museum{
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
+	@Column(name="Museum_ID")
 	private int _museumID;
 	
 	@Column(name="NAME",nullable=false)
@@ -45,23 +45,23 @@ public class Museum{
 	private String _information;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="PICTURES")
+	@JoinColumn(name="MUSEUM_PICTURE_REF", referencedColumnName="Museum_ID")
 	private List<Picture> _pictures;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="WORKS")
+	@JoinColumn(name="MUSEUM_WORK_REF", referencedColumnName="Museum_ID")
 	private List<Work> _works;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="CollectionPicture")
+	@JoinColumn(name="MUSEUM_CollectionPicture_REF", referencedColumnName="Museum_ID")
 	private List<CollectionPicture> _picturesCollections;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="CollectionWork")
+	@JoinColumn(name="MUSEUM_CollectionWork_REF", referencedColumnName="Museum_ID")
 	private List<CollectionWork> _worksCollections;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="AUTHORS")
+	@JoinColumn(name="MUSEUM_AUTHORS_REF", referencedColumnName="Museum_ID")
 	private List<Author> _authors;
 
 	@XmlElement

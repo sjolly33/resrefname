@@ -21,8 +21,8 @@ import javax.persistence.*;
 
 @XmlRootElement(name = "work")
 @Entity
-@Inheritance
-@DiscriminatorColumn(name="WorkType")
+//@Inheritance
+//@DiscriminatorColumn(name="WorkType")
 @Table(name="WORK")
 public class Work extends IMuseum{
 

@@ -1,7 +1,7 @@
 package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.Work.Work;
-import net.projet.ws.service.entities.Work.Paint;
+//import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -28,11 +28,11 @@ public class WorkData{
 
 	public static List<Work> initWorks(){
 		LOG.info("initWork");
-		Work work1 = new Paint();
-		work1.setTitle("THE paint");
-		work1.setDescription("Work en souvenir de qqchose");
+		Work work1 = new Work();
+		//work1.setTitle("THE paint");
+		//work1.setDescription("Work en souvenir de qqchose");
 		works.add(work1);
-		Work work2 = new Paint();
+		Work work2 = new Work();
 		works.add(work2);
 		return new ArrayList<Work>(works);
 	}
