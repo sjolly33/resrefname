@@ -4,5 +4,9 @@
  <MUSEUM Museum_ID="2" THEME="blabla" ADRESS="LA" NAME="Museum2"/>
  <PAINT PAINTID="1" Resume="work1" MUSEUM_PAINT_REF="1"/>
  <PAINT PAINTID="2" Resume="work2" MUSEUM_PAINT_REF="1"/>
- <PAINT PAINTID="3" Resume="work3" TITLE="Title"/>  
+ <PAINT PAINTID="3" Resume="work3" TITLE="Title"/>
+ <PICTURE PictureID="1" Resume="picture" TITLE="Title"/> 
+ <AUTHOR AuthorID="1" name="Jean-Jacques"/> 
+ <COLLECTIONPICTURE CPICTUREID="1" TITLE="myCollectionPicture"/> 
+ <COLLECTIONWORK CWORKID="1" TITLE="myCollectionWork"/> 
 </dataset>

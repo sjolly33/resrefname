@@ -55,7 +55,7 @@ public class MuseumData{
 		}
 		List<Picture> pictures = museum1.getPictures();
 		for(int i=0;i<pictures.size();++i){
-			pictures.get(i).setWork(works.get(0));
+			pictures.get(i).setPaint(works.get(0));
 		}
 		/*for(int i=0;i<works.size();++i){
 			works.get(i).setPicture(pictures);

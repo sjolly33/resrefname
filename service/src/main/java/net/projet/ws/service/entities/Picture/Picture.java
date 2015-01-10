@@ -74,12 +74,21 @@ public class Picture extends IMuseum{
  	}
 
  	@XmlElement
- 	public Paint getWork(){
+ 	public Paint getPaint(){
  		return work;
  	}
 
- 	public void setWork(Paint work){
+ 	public void setPaint(Paint work){
  		this.work = work;
+ 	}
+
+ 	@XmlElement
+ 	public Sculpture getSculpture(){
+ 		return work2;
+ 	}
+
+ 	public void setSculpture(Sculpture work){
+ 		this.work2 = work;
  	}
 
 }

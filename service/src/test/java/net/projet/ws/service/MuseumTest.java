@@ -4,6 +4,10 @@ import net.projet.ws.service.filters.JpaUtil;
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Worker.Author;
+import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Collection.CollectionPicture;
+import net.projet.ws.service.entities.Collection.CollectionWork;
 
 import javax.persistence.*;
 import java.util.*;
@@ -234,19 +238,64 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
-/*
+
 	@Test
 	public void findPicture() throws Exception {
 		LOG.info("findWork");
 		try{
 			tx.begin();
-  			Work work = em.find(Work.class, 3);
-  			assertEquals(work.getID(), 3);
+  			Picture picture = em.find(Picture.class, 1);
+  			assertEquals(picture.getID(), 1);
 		}catch (RuntimeException re) {
-			LOG.error("findWork failed", re);
+			LOG.error("findPicture failed", re);
 			throw re;
 		}finally{
 			tx.commit();
 		}
-	}*/
+	}
+
+	@Test
+	public void findAuthor() throws Exception {
+		LOG.info("findAuthor");
+		try{
+			tx.begin();
+  			Author author = em.find(Author.class, 1);
+  			assertEquals(author.getID(), 1);
+		}catch (RuntimeException re) {
+			LOG.error("findAuthor failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findCollectionPicture() throws Exception {
+		LOG.info("findcPicture");
+		try{
+			tx.begin();
+  			CollectionPicture cPicture = em.find(CollectionPicture.class, 1);
+  			assertEquals(cPicture.getID(), 1);
+		}catch (RuntimeException re) {
+			LOG.error("findcPicture failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findCollectionWork() throws Exception {
+		LOG.info("findcWork");
+		try{
+			tx.begin();
+  			CollectionWork cWork = em.find(CollectionWork.class, 1);
+  			assertEquals(cWork.getID(), 1);
+		}catch (RuntimeException re) {
+			LOG.error("findcWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
 }

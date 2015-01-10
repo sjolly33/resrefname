@@ -120,16 +120,6 @@ public class MuseumRoot{
 	}
 
 	@GET
-	@Path("/{id_museum}/picture/{id_picture}/work")
-	@Produces("application/json")
-	public Paint getWorkByPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
-		Museum museum = MuseumData.getMuseum(museumID);
-		List<Picture> pictures = museum.getPictures();
-		Picture picture = PictureData.getPicture(pictures, pictureID);
-		return picture.getWork();
-	}
-
-	@GET
 	@Path("/{id}/collectionWork/{id_cWork}")
 	@Produces("application/json")
 	public CollectionWork getCollectionWork(@PathParam("id") int museumID, @PathParam("id_cWork") int cWorkID){
@@ -273,26 +263,6 @@ public class MuseumRoot{
 		MuseumData.updateMuseum(museum);
 		return res;
 	}
-
-	//Pas necessaire
-	@POST
-	@Path("/{id_museum}/picture/{id_picture}/new/work")
-	@Consumes("application/json")
-	public Response addWorkToPictureToMuseum(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Paint work){
-		Response res = WorkData.addPaint(work);
-		Museum museum = MuseumData.getMuseum(museumID);
-		List<Picture> pictures = museum.getPictures();
-
-		Picture picture = PictureData.getPicture(pictures, pictureID);
-		picture.setWork(work);
-		picture = PictureData.updatePicture(picture);
-		
-		museum.setPictures(pictures);
-		MuseumData.updateMuseum(museum);
-		return res;
-	}
-
-
 
 ///////////////////////////////////////////////////////////////////////////
 
