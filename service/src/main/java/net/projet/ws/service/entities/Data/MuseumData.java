@@ -3,6 +3,8 @@ package net.projet.ws.service.entities.Data;
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 import net.projet.ws.service.entities.Collection.CollectionWork;
@@ -40,13 +42,13 @@ public class MuseumData{
 		museum1.setAdress("NY");
 
 		museum1.setPictures(PictureData.initPictures());
-		museum1.setWorks(WorkData.initWorks());
+		museum1.setPaints(WorkData.initPaints());
 		museum1.setAuthors(AuthorData.initAuthors());
 
 		museum1.setCollectionsWorks(CollectionData.initCollectionWork());
 		museum1.setCollectionsPictures(CollectionData.initCollectionPicture());
 
-		List<Work> works = museum1.getWorks();
+		List<Paint> works = museum1.getPaints();
 		List<Author> authors = museum1.getAuthors();
 		for(int i=0;i<works.size();++i){
 			works.get(i).setAuthor(authors.get(0));
@@ -58,7 +60,7 @@ public class MuseumData{
 		/*for(int i=0;i<works.size();++i){
 			works.get(i).setPicture(pictures);
 		}*/
-		museum1.setWorks(works);
+		museum1.setPaints(works);
 		museum1.setPictures(pictures);
 
 		List<CollectionPicture> cPictures = museum1.getCollectionsPictures();
@@ -69,7 +71,7 @@ public class MuseumData{
 
 		List<CollectionWork> cWorks = museum1.getCollectionsWorks();
 		for(int i=0;i<cWorks.size();++i){
-			cWorks.get(i).setRefWork(museum1.getWorks());
+			cWorks.get(i).setRefPaint(museum1.getPaints());
 		}
 		museum1.setCollectionsWorks(cWorks);
 

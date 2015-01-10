@@ -2,6 +2,8 @@ package net.projet.ws.service.entities.Picture;
 
 import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 
 import javax.ws.rs.GET;
@@ -35,9 +37,14 @@ public class Picture extends IMuseum{
 	private String _resume;
 
 	@ManyToOne(cascade=CascadeType.ALL) //Picture cannot exist without Work...
-	@JoinColumn(name="Work_ID")
+	@JoinColumn(name="Paint_ID")
 	//@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
-	private Work work;
+	private Paint work;
+
+	@ManyToOne(cascade=CascadeType.ALL) //Picture cannot exist without Work...
+	@JoinColumn(name="Sculpture_ID")
+	//@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
+	private Sculpture work2;
 
 	@XmlElement
  	public int getID() {
@@ -67,11 +74,11 @@ public class Picture extends IMuseum{
  	}
 
  	@XmlElement
- 	public Work getWork(){
+ 	public Paint getWork(){
  		return work;
  	}
 
- 	public void setWork(Work work){
+ 	public void setWork(Paint work){
  		this.work = work;
  	}
 

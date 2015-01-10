@@ -19,17 +19,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
 
-@XmlRootElement(name = "work")
-@Entity
-//@Inheritance
-//@DiscriminatorColumn(name="WorkType")
-@Table(name="WORK")
-public class Work extends IMuseum{
-
-	@Id 
-	@Column(name="WorkID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _workID;
+@MappedSuperclass
+public abstract class Work extends IMuseum{
 
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
@@ -37,29 +28,12 @@ public class Work extends IMuseum{
 	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "Author_ID")
 	private Author author;
-
-	//@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="_workRef")
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
-	private List<Picture> _pictures = new ArrayList<Picture>();
 	
 	@Temporal(TemporalType.DATE)
 	private Date _date;
 
 	@Column(name="Resume")
 	private String _resume;
-/*
-	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name="Particularities", nullable=true)
-	protected List<Particularity> _particularities;
-*/
-	@XmlElement
- 	public int getID() {
- 		return _workID;
- 	}
-
- 	public void setID(int id){
- 		_workID = id;
- 	}
 
 	@XmlElement
  	public List<Float> getDimension() {
@@ -112,13 +86,6 @@ public class Work extends IMuseum{
  		_particularities = new ArrayList<Particularity>(particularities);
  	}*/
 
- 	@XmlElement
- 	public List<Picture> getPicture(){
- 		return new ArrayList<Picture>(_pictures);
- 	}
 
- 	public void setPicture(List<Picture> picture){
- 		_pictures = picture;
- 	}
 
 }

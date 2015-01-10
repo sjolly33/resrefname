@@ -18,7 +18,6 @@
  <!--<class> net.projet.ws.service.entities.Work.ParticularTech </class>-->
  <!--<class> net.projet.ws.service.entities.Work.Particularity </class>-->
 
- <class> net.projet.ws.service.entities.Collection.CollectionMuseum </class>
  <class> net.projet.ws.service.entities.Collection.CollectionPicture </class>
  <class> net.projet.ws.service.entities.Collection.CollectionWork </class>
 

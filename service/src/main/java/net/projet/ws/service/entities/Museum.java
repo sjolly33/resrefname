@@ -1,10 +1,11 @@
 package net.projet.ws.service.entities;
 
-import net.projet.ws.service.entities.Collection.CollectionMuseum;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Picture.Picture;
 
 
@@ -49,8 +50,12 @@ public class Museum{
 	private List<Picture> _pictures;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_WORK_REF", referencedColumnName="Museum_ID")
-	private List<Work> _works;
+	@JoinColumn(name="MUSEUM_PAINT_REF", referencedColumnName="Museum_ID")
+	private List<Paint> _paints;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
+	@JoinColumn(name="MUSEUM_SCULPTURE_REF", referencedColumnName="Museum_ID")
+	private List<Sculpture> _sculptures;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
 	@JoinColumn(name="MUSEUM_CollectionPicture_REF", referencedColumnName="Museum_ID")
@@ -119,12 +124,21 @@ public class Museum{
  	}
 
  	@XmlElement
- 	public List<Work> getWorks(){
- 		return new ArrayList<Work>(_works);
+ 	public List<Paint> getPaints(){
+ 		return new ArrayList<Paint>(_paints);
  	}
 
- 	public void setWorks(List<Work> works){
- 		_works = new ArrayList<Work>(works);
+ 	public void setPaints(List<Paint> works){
+ 		_paints = new ArrayList<Paint>(works);
+ 	}
+
+ 	@XmlElement
+ 	public List<Sculpture> getSculptures(){
+ 		return new ArrayList<Sculpture>(_sculptures);
+ 	}
+
+ 	public void setSculptures(List<Sculpture> works){
+ 		_sculptures = new ArrayList<Sculpture>(works);
  	}
 
  	@XmlElement

@@ -3,7 +3,7 @@ package net.projet.ws.service;
 import net.projet.ws.service.filters.JpaUtil;
 import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Work.Work;
-//import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Paint;
 
 import javax.persistence.*;
 import java.util.*;
@@ -111,7 +111,7 @@ public class MuseumTest
 		LOG.info("testExecuted");
 		assertTrue(true);
 	}
-
+/*
 	@Test
 	public final void findMuseum() 
 	{
@@ -209,7 +209,7 @@ public class MuseumTest
 		LOG.info("findWork");
 		try{
 			tx.begin();
-  			Work work = em.find(Work.class, 3);
+  			Paint work = em.find(Paint.class, 3);
   			assertEquals(work.getID(), 3);
 		}catch (RuntimeException re) {
 			LOG.error("findWork failed", re);
@@ -225,15 +225,15 @@ public class MuseumTest
 		try{
 			tx.begin();
   			Museum museum = em.find(Museum.class, 1);
-  			List<Work> works = museum.getWorks();
-  			assertEquals(museum.getWorks().size(), 2);
+  			List<Paint> works = museum.getPaints();
+  			assertEquals(museum.getPaints().size(), 2);
 		}catch (RuntimeException re) {
 			LOG.error("getWorkFromMuseum failed", re);
 			throw re;
 		}finally{
 			tx.commit();
 		}
-	}
+	}*/
 /*
 	@Test
 	public void findPicture() throws Exception {

@@ -2,6 +2,8 @@ package net.projet.ws.service.entities.Worker;
 
 import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Sculpture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -33,7 +35,10 @@ public class Author{
 	private String _adress;
 
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
-	private List<Work> _worksRef = new ArrayList<Work>();
+	private List<Paint> _worksRef = new ArrayList<Paint>();
+
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
+	private List<Sculpture> _worksRef2 = new ArrayList<Sculpture>();
 
 	@XmlElement
  	public int getID() {
@@ -63,11 +68,11 @@ public class Author{
  	}
 
  	@XmlElement
- 	public List<Work> getWorks() {
+ 	public List<Paint> getWorks() {
  		return _worksRef;
  	}
 
- 	public void setWorks(List<Work> works){
+ 	public void setWorks(List<Paint> works){
  		_worksRef = works;
  	}  	
 }

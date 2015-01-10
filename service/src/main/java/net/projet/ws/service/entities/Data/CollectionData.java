@@ -1,7 +1,6 @@
 package net.projet.ws.service.entities.Data;
 
 import net.projet.ws.service.entities.Museum;
-import net.projet.ws.service.entities.Collection.CollectionMuseum;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 import net.projet.ws.service.entities.Picture.Picture;
@@ -30,7 +29,7 @@ public class CollectionData{
 	private static List<CollectionWork> collectionsWork = new ArrayList<CollectionWork>();
 	private static List<CollectionPicture> collectionsPicture = new ArrayList<CollectionPicture>();
 
-	private static final Logger LOG = Logger.getLogger(CollectionMuseum.class);
+	private static final Logger LOG = Logger.getLogger(CollectionData.class);
 
 	public static List<CollectionPicture> initCollectionPicture() {
 

@@ -7,6 +7,8 @@ import net.projet.ws.service.entities.Data.AuthorData;
 import net.projet.ws.service.entities.Data.CollectionData;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
+import net.projet.ws.service.entities.Work.Paint;
+import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
@@ -70,9 +72,9 @@ public class MuseumRoot{
 	@GET
 	@Path("/{id}/works")
 	@Produces("application/json")
-	public List<Work> getWorks(@PathParam("id") int museumID){
+	public List<Paint> getWorks(@PathParam("id") int museumID){
 		Museum museum = MuseumData.getMuseum(museumID);
-		return museum.getWorks();
+		return museum.getPaints();
 	}
 
 	@GET
@@ -111,16 +113,16 @@ public class MuseumRoot{
 	@GET
 	@Path("/{id_museum}/work/{id_work}")
 	@Produces("application/json")
-	public Work getWork(@PathParam("id_museum") int museumID, @PathParam("id_work") int workID){
+	public Paint getWork(@PathParam("id_museum") int museumID, @PathParam("id_work") int workID){
 		Museum museum = MuseumData.getMuseum(museumID);
-		List<Work> works = museum.getWorks();
-		return WorkData.getWork(works, workID);
+		List<Paint> works = museum.getPaints();
+		return WorkData.getPaint(works, workID);
 	}
 
 	@GET
 	@Path("/{id_museum}/picture/{id_picture}/work")
 	@Produces("application/json")
-	public Work getWorkByPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
+	public Paint getWorkByPicture(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Picture> pictures = museum.getPictures();
 		Picture picture = PictureData.getPicture(pictures, pictureID);
@@ -169,8 +171,8 @@ public class MuseumRoot{
 	@POST
 	@Path("/new/work")
 	@Consumes("application/json")
-	public Response addWork(Work work){
-		return WorkData.addWork(work);
+	public Response addWork(Paint work){
+		return WorkData.addPaint(work);
 	}
 
 	@POST
@@ -223,12 +225,25 @@ public class MuseumRoot{
 	@POST
 	@Path("/{id_museum}/new/work")
 	@Consumes("application/json")
-	public Response addWorkToMuseum(@PathParam("id_museum") int museumID, Work work){
+	public Response addWorkToMuseum(@PathParam("id_museum") int museumID, Paint work){
 		Museum museum = MuseumData.getMuseum(museumID);
-		Response res = WorkData.addWork(work);
-		List<Work> works = museum.getWorks();
+		Response res = WorkData.addPaint(work);
+		List<Paint> works = museum.getPaints();
 		works.add(work);
-		museum.setWorks(works);
+		museum.setPaints(works);
+		MuseumData.updateMuseum(museum);
+		return res;
+	}
+
+	@POST
+	@Path("/{id_museum}/new/work")
+	@Consumes("application/json")
+	public Response addWorkToMuseum(@PathParam("id_museum") int museumID, Sculpture work){
+		Museum museum = MuseumData.getMuseum(museumID);
+		Response res = WorkData.addSculpture(work);
+		List<Sculpture> works = museum.getSculptures();
+		works.add(work);
+		museum.setSculptures(works);
 		MuseumData.updateMuseum(museum);
 		return res;
 	}
@@ -263,8 +278,8 @@ public class MuseumRoot{
 	@POST
 	@Path("/{id_museum}/picture/{id_picture}/new/work")
 	@Consumes("application/json")
-	public Response addWorkToPictureToMuseum(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Work work){
-		Response res = WorkData.addWork(work);
+	public Response addWorkToPictureToMuseum(@PathParam("id_museum") int museumID, @PathParam("id_picture") int pictureID, Paint work){
+		Response res = WorkData.addPaint(work);
 		Museum museum = MuseumData.getMuseum(museumID);
 		List<Picture> pictures = museum.getPictures();
 
@@ -304,8 +319,16 @@ public class MuseumRoot{
 	@Path("/update/work")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public Work updateWork(Work work){
-		return WorkData.updateWork(work);
+	public Paint updateWork(Paint work){
+		return WorkData.updatePaint(work);
+	}
+
+	@PUT
+	@Path("/update/work")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public Sculpture updateWork(Sculpture work){
+		return WorkData.updateSculpture(work);
 	}
 
 	@PUT
@@ -356,8 +379,15 @@ public class MuseumRoot{
 	@DELETE
 	@Path("/delete/work")
 	@Consumes("application/json")
-	public void deleteWork(Work work){
-		WorkData.deleteWork(work);
+	public void deleteWork(Paint work){
+		WorkData.deletePaint(work);
+	}
+
+	@DELETE
+	@Path("/delete/work")
+	@Consumes("application/json")
+	public void deleteWork(Sculpture work){
+		WorkData.deleteSculpture(work);
 	}
 
 	@DELETE

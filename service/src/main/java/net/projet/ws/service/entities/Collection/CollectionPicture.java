@@ -1,5 +1,5 @@
 package net.projet.ws.service.entities.Collection;
-
+import net.projet.ws.service.entities.IMuseum;
 import net.projet.ws.service.entities.Picture.Picture;
 
 import javax.ws.rs.GET;
@@ -17,12 +17,26 @@ import javax.persistence.*;
 
 @XmlRootElement(name = "collectionPicture")
 @Entity
-@DiscriminatorValue("Type")
 @Table(name="COLLECTIONPICTURE")
-public class CollectionPicture extends CollectionMuseum{
+public class CollectionPicture extends IMuseum{
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL) //Collection is a set of existing pictures... 
+	@Id 
+	@Column(name="CPICTUREID", nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int _cPictureID; 
+
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing pictures... 
+	@JoinColumn(name="COLLECTION_PICTURE_REF", referencedColumnName="CPICTUREID")
 	private List<Picture> _pictures;
+
+	@XmlElement
+ 	public int getID() {
+ 		return _cPictureID;
+ 	}
+
+ 	public void setID(int id){
+ 		_cPictureID = id;
+ 	}
 
  	@XmlElement
  	public List<Picture> getRefPicture() {

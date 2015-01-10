@@ -1,4 +1,5 @@
 package net.projet.ws.service.entities.Work;
+import net.projet.ws.service.entities.Picture.Picture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,12 +13,37 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;	
-/*
+
 @XmlRootElement(name = "paint")
 @Entity
-//@DiscriminatorValue("WorkType")
 @Table(name="PAINT")
 public class Paint extends Work{
+
+	@Id 
+	@Column(name="PAINTID", nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int _paintID;
+
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
+	private List<Picture> _pictures = new ArrayList<Picture>();
+
+	@XmlElement
+ 	public int getID() {
+ 		return _paintID;
+ 	}
+
+ 	public void setID(int id){
+ 		_paintID = id;
+ 	}
+
+ 	@XmlElement
+ 	public List<Picture> getPicture(){
+ 		return new ArrayList<Picture>(_pictures);
+ 	}
+
+ 	public void setPicture(List<Picture> picture){
+ 		_pictures = picture;
+ 	}
 
 	//TODO : Once
 	//public void addParticularity(ParticularTech tech){
@@ -28,4 +54,4 @@ public class Paint extends Work{
 	//public void addParticularity(ParticularSupport support){
 	//	_particularities.addParticularity(support);
 	//}
-}*/
+}

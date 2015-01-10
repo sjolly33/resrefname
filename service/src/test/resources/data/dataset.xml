@@ -2,7 +2,7 @@
 <dataset>
  <MUSEUM Museum_ID="1" THEME="Hazard" ADRESS="NY" NAME="Museum" />
  <MUSEUM Museum_ID="2" THEME="blabla" ADRESS="LA" NAME="Museum2"/>
- <WORK WorkID="1" Resume="work1" MUSEUM_WORK_REF="1"/>
- <WORK WorkID="2" Resume="work2" MUSEUM_WORK_REF="1"/>
- <WORK WorkID="3" Resume="work3" TITLE="Title"/>  
+ <PAINT PAINTID="1" Resume="work1" MUSEUM_PAINT_REF="1"/>
+ <PAINT PAINTID="2" Resume="work2" MUSEUM_PAINT_REF="1"/>
+ <PAINT PAINTID="3" Resume="work3" TITLE="Title"/>  
 </dataset>
