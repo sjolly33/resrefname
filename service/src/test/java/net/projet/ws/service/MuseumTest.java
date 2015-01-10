@@ -111,7 +111,7 @@ public class MuseumTest
 		LOG.info("testExecuted");
 		assertTrue(true);
 	}
-/*
+
 	@Test
 	public final void findMuseum() 
 	{
@@ -233,7 +233,7 @@ public class MuseumTest
 		}finally{
 			tx.commit();
 		}
-	}*/
+	}
 /*
 	@Test
 	public void findPicture() throws Exception {
