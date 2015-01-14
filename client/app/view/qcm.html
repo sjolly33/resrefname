@@ -1,0 +1,20 @@
+<div ng-controller="qcmCtrl" ng-init="init()">
+<h1> QCM </h1>
+<h2> Informations </h2>
+title : {{qcm.title}}
+<br/>
+description : {{qcm.desc}}
+<h2> Questions </h2>
+<form>
+<ul>
+    <li ng-repeat="question in questions track by $index">
+      <p>Q[{{$index + 1}}] : {{question.Question}} <br/>
+      <input type="radio" ng-click="checkStatus($index, 1)" value="1" ng-model="choice">{{question.Answer1}}
+      <input type="radio" ng-click="checkStatus($index, 2)" value="2" ng-model="choice">{{question.Answer2}}
+      <input type="radio" ng-click="checkStatus($index, 3)" value="3" ng-model="choice">{{question.Answer3}} 
+      </p>
+    </li>
+</ul>
+<button ng-click="finish()">Submit</button>
+</form>
+</div>

@@ -1,0 +1,8 @@
+{
+"name": "QCM",
+"version": "1.0.0",
+"description": "angular with a QCM app",
+"scripts": {
+    "install": "cd app && npm install"
+ }
+}

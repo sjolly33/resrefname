@@ -1,0 +1,22 @@
+<div ng-controller="statsCtrl" ng-init="init()">
+<h1> Stats for {{qcm.title}} </h1>
+<h2> Informations </h2>
+title : {{qcm.title}}
+<br/>
+description : {{qcm.desc}}
+<br/>
+participant : {{qcm.users}}
+<h2> Questions stats </h2>
+<form>
+<ul>
+    <li ng-repeat="question in qcm.questions track by $index">
+      <p>Q[{{$index + 1}}] : {{question.Question}} <br/>
+       percentage of answer 1 : {{question.Answer1}} = {{answer[$index][0]*100/qcm.users}}%<br/>
+       percentage of answer 2 : {{question.Answer2}} = {{answer[$index][1]*100/qcm.users}}%<br/>
+       percentage of answer 3 : {{question.Answer3}} = {{answer[$index][2]*100/qcm.users}}%<br/>
+       percentage of no answer = {{answer[$index][3]*100/qcm.users}}%
+      </p>
+    </li>
+</ul>
+<h2><a href="#/accueil">Main page</a></h2>
+</form>

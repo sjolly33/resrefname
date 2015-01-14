@@ -1,0 +1,38 @@
+<div ng-controller="accueil" ng-init="init()">
+<h1 class="welcome">Welcome</h1>
+<h2 class="qcmList"> QCM list </h2>
+	<ul>
+    <li ng-repeat="qcm in qcms track by $index">
+	  <p>QCM[{{$index+1}}] : <span class="qcmTitleR">{{qcm.title}}</span>;<br/> description : <span class="qcmDescR">{{qcm.desc}}</span>; 
+	  <span ng-switch on="qcm.open">
+	  <span ng-switch-when="yes"><br/> open : <a href="#/qcm/{{qcm._id}}">yes</a> ; need more {{qcm.users - qcm.questions[0].Result.length}} participant(s) !</span>
+	  <span ng-switch-default><br/> open : no; <a href="#/stats/{{qcm._id}}">Result</a></span>
+	  </span> 
+      </p>
+    </li>
+</ul>
+<h2 class="createQCM"> Create QCM </h2>
+    <form ng-model="newQCM">
+		title : <input type="text" ng-model="newQCM.title"/>
+        description : <input type="text" ng-model="newQCM.desc"/>
+        number of participant : <input type="text" ng-model="newQCM.users"/>
+        <br/>
+        <ul>
+        <li> 
+            Question : <input type="text" ng-model="newQ0.Question"/>
+            Answer 1 : <input type="text" ng-model="newQ0.Answer1"/>
+            Answer 2 : <input type="text" ng-model="newQ0.Answer2"/>
+            Answer 3 : <input type="text" ng-model="newQ0.Answer3"/>
+            <button ng-click="addQ(newQ0)">Save</button>
+        </li>
+        <li ng-repeat="question in questions track by $index">
+            Question : <input type="text" ng-model="newQ.Question" value=""/>
+            Answer 1 : <input type="text" ng-model="newQ.Answer1" value=""/>
+            Answer 2 : <input type="text" ng-model="newQ.Answer2" value=""/>
+            Answer 3 : <input type="text" ng-model="newQ.Answer3" value=""/>
+            <button ng-click="addQ(newQ)">Save</button>
+        </li>
+        </ul>
+        <button ng-click="addQCM(newQCM)">Submit</button>
+    </form>
+</div>
