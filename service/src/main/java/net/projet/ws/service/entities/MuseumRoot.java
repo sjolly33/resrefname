@@ -72,10 +72,19 @@ public class MuseumRoot{
 	@GET
 	@Path("/{id}/works")
 	@Produces("application/json")
-	public List<Paint> getWorks(@PathParam("id") int museumID){
+	public List<Paint> getPaints(@PathParam("id") int museumID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		return museum.getPaints();
 	}
+
+	@GET
+	@Path("/{id}/works")
+	@Produces("application/json")
+	public List<Sculpture> getSculptures(@PathParam("id") int museumID){
+		Museum museum = MuseumData.getMuseum(museumID);
+		return museum.getSculptures();
+	}
+
 
 	@GET
 	@Path("/{id}/authors")

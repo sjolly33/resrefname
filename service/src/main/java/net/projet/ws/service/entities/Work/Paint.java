@@ -27,6 +27,12 @@ public class Paint extends Work{
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
+	@Column(name="particularityTech")
+	private String _particularityTech;
+
+	@Column(name="particularitySupport")
+	private String _particularitySupport;
+
 	@XmlElement
  	public int getID() {
  		return _paintID;
@@ -45,13 +51,11 @@ public class Paint extends Work{
  		_pictures = picture;
  	}
 
-	//TODO : Once
-	//public void addParticularity(ParticularTech tech){
-//		_particularities.addParticularity(tech);
-	//}
+	public void setParticularityTech(String tech){
+		_particularityTech = tech;
+	}
 	
-	//TODO : Once
-	//public void addParticularity(ParticularSupport support){
-	//	_particularities.addParticularity(support);
-	//}
+	public void setParticularitySupport(String support){
+		_particularitySupport = support;
+	}
 }
