@@ -1,0 +1,32 @@
+I) Architecture du projet
+
+	1) Gestionnaire de configuration
+Le projet prend racine sur un méta-projet servant à capitaliser les dépendances redondantes à chaque sous-projet. Nous avons développé deux sous projets. L'un correspondant au front-end (client) de l'application et l'autre au back-end (service).
+
+// Adrien
+
+	2) Architecture Client
+Le client a été développé avec un design MVC à l'aide du framework AngularJS.
+
+// Victor et Adrien
+
+	3) Architecture Service
+// A REVOIR
+Le back-end a été développé en J2EE à l'aide des framework Jersey et JPA. 
+
+Un phase de test a été intégrée au cycle de Maven avant la phase de déploiement. La phase de tests :
+	1 - instancie une nouvelle base de données
+	2 - établie une communication via un EntityManager
+	3 - remplie cette dernière à l'aide d'un fichier de données XML
+	4 - exécute une méthode de tests 
+	5 - répète les étapes 3 et 4 jusqu'à ce que tous les tests soient terminés
+	6 - envoi les résultats des tests dans des fichiers de sorties 
+
+// Adrien
+
+II) Fonctionnalités
+// Solene et Victor
+
+III) Discussions
+
+// Solene et Adrien
