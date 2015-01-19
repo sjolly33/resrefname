@@ -48,6 +48,11 @@ public class Sculpture extends Work{
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
  	}
+
+ 	@XmlElement
+ 	public List<String> getParticularitiesSupport(){
+		return new ArrayList<String>(_particularitiesSupport);
+	}
 	
 	public void setParticularitiesSupport(List<String> support){
 		_particularitiesSupport = new ArrayList<String>(support);

@@ -4,8 +4,6 @@
  xsi:schemaLocation= "http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
  <persistence-unit name="Museum" transaction-type="RESOURCE_LOCAL" >
  <provider> org.eclipse.persistence.jpa.PersistenceProvider </provider>
- <class> net.projet.ws.service.entities.MuseumTest </class>
- <class> net.projet.ws.service.entities.ElementTest </class>
  <class> net.projet.ws.service.entities.IMuseum </class>
  <class> net.projet.ws.service.entities.Museum </class>
 
@@ -14,13 +12,8 @@
  <class> net.projet.ws.service.entities.Work.Work </class>
  <class> net.projet.ws.service.entities.Work.Paint </class>
  <class> net.projet.ws.service.entities.Work.Sculpture </class>
- <!--<class> net.projet.ws.service.entities.Work.ParticularSupport </class>-->
- <!--<class> net.projet.ws.service.entities.Work.ParticularTech </class>-->
- <!--<class> net.projet.ws.service.entities.Work.Particularity </class>-->
-
  <class> net.projet.ws.service.entities.Collection.CollectionPicture </class>
  <class> net.projet.ws.service.entities.Collection.CollectionWork </class>
-
  <class> net.projet.ws.service.entities.Worker.Author </class>
 
  <non-jta-data-source>java:comp/env/jdbc/H2DB</non-jta-data-source>

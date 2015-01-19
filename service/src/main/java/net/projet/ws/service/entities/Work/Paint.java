@@ -51,6 +51,16 @@ public class Paint extends Work{
  		_pictures = picture;
  	}
 
+ 	@XmlElement
+ 	public String getParticularityTech(){
+		return _particularityTech;
+	}
+	
+	@XmlElement
+	public String getParticularitySupport(){
+		return _particularitySupport;
+	}
+
 	public void setParticularityTech(String tech){
 		_particularityTech = tech;
 	}
