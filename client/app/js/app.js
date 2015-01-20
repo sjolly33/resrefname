@@ -5,7 +5,7 @@ var app = angular.module('MuseumManager',['ngRoute','ui.bootstrap'])
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
-    .when('/create_museum', {templateUrl: 'view/create_museum.html',controller: 'createMuseumController'})
+    .when('/create_museum', {templateUrl: 'view/create_museum.html',controller: 'museumController'})
     .when('/museum/:id', {templateUrl: 'view/museum.html',controller: 'museumController'})
     .when('/home', {templateUrl: 'view/home.html',controller: 'homeController'})
     .when('/search', {templateUrl: 'view/search.html',controller: 'searchController'})

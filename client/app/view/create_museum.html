@@ -1,4 +1,4 @@
-<div class="col-md-offset-1" ng-controller="createMuseumController">
+<div class="col-md-offset-1" ng-controller="museumController">
 
     <h2>New museum</h2>
 
@@ -18,16 +18,17 @@
                 <br>
                 <label for="information_museum"> Information : </label>
                 <input class="form-control" type="text" id="information_museum" ng-model="information_museum" required/>
-
+            </div>
         </div>
-    </div>
-    <div class="col-lg-12">
-        <br>
-        <button ng-click="save(form_new_museum)" class="btn bg-primary">
-            <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
-        </button>
-    </div>
+        <div class="col-lg-12">
+            <br>
+            <div class="col-md-5 text-center">
+            <button ng-click="save(form_new_museum)" class="btn bg-primary">
+                <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
+            </button>
+            </div>
+        </div>
 
-</form>
+    </form>
 
 </div>

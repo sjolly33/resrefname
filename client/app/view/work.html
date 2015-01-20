@@ -1,10 +1,54 @@
 
-
 <div class="col-md-offset-1" ng-controller="workController">
 
 	<div class="text-center">
 		<h2> Work : {{worker.name}} </h2>
 	</div>
 
+
+	<h3> General informations : </h3>
+
+	<div class="col-md-12">
+		<fieldset class="scheduler-border col-md-5">
+			<br>
+			<label> Title : {{work.name}} </label>
+			<br>
+			<label> Author : {{work.author}} </label>
+			<br>
+			<label> Dimension : {{work.dimension}} </label>
+			<br>
+			<label> Resume : {{work.resume}} </label>
+			<br>
+			<label> Date : {{work.date}} </label>
+			<br>
+			<label> Type : {{work.type}} </label>
+			<br>
+			<label> More : {{work.more}} </label>
+			<br>
+		</fieldset>
+	</div>
+
+
+	<h3> Pictures : </h3>
+
+	<div class="col-md-12">
+		<fieldset class="scheduler-border col-md-4">
+			<br>
+			<img  width="400" height="300" ng-src="./img/test1.jpg"/>
+			<br>
+			<div class="col-lg-12">
+				<br>
+
+				<button ng-click="viewPreviousPicture()" class="btn bg-primary">
+					<span caria-hidden="true"></span> <i class="fa fa-arrow-left"></i> previous 
+				</button>
+				&nbsp;&nbsp;&nbsp;
+				<button ng-click="viewNextPicture()" class="btn bg-primary">
+					<span caria-hidden="true"></span> <i class="fa fa-arrow-right"></i> next
+				</button>
+				<br>
+			</div>
+		</fieldset>
+	</div>
 
 </div>

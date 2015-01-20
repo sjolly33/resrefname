@@ -1,38 +1,54 @@
-//Instanciate Controllers
 
-app.controller('createMuseumController', ['$scope', '$routeParams','$route', 
+////////////////////////////////////////////////////////////////////////
+// MUSEUM
+////////////////////////////////////////////////////////////////////////
+app.controller('museumController', ['$scope', '$routeParams','$route', 
   function($scope, $resource, $routeParams, $route) {
-    /*
-   alert($scope.title_museum);
-    alert($scope.theme_museum);
-    alert($scope.adress_museum);
-    alert( $scope.information_museum);
-    */
+    console.log('museumController');
 
     $scope.save = function ($form) {
-      alert("save");
-    }
+      if($form.$valid){
+    // Recuperaton des donnees du formulaire :
+    var new_museum = {};
+    new_museum.name = $scope.title_museum;
+    new_museum.theme = $scope.theme_museum;
+    new_museum.adress = $scope.adress_museum;
+    new_museum.information = $scope.information_museum;
+    
+    console.log(new_museum);
+    // Puis sauvegarde :
+    alert("save museum in museumController");
+  }
+}
 
-  }]);
-
-app.controller('museumController', ['$scope','$routeParams','$route',
- function($scope, $resource, $routeParams, $route) {
-  console.log('museumController');
 }]);
 
 
+
+////////////////////////////////////////////////////////////////////////
+// HOME
+////////////////////////////////////////////////////////////////////////
 app.controller('homeController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('homeController');
   }]);
 
+
+////////////////////////////////////////////////////////////////////////
+// SEARCH
+////////////////////////////////////////////////////////////////////////
 app.controller('searchController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('searchController');
   }]);
 
-app.controller('workController', ['$scope','$routeParams', '$route', 
-  function($scope, $resource, $routeParams, $route) {
+
+
+////////////////////////////////////////////////////////////////////////
+// WORK
+////////////////////////////////////////////////////////////////////////
+app.controller('workController', ['$scope','$routeParams', '$route', '$sce',
+  function($scope, $resource, $routeParams, $route, $sce) {
     console.log('workController');
 
     $scope.ADD = function($http, $scope){
@@ -44,14 +60,125 @@ app.controller('workController', ['$scope','$routeParams', '$route',
           url: ""
         })}
 
-        $scope.removePicture = function ($form) {
+        $scope.removePicture = function () {
           $scope.pictures.splice(-1,1)
         }
       }
-    
-  }]);
 
+      $scope.viewPreviousPicture = function(){
+        alert("viewPreviousPicture");
+      }
+
+      $scope.viewNextPicture = function(){
+        alert("viewNextPicture");
+      }
+
+      $scope.forSce = function($sce){
+
+        $scope.painting = function(){
+
+          var html_content =  
+          "<label for='technical_work'> Technical : </label>"+
+          "<select class='form-control' ng-model='technical_work' >"+
+          "<option>Watercolor</option>"+
+          "<option>Gouache</option>"+
+          "<option>Oil paints</option>"+
+          "<option>Acrylic</option>"+
+          "<option>Other</option>"+
+          "</select>"+
+          "<br>"+
+          "<label for='sheld_work'> Sheld : </label>"+
+          "<select class='form-control' ng-model='sheld_work'>"+
+          "<option>None</option>"+
+          "<option>Flax Canvas</option>"+
+          "<option>Cotton Canvas</option>"+
+          "<option>Cardboard</option>"+
+          "<option>Paper</option>"+
+          "<option>Wood</option>"+
+          "<option>Other</option>"+
+          "</select>";
+
+          $scope.myHTML = $sce.trustAsHtml(html_content);
+        }
+
+        $scope.sculture = function(){
+          var html_content =  
+          "<label for='material_work'> Material : </label>"+
+          "<select class='form-control' ng-model='material_work' >"+
+          "<option>Wax</option>"+
+          "<option>Clay</option>"+
+          "<option>Plasticine</option>"+
+          "<option>Plaster</option>"+
+          "<option>Cement</option>"+
+          "<option>Stone</option>"+
+          "<option>Wood</option>"+
+          "<option>Other</option>"+
+          "</select>";
+
+          $scope.myHTML = $sce.trustAsHtml(html_content);
+        }
+
+        $scope.drawing = function(){
+          alert("Rien pour le moment");
+        }
+
+        $scope.photography = function(){
+         var html_content =  
+         "<label for='sheld_work'> Shell : </label>"+
+         "<select class='form-control' ng-model='sheld_work' >"+
+         "<option>None</option>"+
+         "<option>Aluminium</option>"+
+         "<option>Wood</option>"+
+         "<option>Cardboard</option>"+
+         "<option>Other</option>"+
+         "</select>";
+
+         $scope.myHTML = $sce.trustAsHtml(html_content);
+       }
+
+     }
+
+     $scope.save = function($form){
+
+    // Recuperaton des donnees du formulaire :
+    var new_work = {};
+    new_work.title = $scope.title_work;
+    new_work.author = $scope.author_work;
+    new_work.dimension = $scope.dimension_work;
+    new_work.resume = $scope.resume_work;
+    new_work.date = $scope.date_work;
+
+    // A GERER !!
+    new_work.specialities = {};
+
+    // Puis sauvegarde : 
+    console.log(new_work);
+    alert("save work in workController");
+  
+}
+
+
+
+}]);
+
+
+////////////////////////////////////////////////////////////////////////
+// WORKER
+////////////////////////////////////////////////////////////////////////
 app.controller('workerController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('workerController');
-  }]);
+
+    $scope.save = function($form){
+      if($form.$valid){
+    // Recuperaton des donnees du formulaire :
+    var new_worker = {};
+    new_worker.name = $scope.name_worker;
+    new_worker.adress = $scope.adress_worker;
+
+    // Puis sauvegarde : 
+    console.log(new_worker);
+    alert("save worker in workerController");
+  }
+}
+}]);
