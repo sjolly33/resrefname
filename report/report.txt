@@ -6,23 +6,81 @@ Le projet prend racine sur un méta-projet servant à capitaliser les dépendanc
 // Adrien
 
 	2) Architecture Client
-Le client a été développé avec un design MVC à l'aide du framework AngularJS.
-
+Le client a été développé en Web 2.0 avec un design MVC à l'aide du framework AngularJS.
 // Victor et Adrien
 
 	3) Architecture Service
 // A REVOIR
-Le back-end a été développé en J2EE à l'aide des framework Jersey et JPA. 
+Le back-end a été développé en J2EE à l'aide des framework Jersey et JPA.
+L'archtecture du service prend la forme suivante : 
 
-Un phase de test a été intégrée au cycle de Maven avant la phase de déploiement. La phase de tests :
+service
+├── pom.xml
+├── src
+    ├── main
+    │   ├── java
+    │   │   └── net
+    │   │       └── projet
+    │   │           └── ws
+    │   │               └── service
+    │   │                   ├── entities
+    │   │                   │   ├── Collection
+    │   │                   │   │   ├── CollectionPicture.java
+    │   │                   │   │   └── CollectionWork.java
+    │   │                   │   ├── Data
+    │   │                   │   │   ├── AuthorData.java
+    │   │                   │   │   ├── CollectionData.java
+    │   │                   │   │   ├── MuseumData.java
+    │   │                   │   │   ├── PictureData.java
+    │   │                   │   │   └── WorkData.java
+    │   │                   │   ├── IMuseum.java
+    │   │                   │   ├── Museum.java
+    │   │                   │   ├── MuseumRoot.java
+    │   │                   │   ├── Picture
+    │   │                   │   │   └── Picture.java
+    │   │                   │   ├── Work
+    │   │                   │   │   ├── Paint.java
+    │   │                   │   │   ├── Sculpture.java
+    │   │                   │   │   └── Work.java
+    │   │                   │   └── Worker
+    │   │                   │       └── Author.java
+    │   │                   └── filters
+    │   │                       ├── JpaFilter.java
+    │   │                       └── JpaUtil.java
+    │   ├── resources
+    │   │   ├── log4j.properties.xml
+    │   │   └── META-INF
+    │   │       └── persistence.xml
+    │   └── webapp
+    │       ├── index.jsp
+    │       └── WEB-INF
+    │           ├── jetty-env.xml
+    │           └── web.xml
+    └── test
+        ├── java
+        │   └── net
+        │       └── projet
+        │           └── ws
+        │               └── service
+        │                   └── MuseumTest.java
+        └── resources
+            ├── data
+            │   └── dataset.xml
+            ├── log4j.properties.xml
+            └── META-INF
+                └── persistence.xml
+
+Le dossier /entities contient toutes les classes annotés JPA qui seront traduits dans le domaine relationnel. Le fichier MuseumRoot.java contient tous les points d'accès pour les méthodes REST dans le but d'interroger la base de données. L'interrogation passe par les fichiers contenu dans le dossier Data/ ayant accès à un EntityManager instanciable via des filtres (/filters).
+
+
+Une phase de test a été intégrée au cycle de Maven avant la phase de déploiement. La phase de tests :
 	1 - instancie une nouvelle base de données
 	2 - établie une communication via un EntityManager
-	3 - remplie cette dernière à l'aide d'un fichier de données XML
+	3 - efface et remplie la base de données à l'aide d'un fichier de données XML
 	4 - exécute une méthode de tests 
 	5 - répète les étapes 3 et 4 jusqu'à ce que tous les tests soient terminés
 	6 - envoi les résultats des tests dans des fichiers de sorties 
 
-// Adrien
 
 II) Fonctionnalités
 // Solene et Victor
@@ -30,3 +88,17 @@ II) Fonctionnalités
 III) Discussions
 
 // Solene et Adrien
+
+1) Domaine objet et relationnel
+
+Nous avons consulté les annotations proposées par JPA 2.0 dans l'objectif de profiter au maximum des avantages du monde objet. Néanmoins, nous nous sommes heurtés à un certains nombres de problèmes de conception notamment en ce qui concerne les relations d'héritages et de polymorphismes (conflits entre tables, etc). De ce fait, seul les classes les plus bas niveau ont été définies comme entités. Par exemple, les classes Work et IMuseum sont toutes les deux abstraites et sont renseignées d'une annotation "@MappedSuperclass" signifiant que les champs sont factorisés pour les sous-classes entités.
+Ainsi, la modularité du modèle objet développé se voit réduit par la nécessité de travailler majoritairement avec des types concrèts s'entre-référençant.
+
+2) Interaction Client/Service
+
+// Parler de la taille des requetes
+
+3) Extensions des fonctionnalités
+
+
+
