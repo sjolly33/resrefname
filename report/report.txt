@@ -1,18 +1,51 @@
 I) Architecture du projet
 
 	1) Gestionnaire de configuration
-Le projet prend racine sur un méta-projet servant à capitaliser les dépendances redondantes à chaque sous-projet. Nous avons développé deux sous projets. L'un correspondant au front-end (client) de l'application et l'autre au back-end (service).
 
-// Adrien
+Nous avons utilisé Maven pour la gestion du projet.
+Ce dernier prend racine sur un méta-projet servant à capitaliser les dépendances redondantes à chaque sous-projet. Nous avons développé deux sous projets. L'un correspondant au front-end (client) de l'application et l'autre au back-end (service).
+
 
 	2) Architecture Client
+
+	// Victor et Adrien
+
 Le client a été développé en Web 2.0 avec un design MVC à l'aide du framework AngularJS.
-// Victor et Adrien
+L'architecture du client prend la forme suivante : 
+
+client
+├── app
+│   ├── css
+│   │   ├── style.css
+│   │   └── vendor
+│   │       └── bootstrap.min.css
+│   ├── index.html
+│   ├── js
+│   │   ├── app.js
+│   │   ├── controllers.js
+│   │   └── services.js
+│   ├── karma.conf.js
+│   ├── package.json
+│   ├── protractor.conf.js
+│   ├── test
+│   │   └── E2E
+│   │       └── viewAccueil.js
+│   └── view
+│       ├── create_museum.html
+│       ├── create_worker.html
+│       ├── create_work.html
+│       ├── home.html
+│       ├── museum.html
+│       ├── search.html
+│       ├── worker.html
+│       └── work.html
+├── package.json
+├── pom.xml
 
 	3) Architecture Service
 // A REVOIR
 Le back-end a été développé en J2EE à l'aide des framework Jersey et JPA.
-L'archtecture du service prend la forme suivante : 
+L'architecture du service prend la forme suivante : 
 
 service
 ├── pom.xml
@@ -87,18 +120,18 @@ II) Fonctionnalités
 
 III) Discussions
 
-// Solene et Adrien
-
 1) Domaine objet et relationnel
 
 Nous avons consulté les annotations proposées par JPA 2.0 dans l'objectif de profiter au maximum des avantages du monde objet. Néanmoins, nous nous sommes heurtés à un certains nombres de problèmes de conception notamment en ce qui concerne les relations d'héritages et de polymorphismes (conflits entre tables, etc). De ce fait, seul les classes les plus bas niveau ont été définies comme entités. Par exemple, les classes Work et IMuseum sont toutes les deux abstraites et sont renseignées d'une annotation "@MappedSuperclass" signifiant que les champs sont factorisés pour les sous-classes entités.
-Ainsi, la modularité du modèle objet développé se voit réduit par la nécessité de travailler majoritairement avec des types concrèts s'entre-référençant.
+Ainsi, la modularité du modèle objet développé se voit réduit par la nécessité de travailler majoritairement avec des types concrèts s'entre-référençant. Ce problème n'en est pas forcément un car, dans le contexte métier présent, les ajouts de catégories d'objets se feront rare.
 
 2) Interaction Client/Service
 
-// Parler de la taille des requetes
+La stratégie de développement a été de fournir des services (GET, POST, PUT et DELETE) à chaque entité persisté. Des requetes permettant l'accès direct à un musée ont été développées dans l'objectif de diminuer la taille des données à transiter. Cependant, les requetes 
+sont peu ciblés et donc le front-end doit nécessairement envoyé l'ensemble d'une entité meme si un seul champ est renseigné (par exemple, envoi de tout les champs d'un auteur meme si ce dernier dispose de beaucoup de champs à null).
+La raison est le cout de développement que représente la décomposition des services. Egalement, en tenant compte du métier de conservateur, la fréquence des modifications seront faible tandis que leurs tailles seront importantes (nécessité de renseigner une oeuvre au mieux avant son exposition). 
 
 3) Extensions des fonctionnalités
 
-
+//Solene
 
