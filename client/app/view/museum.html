@@ -1,0 +1,60 @@
+<div class="text-center">
+	<h2>Museum Page</h2>
+</div>
+
+<div class="col-md-offset-1" ng-controller="museumController">
+
+	<div class="col-lg-12">
+		<br>
+		<a  href="#/create_work" class="btn btn-primary" role="button"> New Work</a>
+		&nbsp;&nbsp;&nbsp;
+		<a  href="#/create_worker" class="btn btn-primary" role="button"> New Worker</a>
+		<br>
+	</div>
+	
+<br><br>
+<br><br>
+
+	<h3> General informations : </h3>
+
+	<div class="col-md-12">
+		<fieldset class="scheduler-border col-md-5">
+			<br>
+			<label> Name : {{museum.name}} </label>
+			<br>
+			<label> Theme : {{museum.theme}} </label>
+			<br>
+			<label> Adress : {{museum.adress}} </label>
+			<br>
+			<label> Information : {{museum.information}} </label>
+			<br>
+		</fieldset>
+	</div>
+
+
+	<h3> Works : </h3>
+
+	<li>
+		<a href="#/work/1"> Oeuvre 1 </a>
+	</li>
+	<li>
+		<a href="#/work/2"> Oeuvre 2 </a>
+	</li>
+	<li>
+		<a href="#/work/3"> Oeuvre 3 </a>
+	</li>
+
+
+	<h3> Workers : </h3>
+
+	<li>
+		<a href="#/worker/1"> Worker 1 </a>
+	</li>
+	<li>
+		<a href="#/worker/2"> Worker 2 </a>
+	</li>
+	<li>
+		<a href="#/worker/3"> Worker 3 </a>
+	</li>
+
+</div>

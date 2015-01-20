@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 var QCMServices = angular.module('QCMServices', ['ngResource']);
 
@@ -12,3 +12,4 @@ QCMServices.factory('QCM', ['$resource',
       updateQCM: {method:'PUT', isArray:false}
     });
   }]);
+*/

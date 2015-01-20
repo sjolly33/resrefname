@@ -1,17 +1,39 @@
 <!doctype html>
-<html ng-app="qcmApp">
+<html lang="fr">
+
 <head>
-<title>QCM</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="./node_modules/angular/angular.js"></script>
-<script src="./node_modules/angular-route/angular-route.js"></script>
-<script src="./node_modules/angular-resource/angular-resource.js"></script>
-<script src="./js/app.js"></script>
-<script src="./js/controllers.js"></script>
-<script src="./js/services.js"></script>
+	<meta charset="utf-8">
+	<title>Museum Manager Home</title>
+
+	<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./node_modules/angular/angular.js"></script>
+	<script type="text/javascript" src="./node_modules/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="./node_modules/angular-resource/angular-resource.js"></script>
+	<script type="text/javascript" src="./node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js"></script>
+
+	<link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./node_modules//font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/vendor/bootstrap.min.css">
+
+	<script src="./js/app.js"></script>
+	<script src="./js/controllers.js"></script>
+	<script src="./js/services.js"></script>
+
+	<nav class="navbar-inverse" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/home"><i class="fa fa-home"></i></a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<a class="navbar-brand" href="#/search"> <i class="fa fa-search"></i> Search in museum </a>
+			</div>
+		</div>
+	</nav>
 </head>
-<body>
-	<div ng-view>
-	</div>
+
+<body ng-app="MuseumManager">
+	<div ng-view></div>
 </body>
+
 </html>

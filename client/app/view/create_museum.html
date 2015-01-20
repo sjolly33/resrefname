@@ -1,0 +1,33 @@
+<div class="col-md-offset-1" ng-controller="createMuseumController">
+
+    <h2>New museum</h2>
+
+    <form name="form_new_museum">
+
+        <br>
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <label for="title_museum"> Name : </label>
+                <input class="form-control" type="text" id="title_museum"  ng-model="title_museum" required/>
+                <br>
+                <label for="theme_museum"> Theme : </label>
+                <input class="form-control" type="text" id="theme_museum" ng-model="theme_museum" required/>
+                <br>
+                <label for="adress_museum"> Adress : </label>
+                <input class="form-control" type="text" id="adress_museum" ng-model="adress_museum" required/>
+                <br>
+                <label for="information_museum"> Information : </label>
+                <input class="form-control" type="text" id="information_museum" ng-model="information_museum" required/>
+
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <br>
+        <button ng-click="save(form_new_museum)" class="btn bg-primary">
+            <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
+        </button>
+    </div>
+
+</form>
+
+</div>
