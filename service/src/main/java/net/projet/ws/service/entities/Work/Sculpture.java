@@ -28,6 +28,9 @@ public class Sculpture extends Work{
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work2")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
+	@Column(name="particularitySupport")
+	private List<String> _particularitiesSupport;
+
 	@XmlElement
  	public int getID() {
  		return _sculptureID;
@@ -45,4 +48,13 @@ public class Sculpture extends Work{
  	public void setPicture(List<Picture> picture){
  		_pictures = picture;
  	}
+
+ 	@XmlElement
+ 	public List<String> getParticularitiesSupport(){
+		return new ArrayList<String>(_particularitiesSupport);
+	}
+	
+	public void setParticularitiesSupport(List<String> support){
+		_particularitiesSupport = new ArrayList<String>(support);
+	}
 }
