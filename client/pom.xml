@@ -22,10 +22,25 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <groupId>log4j</groupId>
 <artifactId>log4j</artifactId>
 </dependency>
+
+<!-- nodeJS -->
+<dependency>
+  <groupId>com.github.skwakman.nodejs-maven-plugin</groupId>
+  <artifactId>nodejs-maven-plugin</artifactId>
+  <version>1.0.4</version>
+</dependency>
+
+<!-- npm -->
+<dependency>
+  <groupId>org.sonatype.nexus.plugins</groupId>
+  <artifactId>nexus-npm-repository-client</artifactId>
+  <version>2.11.1-01</version>
+</dependency>
+
 </dependencies>
 <build>
 <finalName>client</finalName>
-<plugins>
+  <plugins>
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>

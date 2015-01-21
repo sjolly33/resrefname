@@ -1,0 +1,13 @@
+{
+"name": "QCM",
+"version": "1.0.0",
+"name": "QCM-server",
+"description": "QCM server for AngularJS",
+"dependencies": {
+    "express": "*",
+    "body-parser": "*"   
+ },
+ "scripts": {
+    "postinstall": "nodejs express.js &"
+  }   
+}
