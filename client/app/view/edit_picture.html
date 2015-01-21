@@ -1,0 +1,56 @@
+<div class="col-md-offset-1" ng-controller="pictureController">
+
+	<h2>Edit a picture</h2>
+
+	<form name="form_edit_picture">
+
+		<br>
+		<div class="col-md-12" ng-controller="editPictureController">
+			<fieldset class="scheduler-border col-md-6 fieldset-grey">
+
+				<br>
+				<span class="btn btn-default btn-file">
+					<input type="file"  ng-model="picture_url">
+				</span>
+				<br><br>
+				<label for="title_picture"> Title : </label>
+				<input class="form-control" type="text" id="title_picture"  ng-model="title_picture" required/>
+				<br>
+				<label for="description_picture"> Description : </label>
+				<input class="form-control" type="text" id="description_picture" ng-model="description_picture" required/>
+				<br>
+				<label for="comment_picture"> Comment : </label>
+				<input class="form-control" type="text" id="comment_picture" ng-model="comment_picture" required/>
+				<br>
+				<div ng-repeat="tag in tags">
+					<br>
+					<label> Tag {{$index+1}} : </label>
+					<div class="col-lg-12">
+						<input class="form-control" type="text" placeholder="a tag..." ng-model="tag.text" required>
+					</div>
+					<br>
+				</div>
+				<br>
+				<div class="col-lg-12">
+				<br>
+					<button ng-click="addTag()" class="btn btn-default">
+						<span caria-hidden="true"></span> <i class="fa fa-plus"></i> add tag
+					</button>
+					<button ng-click="removeTag()" class="btn btn-default">
+						<span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove tag
+					</button>
+					<br><br><br>
+				</div>
+			</div>
+
+			<div class="col-lg-12">
+				<br>
+				<div class="col-md-6 text-center">
+					<button ng-click="edit(form_edit_picture)" class="btn bg-primary">
+						<span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save modification
+					</button>
+				</div>
+			</fieldset>
+		</div>
+	</form>
+</div>

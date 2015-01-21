@@ -59,30 +59,6 @@
 <br>
 
 <div class="col-md-12" ng-controller="ADD">
-    <h4> Pictures </h4>
-    <div class="col-md-12">
-        <fieldset class="scheduler-border col-md-6 fieldset-grey">
-            <div ng-repeat="picture in pictures">
-                <br><br>
-                <label> Picture {{$index+1}} : </label>
-                <div class="col-lg-12">
-                    <span class="btn btn-default btn-file">
-                        <input type="file"  ng-model="picture.url">
-                    </span>
-                </div>
-                <br>
-            </div>
-            <br><br><br>
-            <div class="col-lg-12">
-                <button ng-click="addPicture()" class="btn btn-default">
-                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> add picture
-                </button>
-                <button ng-click="removePicture()" class="btn btn-default">
-                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove picture
-                </button>
-            </div>
-        </fieldset>
-    </div>
 
     <h4> Tags </h4>
     <div class="col-md-12">

@@ -1,5 +1,38 @@
 <div class="col-md-offset-1" ng-controller="workerController">
 
-	<h2>Edit Worker</h2>
+    <h2> Edit Author</h2>
+
+    <div ng-controller="editWorkerController">
+
+        <br>
+
+        <form name="form_edit_worker">
+            <h4> General informations : </h4>
+
+            <div class="col-md-12">
+                <fieldset class="scheduler-border col-md-5 fieldset-grey">
+                    <br>
+                    <label for="name_worker"> Name : </label>
+                    <input class="form-control" type="text" id="name_worker"  ng-model="name_worker" required/>
+                    <br>
+                    <label for="adress_worker"> Adress : </label>
+                    <input class="form-control" type="text" id="adress_worker"  ng-model="adress_worker" required/>
+                    <br>
+                </fieldset>
+            </div>
+
+            <br><br>
+
+            <div class="col-lg-12">
+                <br>
+                <div class="col-md-5 text-center">
+                    <button ng-click="save(form_edit_worker)" class="btn bg-primary">
+                        <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
 
 </div>

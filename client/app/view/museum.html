@@ -8,18 +8,18 @@
 
 		<h3> Actions : </h3>
 
-		<fieldset class="scheduler-border col-md-6 fieldset-grey">
+		<fieldset class="scheduler-border col-md-8 fieldset-grey">
 			<div class="col-lg-12 text-center">
 				<br>
-				<a  href="#/create_work" class="btn btn-primary" role="button"> New Work</a>
+				<a  href="#/create_work" class="btn btn-primary" role="button"> <i class="fa fa-plus"></i> New Work</a>
 				&nbsp;&nbsp;&nbsp;
-				<a  href="#/create_worker" class="btn btn-primary" role="button"> New Author</a>
+				<a  href="#/create_worker" class="btn btn-primary" role="button"> <i class="fa fa-plus"></i> New Author</a>
 				&nbsp;&nbsp;&nbsp;
-				<a  href="#/create_collection" class="btn btn-primary" role="button"> New Collection</a>
+				<a  href="#/create_collection" class="btn btn-primary" role="button"> <i class="fa fa-plus"></i> New Collection</a>
 				&nbsp;&nbsp;&nbsp;
 				<a  href="#/edit_museum/{{museum.id}}" class="btn btn-primary" role="button"> Edit this museum</a>
 				&nbsp;&nbsp;&nbsp;
-				<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> Delete this museum</a>
+				<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> <i class="fa fa-times"></i> Delete this museum</a>
 				<br>
 			</div>
 		</fieldset>
@@ -43,12 +43,10 @@
 			</fieldset>
 		</div>
 
-
-
 		<div class="col-md-4">
 			<h3> Works list : </h3>
 			<div ng-repeat="work in works_list">
-				<li>
+				<li class="list-group-item" >
 					<a ng-href="#/work/{{work.id}}"> {{work.title}} </a>
 				</li>
 			</div>
@@ -57,7 +55,7 @@
 		<div class="col-md-4">
 			<h3> Authors list : </h3>
 			<div ng-repeat="worker in workers_list">
-				<li>
+				<li class="list-group-item">
 					<a ng-href="#/worker/{{worker.id}}"> {{worker.name}} </a>
 				</li>
 			</div>
@@ -66,7 +64,7 @@
 		<div class="col-md-4">
 			<h3> Collections list : </h3>
 			<div ng-repeat="collection in collections_list">
-				<li>
+				<li class="list-group-item">
 					<a ng-href="#/collection/{{collection.id}}"> {{collection.name}} </a>
 				</li>
 			</div>
