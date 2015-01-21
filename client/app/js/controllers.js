@@ -6,24 +6,25 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
   function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('museumController');
 
-    // JSON STATIC A CHANGER
-    $scope.works_list = [
-    {'id' : '2' ,'title' : "La joconde"},
-    {'id' : '10' ,'title' : 'Un tableau moche'},
-    {'id' : '27'  ,'title' : 'Une statuette'},
-    ];
+    $scope.works_list = []
+    $scope.workers_list = []
+    $scope.collections_list = []
+    $scope.museum = {name: null, theme: null, adress: null, information: null};
+    $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){
+       $scope.museum.name = res.name;
+       $scope.museum.theme = res.theme;
+       $scope.museum.adress = res.adress;
+       $scope.museum.information = res.information;
 
-    $scope.workers_list = [
-    {'id' : '8' ,'name' : "Zidane"},
-    {'id' : '22' ,'name' : 'Picasso'},
-    {'id' : '11'  ,'name' : 'Victor Dupin'},
-    ];
+       $scope.works_list = res.paints;
+       $scope.works_list = $scope.works_list.concat(res.sculptures);
 
-    $scope.collections_list = [
-    {'id' : '28' ,'name' : "Les plus grand tableau du XXe siecle"},
-    {'id' : '10' ,'name' : 'Jambon beurre et petit diarée'},
-    {'id' : '6'  ,'name' : 'Victor Dupin Collection'},
-    ];
+       $scope.workers_list = res.authors;
+
+       $scope.collections_list = res.collectionsPictures;
+       $scope.collections_list = $scope.collections_list.concat(res.collectionsWorks);
+       return res;
+    });
 
     $scope.save = function ($form) {
       if($form.$valid){
