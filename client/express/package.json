@@ -5,9 +5,7 @@
 "description": "QCM server for AngularJS",
 "dependencies": {
     "express": "*",
-    "body-parser": "*"   
- },
- "scripts": {
-    "postinstall": "nodejs express.js &"
-  }   
+    "body-parser": "*",
+    "request": "2.51.0"   
+ } 
 }

@@ -2,10 +2,11 @@
 ////////////////////////////////////////////////////////////////////////
 // MUSEUM
 ////////////////////////////////////////////////////////////////////////
-app.controller('museumController', ['$scope', '$routeParams','$route', 
-  function($scope, $resource, $routeParams, $route) {
+app.controller('museumController', ['$scope', '$resource', '$routeParams','$route', 'MuseumService',
+  function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('museumController');
 
+    console.log(MuseumService.query())
 
     // JSON STATIC A CHANGER
     $scope.works_list = [
@@ -71,7 +72,7 @@ $scope.editMuseumController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // HOME
 ////////////////////////////////////////////////////////////////////////
-app.controller('homeController', ['$scope','$routeParams', '$route', 
+app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route',
   function($scope, $resource, $routeParams, $route) {
     console.log('homeController');
 

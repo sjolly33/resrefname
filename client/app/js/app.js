@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('MuseumManager',['ngRoute','ui.bootstrap'])
+var app = angular.module('MuseumManager',['ngRoute','ui.bootstrap', 'MuseumServices'])
 
 app.config(['$routeProvider',
   function($routeProvider) {
