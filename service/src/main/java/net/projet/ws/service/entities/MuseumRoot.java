@@ -358,52 +358,52 @@ public class MuseumRoot{
 	// Need to send directly an object to remove
 
 	@DELETE
-	@Path("/delete/museum")
+	@Path("/delete/museum/{id}")
 	@Consumes("application/json")
-	public void deleteMuseum(Museum museum){
-		MuseumData.deleteMuseum(museum);
+	public void deleteMuseum(@PathParam("id") int museumID){
+		MuseumData.deleteMuseum(MuseumData.getMuseum(museumID));
 	}
 
 	@DELETE
-	@Path("/delete/picture")
+	@Path("/delete/picture/{id}")
 	@Consumes("application/json")
-	public void deletePicture(Picture picture){
-		PictureData.deletePicture(picture);
+	public void deletePicture(@PathParam("id") int pictureID){
+		PictureData.deletePicture(PictureData.getPicture(pictureID));
 	}
 
 	@DELETE
-	@Path("/delete/paint")
+	@Path("/delete/paint/{id}")
 	@Consumes("application/json")
-	public void deletePaint(Paint work){
-		WorkData.deletePaint(work);
+	public void deletePaint(@PathParam("id") int workID){
+		WorkData.deletePaint(WorkData.getPaint(workID));
 	}
 
 	@DELETE
-	@Path("/delete/sculpture")
+	@Path("/delete/sculpture/{id}")
 	@Consumes("application/json")
-	public void deleteSculpture(Sculpture work){
-		WorkData.deleteSculpture(work);
+	public void deleteSculpture(@PathParam("id") int workID){
+		WorkData.deleteSculpture(WorkData.getSculpture(workID));
 	}
 
 	@DELETE
-	@Path("/delete/collectionPicture")
+	@Path("/delete/collectionPicture/{id}")
 	@Consumes("application/json")
-	public void deleteCollectionPicture(CollectionPicture cPicture){
-		CollectionData.deleteCollectionPicture(cPicture);
+	public void deleteCollectionPicture(@PathParam("id") int cPictureID){
+		CollectionData.deleteCollectionPicture(CollectionData.getCollectionPicture(cPictureID));
 	}
 
 	@DELETE
-	@Path("/delete/collectionWork")
+	@Path("/delete/collectionWork/{id}")
 	@Consumes("application/json")
-	public void deleteCollectionWork(CollectionWork cWork){
-		CollectionData.deleteCollectionWork(cWork);
+	public void deleteCollectionWork(@PathParam("id") int cWorkID){
+		CollectionData.deleteCollectionWork(CollectionData.getCollectionWork(cWorkID));
 	}
 
 	@DELETE
-	@Path("/delete/author")
+	@Path("/delete/author/{id}")
 	@Consumes("application/json")
-	public void deleteAuthor(Author author){
-		AuthorData.deleteAuthor(author);
+	public void deleteAuthor(@PathParam("id") int authorID){
+		AuthorData.deleteAuthor(AuthorData.getAuthor(authorID));
 	}
 
 	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT

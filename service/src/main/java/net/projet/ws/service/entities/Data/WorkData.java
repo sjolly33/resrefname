@@ -64,6 +64,27 @@ public class WorkData{
 		return paints;
 	}
 
+	public static Paint getPaint(int id){
+		LOG.info("getPaint");
+		int index = 0;
+		Paint paint = new Paint();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			paint = em.find(Paint.class, id);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return paint;
+	}
+
 	public static Paint getPaint(List<Paint> paints, int id){
 		LOG.info("getPaint");
 		int index = 0;
@@ -169,6 +190,27 @@ public class WorkData{
 		}finally{
 		}
 		return sculptures;
+	}
+
+	public static Sculpture getSculpture(int id){
+		LOG.info("getSculpture");
+		int index = 0;
+		Sculpture sculpture = new Sculpture();
+		EntityManager em = JpaUtil.getEntityManager();
+		EntityTransaction tx = null;
+		try{
+			tx = em.getTransaction();
+			tx.begin();
+			sculpture = em.find(Sculpture.class, id);
+			tx.commit();
+		}catch(Exception re)
+		{
+			if(tx!=null)
+				LOG.error("Something went wrong; Discard all partial changes");
+			tx.rollback();
+		}finally{
+		}
+		return sculpture;
 	}
 
 	public static Sculpture getSculpture(List<Sculpture> sculptures, int id){

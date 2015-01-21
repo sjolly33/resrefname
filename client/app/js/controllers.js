@@ -44,7 +44,7 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
       removedM.authors = $scope.museumInfo.authors;
       removedM.sculptures = $scope.museumInfo.sculptures;
       removedM.paints = $scope.museumInfo.paints;
-      MuseumService.remove({id:$routeParams.id}, removedM, function(res, req){})
+      MuseumService.remove({id:$routeParams.id}, function(res, req){})
     }
   }
 

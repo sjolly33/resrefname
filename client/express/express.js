@@ -67,13 +67,14 @@ app.put('/api/museum/:id', function(req,res) {
 
 app.delete('/api/museum/:id', function(req,res) {
   console.log('delete museum')
+  
+  console.log(req.body)
   console.log(req.params.id)
-  var newurl = path+'delete/museum';
+  var newurl = path+'delete/museum/'+req.params.id;
   request({
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
-    url: newurl,
-    json: req.body
+    url: newurl
     }, function(error, response, body){
         console.log(body);
     }
