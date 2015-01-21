@@ -22,5 +22,7 @@ app.listen(port, function () {
 app.get('/api/museum', function(req,res) {
   console.log('get museums')
   var newurl = 'http://localhost:8080/rest/museum/museums';
-  request.get(newurl).pipe(res, function(){});
+  request.get(newurl, function(error, response, body){
+    res.send(body)
+  })
 });

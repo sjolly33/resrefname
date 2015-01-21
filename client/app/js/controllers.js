@@ -6,6 +6,8 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
   function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('museumController');
 
+    console.log(MuseumService.query())
+
     // JSON STATIC A CHANGER
     $scope.works_list = [
     {'id' : '2' ,'title' : "La joconde"},
