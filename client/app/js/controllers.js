@@ -6,8 +6,6 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
   function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('museumController');
 
-    console.log(MuseumService.query())
-
     // JSON STATIC A CHANGER
     $scope.works_list = [
     {'id' : '2' ,'title' : "La joconde"},
@@ -36,7 +34,6 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
     new_museum.adress = $scope.adress_museum;
     new_museum.information = $scope.information_museum;
     MuseumService.save(new_museum,function(res, req){})
-    // Puis sauvegarde :
     alert("save museum in museumController");
   }
 }
@@ -71,8 +68,8 @@ $scope.editMuseumController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // HOME
 ////////////////////////////////////////////////////////////////////////
-app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route',
-  function($scope, $resource, $routeParams, $route) {
+app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService',
+  function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('homeController');
 
     $scope.museums_list = [
@@ -81,6 +78,9 @@ app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route
     {'id' : '2' ,'name' : 'La Chapelle Sixtine'},
     {'id' : '45' ,'name' : 'Musée Burgonde'}
     ];
+
+    $scope.museums_list = MuseumService.query()
+
   }]);
 
 
