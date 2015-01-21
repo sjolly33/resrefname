@@ -39,6 +39,7 @@ app.get('/api/museum/:id', function(req,res) {
 
 app.post('/api/museum', function(req,res) {
   console.log('post museum')
+  console.log(req.body)
   var newurl = path+'new/museum';
   request.post({
     headers: {'content-type' : 'application/json'},

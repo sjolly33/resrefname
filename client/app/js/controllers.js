@@ -30,13 +30,12 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
     $scope.save = function ($form) {
       if($form.$valid){
     // Recuperaton des donnees du formulaire :
-    var new_museum = {};
+    var new_museum = new MuseumService();
     new_museum.name = $scope.title_museum;
     new_museum.theme = $scope.theme_museum;
     new_museum.adress = $scope.adress_museum;
     new_museum.information = $scope.information_museum;
-    
-    console.log(new_museum);
+    MuseumService.save(new_museum,function(res, req){})
     // Puis sauvegarde :
     alert("save museum in museumController");
   }
