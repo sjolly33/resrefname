@@ -1,7 +1,7 @@
 <div ng-controller="museumController">
-
+<div ng-controller="initMuseumCtrl">
 	<div class="text-center">
-		<h2>Museum : {{museum.name}}</h2>
+		<h2>Museum : {{museum.name}} {{museum.id}}</h2>
 	</div>
 
 	<div class="col-md-offset-1">
@@ -19,7 +19,7 @@
 				&nbsp;&nbsp;&nbsp;
 				<a  href="#/edit_museum/{{museum.id}}" class="btn btn-primary" role="button"> Edit this museum</a>
 				&nbsp;&nbsp;&nbsp;
-				<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> <i class="fa fa-times"></i> Delete this museum</a>
+				<a  class="btn btn-primary btn-danger" ng-click="remove()" role="button"> <i class="fa fa-times"></i> Delete this museum</a>
 				<br>
 			</div>
 		</fieldset>

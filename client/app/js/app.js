@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('MuseumManager',['ngRoute','ui.bootstrap', 'MuseumServices'])
+var app = angular.module('MuseumManager',['ngRoute','ui.bootstrap', 'MuseumCtrls', 'MuseumServices'])
 
 app.config(['$routeProvider',
   function($routeProvider) {
@@ -16,10 +16,10 @@ app.config(['$routeProvider',
     .when('/create_work', {templateUrl: 'view/create_work.html',controller: 'workController'})
     .when('/create_collection', {templateUrl: 'view/create_collection.html',controller: 'workerController'})
     .when('/create_picture', {templateUrl: 'view/create_picture.html',controller: 'pictureController'})
-    .when('/edit_worker', {templateUrl: 'view/edit_worker.html',controller: 'workerController'})
-    .when('/edit_work', {templateUrl: 'view/edit_work.html',controller: 'workController'})
-    .when('/edit_collection', {templateUrl: 'view/edit_collection.html',controller: 'collectionController'})
-    .when('/edit_museum', {templateUrl: 'view/edit_museum.html',controller: 'museumController'})
-    .when('/edit_picture', {templateUrl: 'view/edit_picture.html',controller: 'pictureController'})
+    .when('/edit_worker/:id', {templateUrl: 'view/edit_worker.html',controller: 'workerController'})
+    .when('/edit_work/:id', {templateUrl: 'view/edit_work.html',controller: 'workController'})
+    .when('/edit_collection/:id', {templateUrl: 'view/edit_collection.html',controller: 'collectionController'})
+    .when('/edit_museum/:id', {templateUrl: 'view/edit_museum.html',controller: 'museumController'})
+    .when('/edit_picture/:id', {templateUrl: 'view/edit_picture.html',controller: 'pictureController'})
     .otherwise({redirectTo:'/home'})
 }]);

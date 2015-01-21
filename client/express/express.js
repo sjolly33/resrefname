@@ -51,10 +51,10 @@ app.post('/api/museum', function(req,res) {
   )
 })
 
-app.put('/api/museum/', function(req,res) {
+app.put('/api/museum/:id', function(req,res) {
   console.log('put museum')
   var newurl = path+'update/museum';
-  request.put({
+  request({
     headers: {'content-type' : 'application/json'},
     method: 'PUT',
     url: newurl,
@@ -65,10 +65,11 @@ app.put('/api/museum/', function(req,res) {
   )
 })
 
-app.del('/api/museum/', function(req,res) {
+app.delete('/api/museum/:id', function(req,res) {
   console.log('delete museum')
+  console.log(req.params.id)
   var newurl = path+'delete/museum';
-  request.put({
+  request({
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl,

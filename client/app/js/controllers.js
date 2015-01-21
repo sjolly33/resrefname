@@ -1,16 +1,20 @@
+'use strict';
+var appControllers = angular.module('MuseumCtrls', []);
 
 ////////////////////////////////////////////////////////////////////////
 // MUSEUM
 ////////////////////////////////////////////////////////////////////////
-app.controller('museumController', ['$scope', '$resource', '$routeParams','$route', 'MuseumService',
+appControllers.controller('museumController', ['$scope', '$resource', '$routeParams','$route', 'MuseumService',
   function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('museumController');
 
+    $scope.initMuseumCtrl = function($scope){
     $scope.works_list = []
     $scope.workers_list = []
     $scope.collections_list = []
-    $scope.museum = {name: null, theme: null, adress: null, information: null};
+    $scope.museum = {id:0, name: null, theme: null, adress: null, information: null};
     $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){
+       $scope.museum.id = res.id;
        $scope.museum.name = res.name;
        $scope.museum.theme = res.theme;
        $scope.museum.adress = res.adress;
@@ -23,45 +27,63 @@ app.controller('museumController', ['$scope', '$resource', '$routeParams','$rout
 
        $scope.collections_list = res.collectionsPictures;
        $scope.collections_list = $scope.collections_list.concat(res.collectionsWorks);
+       console.log($scope.museum.id)
        return res;
     });
+    console.log($scope.museumInfo)
 
-    $scope.save = function ($form) {
-      if($form.$valid){
-    // Recuperaton des donnees du formulaire :
-    var new_museum = new MuseumService();
-    new_museum.name = $scope.title_museum;
-    new_museum.theme = $scope.theme_museum;
-    new_museum.adress = $scope.adress_museum;
-    new_museum.information = $scope.information_museum;
-    MuseumService.save(new_museum,function(res, req){})
-    alert("save museum in museumController");
+    $scope.remove = function(){
+      var removedM = new MuseumService();
+      removedM.name = $scope.museumInfo.name;
+      removedM.theme = $scope.museumInfo.theme;
+      removedM.adress = $scope.museumInfo.adress;
+      removedM.information = $scope.museumInfo.information;
+      removedM.collectionsPictures = $scope.museumInfo.collectionsPictures;
+      removedM.collectionsWorks = $scope.museumInfo.collectionsWorks;
+      removedM.pictures = $scope.museumInfo.pictures;
+      removedM.authors = $scope.museumInfo.authors;
+      removedM.sculptures = $scope.museumInfo.sculptures;
+      removedM.paints = $scope.museumInfo.paints;
+      MuseumService.remove({id:$routeParams.id}, removedM, function(res, req){})
+    }
   }
-}
 
-$scope.editMuseumController = function($scope){
-
- // MuseumFactory -> recuperer picture en fonction de l'id puis :
- $scope.title_museum = "title_museum";
- $scope.theme_museum = "title_museum";
- $scope.adress_museum = "description_museum";
- $scope.information_museum = "museum_information";
-
- $scope.edit = function ($form){
-  if($form.$valid){
-    // Recuperaton des donnees du formulaire :
-    var edit_museum = {};
-    edit_museum.title = $scope.title_museum;
-    edit_museum.theme = $scope.theme_museum;
-    edit_museum.adress = $scope.adress_museum;
-    edit_museum.information = $scope.information_museum;
-
-    // Puis sauvegarde : 
-    console.log(edit_museum);
-    alert("edit museum in museumController");
+  $scope.save = function ($form) {
+    if($form.$valid){
+      var new_museum = new MuseumService();
+      new_museum.name = $scope.title_museum;
+      new_museum.theme = $scope.theme_museum;
+      new_museum.adress = $scope.adress_museum;
+      new_museum.information = $scope.information_museum;
+      console.log("save")
+      MuseumService.save(new_museum,function(res, req){})
+      }
   }
-}
-}
+
+  $scope.editMuseumController = function($scope){
+
+   $scope.title_museum = "title_museum";
+   $scope.theme_museum = "title_museum";
+   $scope.adress_museum = "description_museum";
+   $scope.information_museum = "museum_information";
+   $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){
+      console.log(res)
+      $scope.title_museum=res.name;
+      $scope.theme_museum=res.theme;
+      $scope.adress_museum = res.adress;
+      $scope.information_museum = res.information;
+   })
+   $scope.edit = function ($form){
+    if($form.$valid){
+      var edit_museum = new MuseumService();
+      edit_museum.name = $scope.title_museum;
+      edit_museum.theme = $scope.theme_museum;
+      edit_museum.adress = $scope.adress_museum;
+      edit_museum.information = $scope.information_museum;
+      MuseumService.put({id:$routeParams.id}, edit_museum, function(res, rep){});
+      }
+    }
+  }
 
 }]);
 
@@ -69,16 +91,9 @@ $scope.editMuseumController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // HOME
 ////////////////////////////////////////////////////////////////////////
-app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService',
+appControllers.controller('homeController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService',
   function($scope, $resource, $routeParams, $route, MuseumService) {
     console.log('homeController');
-
-    $scope.museums_list = [
-    {'id' : '14' ,'name' : "Musée d'aquitaine"},
-    {'id' : '25' ,'name' : 'Le Louvre'},
-    {'id' : '2' ,'name' : 'La Chapelle Sixtine'},
-    {'id' : '45' ,'name' : 'Musée Burgonde'}
-    ];
 
     $scope.museums_list = MuseumService.query()
 
@@ -88,7 +103,7 @@ app.controller('homeController', ['$scope', '$resource', '$routeParams', '$route
 ////////////////////////////////////////////////////////////////////////
 // SEARCH
 ////////////////////////////////////////////////////////////////////////
-app.controller('searchController', ['$scope','$routeParams', '$route', 
+appControllers.controller('searchController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('searchController');
   }]);
@@ -98,7 +113,7 @@ app.controller('searchController', ['$scope','$routeParams', '$route',
 ////////////////////////////////////////////////////////////////////////
 // WORK
 ////////////////////////////////////////////////////////////////////////
-app.controller('workController', ['$scope','$routeParams', '$route', '$sce',
+appControllers.controller('workController', ['$scope','$routeParams', '$route', '$sce',
   function($scope, $resource, $routeParams, $route, $sce) {
     console.log('workController');
 
@@ -265,7 +280,7 @@ $scope.date_work = "date_work";
 ////////////////////////////////////////////////////////////////////////
 // WORKER
 ////////////////////////////////////////////////////////////////////////
-app.controller('workerController', ['$scope','$routeParams', '$route', 
+appControllers.controller('workerController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('workerController');
 
@@ -307,7 +322,7 @@ $scope.editWorkerController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // COLLECTION
 ////////////////////////////////////////////////////////////////////////
-app.controller('collectionController', ['$scope','$routeParams', '$route', 
+appControllers.controller('collectionController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('collectionController');
 
@@ -397,7 +412,7 @@ $scope.editCollectionController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // PICTURE
 ////////////////////////////////////////////////////////////////////////
-app.controller('pictureController', ['$scope','$routeParams', '$route', 
+appControllers.controller('pictureController', ['$scope','$routeParams', '$route', 
   function($scope, $resource, $routeParams, $route) {
     console.log('pictureController');
 
