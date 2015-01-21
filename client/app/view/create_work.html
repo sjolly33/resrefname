@@ -4,27 +4,35 @@
 
     <form name="form_new_work">
 
-        <div class="col-md-5">
-          <label for="title_work"> Title : </label>
-          <input class="form-control" type="text" id="title_work"  ng-model="title_work" required/>
-          <br>
-          <label for="author_work"> Author : </label>
-          <input class="form-control" type="text" id="author_work"  ng-model="author_work" required/>
-          <br>
-          <label for="dimension_work"> Dimension : </label>
-          <input class="form-control" type="text" id="dimension_work" ng-model="dimension_work" required/>
-          <br>
-          <label for="resume_work"> Resume : </label>
-          <input class="form-control" type="text" id="resume_work" ng-model="resume_work" required/>
-          <br>
-          <label for="date_work"> Date : </label>
-          <input class="form-control" type="text" id="date_work" ng-model="date_work" required/>
+       <br>
 
-      </div>
+       <h4> General Informations </h4>
+       <div class="col-md-12">
+        <fieldset class="scheduler-border col-md-6 fieldset-grey">
+            <br>
+            <label for="title_work"> Title : </label>
+            <input class="form-control" type="text" id="title_work"  ng-model="title_work" required/>
+            <br>
+            <label for="description_work"> Description : </label>
+            <input class="form-control" type="text" id="description_work" ng-model="description_work" required/>
+            <br>
+            <label for="author_work"> Author : </label>
+            <input class="form-control" type="text" id="author_work"  ng-model="author_work" required/>
+            <br>
+            <label for="dimension_work"> Dimension : </label>
+            <input class="form-control" type="text" id="dimension_work" ng-model="dimension_work" required/>
+            <br>
+            <label for="resume_work"> Resume : </label>
+            <input class="form-control" type="text" id="resume_work" ng-model="resume_work" required/>
+            <br>
+            <label for="date_work"> Date : </label>
+            <input class="form-control" type="text" id="date_work" ng-model="date_work" required/>
+        </fieldset>
+    </div>
 
-      <div class="col-md-12">
+    <div class="col-md-12">
         <br><br>
-        <label for="type_work"> Choose a type :  </label>
+        <label for="type_work"> Choose a type of Work  </label>
         <div class="btn-group" dropdown is-open="status.isopen">
             <button type="button form-control" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                Work type<span class="caret"></span>
@@ -42,38 +50,67 @@
 </div>
 
 <div class="col-md-5">
-    <div class="col-md-12" id="type_work_content"  ng-controller="forSce" > 
-        <i ng-bind-html="myHTML" id="type_work_content" ng-model="specialite"></i><br><br>
+    <div  class="options" class="col-md-12" id="type_work_content"  ng-controller="forSce" > 
+        <div ng-bind-html="myHTML" id="type_work_content" ng-model="specialite"></div>
+        <br><br>
     </div>
 </div>
 
 <br>
 
 <div class="col-md-12" ng-controller="ADD">
-    <div ng-repeat="picture in pictures">
-        <br><br>
-        <label> Picture {{$index+1}} : </label>
-        <div class="col-lg-12">
-            <span class="btn btn-default btn-file">
-                <input type="file"  ng-model="picture.url">
-            </span>
-        </div>
-        <br>
+    <h4> Pictures </h4>
+    <div class="col-md-12">
+        <fieldset class="scheduler-border col-md-6 fieldset-grey">
+            <div ng-repeat="picture in pictures">
+                <br><br>
+                <label> Picture {{$index+1}} : </label>
+                <div class="col-lg-12">
+                    <span class="btn btn-default btn-file">
+                        <input type="file"  ng-model="picture.url">
+                    </span>
+                </div>
+                <br>
+            </div>
+            <br><br><br>
+            <div class="col-lg-12">
+                <button ng-click="addPicture()" class="btn btn-default">
+                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> add picture
+                </button>
+                <button ng-click="removePicture()" class="btn btn-default">
+                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove picture
+                </button>
+            </div>
+        </fieldset>
     </div>
-    <br><br><br>
-    <div class="col-lg-12">
-        <button ng-click="addPicture()" class="btn btn-default">
-            <span caria-hidden="true"></span> <i class="fa fa-plus"></i> add picture
-        </button>
-        <button ng-click="removePicture()" class="btn btn-default">
-            <span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove picture
-        </button>
+
+    <h4> Tags </h4>
+    <div class="col-md-12">
+        <fieldset class="scheduler-border col-md-6 fieldset-grey">
+            <div ng-repeat="tag in tags">
+                <br>
+                <label> Tag {{$index+1}} : </label>
+                <div class="col-lg-12">
+                        <input class="form-control" type="text" placeholder="a tag..." ng-model="tag.text" required>
+                </div>
+                <br>
+            </div>
+            <br><br><br>
+            <div class="col-lg-12">
+                <button ng-click="addTag()" class="btn btn-default">
+                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> add tag
+                </button>
+                <button ng-click="removeTag()" class="btn btn-default">
+                    <span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove tag
+                </button>
+            </div>
+        </fieldset>
     </div>
 </div>
 
 <div class="col-lg-12">
     <br>
-    <div class="col-md-5 text-center">
+    <div class="col-md-6 text-center">
         <button ng-click="save(form_new_work)" class="btn bg-primary">
             <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
         </button>

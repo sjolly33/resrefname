@@ -1,17 +1,29 @@
 
+<div class="text-center">
+<h2> Work : {{work.name}} </h2>
+</div>
+
 <div class="col-md-offset-1" ng-controller="workController">
 
-	<div class="text-center">
-		<h2> Work : {{worker.name}} </h2>
-	</div>
+	<h3> Actions : </h3>
 
+	<fieldset class="scheduler-border col-md-3 fieldset-grey">
+		<div class="col-lg-12 text-center">
+			<br>
+			<a  href="#/edit_work/{{work.id}}" class="btn btn-primary" role="button"> Edit this work</a>
+			&nbsp;&nbsp;&nbsp;
+			<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> Delete this work </a>
+		</div>
+	</fieldset>
+
+	<br><br><br><br>
 
 	<h3> General informations : </h3>
 
 	<div class="col-md-12">
-		<fieldset class="scheduler-border col-md-5">
+		<fieldset class="scheduler-border col-md-5 fieldset-grey">
 			<br>
-			<label> Title : {{work.name}} </label>
+			<label> Title : {{work.title}} </label>
 			<br>
 			<label> Author : {{work.author}} </label>
 			<br>
@@ -25,6 +37,8 @@
 			<br>
 			<label> More : {{work.more}} </label>
 			<br>
+			<label> Tags : {{work.tags}} </label>
+			<br>
 		</fieldset>
 	</div>
 
@@ -32,7 +46,7 @@
 	<h3> Pictures : </h3>
 
 	<div class="col-md-12">
-		<fieldset class="scheduler-border col-md-4">
+		<fieldset class="scheduler-border col-md-4 fieldset-grey">
 			<br>
 			<img  width="400" height="300" ng-src="./img/test1.jpg"/>
 			<br>
