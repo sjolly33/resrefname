@@ -1,15 +1,14 @@
-/*'use strict';
+'use strict';
 
-var QCMServices = angular.module('QCMServices', ['ngResource']);
+var MuseumServices = angular.module('MuseumServices', ['ngResource']);
 
-QCMServices.factory('QCM', ['$resource',
+MuseumServices.factory('MuseumService', ['$resource',
   function($resource){
 
-    return $resource('./../api/qcms/:id', {id: '@_id'}, {
+    return $resource('./../api/museum/:id', {
       query: {method:'GET', isArray:true},
       get: {method:'GET', isArray:false},
-      create: {method:'POST', isArray:false},
-      updateQCM: {method:'PUT', isArray:false}
+      post: {method:'POST', isArray:false},
+      put: {method:'PUT', isArray:false}
     });
   }]);
-*/

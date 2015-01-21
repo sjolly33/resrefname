@@ -58,6 +58,19 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <goal>exec</goal>
           </goals>
         </execution>
+        <execution>
+          <id>exec-nodejs-express</id>
+          <phase>generate-sources</phase>
+          <configuration>
+            <executable>nodejs</executable>
+            <arguments>
+              <argument>express/express.js</argument>
+            </arguments>
+          </configuration>
+          <goals>
+            <goal>exec</goal>
+          </goals>
+        </execution>
       </executions>
     </plugin>
    </plugins>
