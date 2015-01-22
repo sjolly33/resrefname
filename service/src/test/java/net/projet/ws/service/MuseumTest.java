@@ -303,7 +303,7 @@ public class MuseumTest
 
 	@Test
 	public void findReproductionPaint() throws Exception {
-		LOG.info("findReproduction");
+		LOG.info("findReproductionPaint");
 		try{
 			tx.begin();
   			ReproductionPaint repro = em.find(ReproductionPaint.class, 1);

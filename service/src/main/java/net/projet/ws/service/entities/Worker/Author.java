@@ -35,10 +35,10 @@ public class Author{
 	private String _adress;
 
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
-	private List<Paint> _worksRef = new ArrayList<Paint>();
+	private List<Paint> _paintsRef = new ArrayList<Paint>();
 
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
-	private List<Sculpture> _worksRef2 = new ArrayList<Sculpture>();
+	private List<Sculpture> _SculpturesRef = new ArrayList<Sculpture>();
 
 	@XmlElement
  	public int getID() {
@@ -68,11 +68,20 @@ public class Author{
  	}
 
  	@XmlElement
- 	public List<Paint> getWorks() {
- 		return _worksRef;
+ 	public List<Paint> getPaints() {
+ 		return _paintsRef;
  	}
 
- 	public void setWorks(List<Paint> works){
- 		_worksRef = works;
- 	}  	
+ 	public void setPaints(List<Paint> works){
+ 		_paintsRef = works;
+ 	} 
+
+ 	@XmlElement
+ 	public List<Sculpture> getSculptures() {
+ 		return _SculpturesRef;
+ 	}
+
+ 	public void setSculptures(List<Sculpture> works){
+ 		_SculpturesRef = works;
+ 	}   	
 }

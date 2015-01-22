@@ -26,7 +26,7 @@ public abstract class Work extends IMuseum{
 	private List<Float> _dimension = new ArrayList<Float>(3);
 
 	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "Author_ID")
+	@JoinColumn(name = "author")
 	private Author author;
 	
 	@Temporal(TemporalType.DATE)
