@@ -125,6 +125,8 @@ III) Discussions
 Nous avons consulté les annotations proposées par JPA 2.0 dans l'objectif de profiter au maximum des avantages du monde objet. Néanmoins, nous nous sommes heurtés à un certains nombres de problèmes de conception notamment en ce qui concerne les relations d'héritages et de polymorphismes (conflits entre tables, etc). De ce fait, seul les classes les plus bas niveau ont été définies comme entités. Par exemple, les classes Work et IMuseum sont toutes les deux abstraites et sont renseignées d'une annotation "@MappedSuperclass" signifiant que les champs sont factorisés pour les sous-classes entités.
 Ainsi, la modularité du modèle objet développé se voit réduit par la nécessité de travailler majoritairement avec des types concrèts s'entre-référençant. Ce problème n'en est pas forcément un car, dans le contexte métier présent, les ajouts de catégories d'objets se feront rare.
 
+Reproductions embedded
+
 2) Interaction Client/Service
 
 La stratégie de développement a été de fournir des services (GET, POST, PUT et DELETE) à chaque entité persisté. Des requetes permettant l'accès direct à une entité complète ont été développées dans l'objectif de diminuer la taille des données à transiter. Cependant, les requetes 

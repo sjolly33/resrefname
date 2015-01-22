@@ -3,6 +3,10 @@ package net.projet.ws.service.entities.Data;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.entities.Work.Sculpture;
+
+import net.projet.ws.service.entities.Reproduction.ReproductionPaint;
+import net.projet.ws.service.entities.Reproduction.ReproductionSculpture;
+
 import net.projet.ws.service.filters.JpaUtil;
 
 import javax.ws.rs.core.Response;
@@ -31,6 +35,7 @@ public class WorkData{
 	public static List<Paint> initPaints(){
 		LOG.info("initPaint");
 		Paint paint1 = new Paint();
+		paint1.setReproductions(ReproductionData.initReproductionPaints());
 		//work1.setTitle("THE paint");
 		//work1.setDescription("Work en souvenir de qqchose");
 		paints.add(paint1);

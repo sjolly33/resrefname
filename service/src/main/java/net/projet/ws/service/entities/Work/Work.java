@@ -76,16 +76,5 @@ public abstract class Work extends IMuseum{
  	public void setDate(Date date){
  		_date = date;
  	}
-/*
-  	@XmlElement
- 	public List<Particularity> getParticularities(){
- 		return new ArrayList<Particularity>(_particularities);
- 	}
-
- 	public void setParticularities(List<Particularity> particularities){
- 		_particularities = new ArrayList<Particularity>(particularities);
- 	}*/
-
-
 
 }

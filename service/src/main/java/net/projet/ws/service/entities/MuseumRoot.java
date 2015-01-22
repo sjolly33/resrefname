@@ -5,6 +5,8 @@ import net.projet.ws.service.entities.Data.PictureData;
 import net.projet.ws.service.entities.Data.WorkData;
 import net.projet.ws.service.entities.Data.AuthorData;
 import net.projet.ws.service.entities.Data.CollectionData;
+import net.projet.ws.service.entities.Data.ReproductionData;
+
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
@@ -12,6 +14,9 @@ import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
+import net.projet.ws.service.entities.Reproduction.ReproductionPaint;
+import net.projet.ws.service.entities.Reproduction.ReproductionSculpture;
+
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -112,7 +117,7 @@ public class MuseumRoot{
 
 
 	@GET
-	@Path("/author{id}")
+	@Path("/author/{id}")
 	@Produces("application/json")
 	public Author getAuthor(@PathParam("id") int authorID){
 		return AuthorData.getAuthor(authorID);
@@ -125,6 +130,21 @@ public class MuseumRoot{
 		Museum museum = MuseumData.getMuseum(museumID);
 		return museum.getAuthors();
 	}
+
+	@GET
+	@Path("/reproductionPaint/{id}")
+	@Produces("application/json")
+	public ReproductionPaint getReproductionPaint(@PathParam("id") int rPaintID){
+		return ReproductionData.getReproductionPaint(rPaintID);
+	}
+
+	@GET
+	@Path("/reproductionSculpture/{id}")
+	@Produces("application/json")
+	public ReproductionSculpture getReproductionSculpture(@PathParam("id") int rSculptureID){
+		return ReproductionData.getReproductionSculpture(rSculptureID);
+	}
+
 
 	@GET
 	@Path("/{id}/author/{id_author}")
@@ -257,6 +277,20 @@ public class MuseumRoot{
 	@Consumes("application/json")
 	public Response addAuthor(Author author){
 		return AuthorData.addAuthor(author);
+	}
+
+	@POST
+	@Path("/new/reproductionPaint")
+	@Consumes("application/json")
+	public Response addReproductionPaint(ReproductionPaint reproduction){
+		return ReproductionData.addReproductionPaint(reproduction);
+	}
+
+	@POST
+	@Path("/new/reproductionSculpture")
+	@Consumes("application/json")
+	public Response addReproductionSculpture(ReproductionSculpture reproduction){
+		return ReproductionData.addReproductionSculpture(reproduction);
 	}
 
 	@POST
@@ -398,6 +432,22 @@ public class MuseumRoot{
 		return AuthorData.updateAuthor(author);
 	}
 
+	@PUT
+	@Path("/update/reproductionPaint")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public ReproductionPaint updateReproductionPaint(ReproductionPaint reproductionPaint){
+		return ReproductionData.updateReproductionPaint(reproductionPaint);
+	}
+
+	@PUT
+	@Path("/update/reproductionSculpture")
+	@Produces("application/json")
+	@Consumes("application/json")
+	public ReproductionSculpture updateReproductionSculpture(ReproductionSculpture reproductionSculpture){
+		return ReproductionData.updateReproductionSculpture(reproductionSculpture);
+	}
+
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -452,6 +502,20 @@ public class MuseumRoot{
 	@Consumes("application/json")
 	public void deleteAuthor(@PathParam("id") int authorID){
 		AuthorData.deleteAuthor(AuthorData.getAuthor(authorID));
+	}
+
+	@DELETE
+	@Path("/delete/reproductionPaint/{id}")
+	@Consumes("application/json")
+	public void deleteReproductionPaint(@PathParam("id") int reproductionPaintID){
+		ReproductionData.deleteReproductionPaint(ReproductionData.getReproductionPaint(reproductionPaintID));
+	}
+
+	@DELETE
+	@Path("/delete/reproductionSculpture/{id}")
+	@Consumes("application/json")
+	public void deleteReproductionSculpture(@PathParam("id") int reproductionSculptureID){
+		ReproductionData.deleteReproductionSculpture(ReproductionData.getReproductionSculpture(reproductionSculptureID));
 	}
 
 	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT

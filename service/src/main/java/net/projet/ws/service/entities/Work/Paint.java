@@ -1,5 +1,6 @@
 package net.projet.ws.service.entities.Work;
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Reproduction.ReproductionPaint;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -32,6 +33,10 @@ public class Paint extends Work{
 
 	@Column(name="particularitySupport")
 	private String _particularitySupport;
+
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="Reproductions")
+	private List<ReproductionPaint> _reproductions;
 
 	@XmlElement
  	public int getID() {
@@ -67,5 +72,14 @@ public class Paint extends Work{
 	
 	public void setParticularitySupport(String support){
 		_particularitySupport = support;
+	}
+
+	@XmlElement
+	public List<ReproductionPaint> getReproductions(){
+		return new ArrayList<ReproductionPaint>(_reproductions);
+	}
+
+	public void setReproductions(List<ReproductionPaint> reproductions){
+		_reproductions = new ArrayList<ReproductionPaint>(reproductions);
 	}
 }

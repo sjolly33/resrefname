@@ -18,6 +18,11 @@
  <class> net.projet.ws.service.entities.Collection.CollectionWork </class>
 
  <class> net.projet.ws.service.entities.Worker.Author </class>
+
+ <class> net.projet.ws.service.entities.Reproduction.Reproduction </class>
+ <class> net.projet.ws.service.entities.Reproduction.ReproductionPaint </class>
+ <class> net.projet.ws.service.entities.Reproduction.ReproductionSculpture </class>
+
  <properties>
  <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.H2Platform"/>
  <property name="eclipselink.ddl-generation" value="create-tables"/>

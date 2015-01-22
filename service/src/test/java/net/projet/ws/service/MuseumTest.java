@@ -8,6 +8,8 @@ import net.projet.ws.service.entities.Worker.Author;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Collection.CollectionPicture;
 import net.projet.ws.service.entities.Collection.CollectionWork;
+import net.projet.ws.service.entities.Reproduction.ReproductionPaint;
+import net.projet.ws.service.entities.Reproduction.ReproductionSculpture;
 
 import javax.persistence.*;
 import java.util.*;
@@ -293,6 +295,36 @@ public class MuseumTest
   			assertEquals(cWork.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findcWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findReproductionPaint() throws Exception {
+		LOG.info("findReproduction");
+		try{
+			tx.begin();
+  			ReproductionPaint repro = em.find(ReproductionPaint.class, 1);
+  			assertEquals(repro.getID(), 1);
+		}catch (RuntimeException re) {
+			LOG.error("findReproductionPaint failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findReproductionSculpture() throws Exception {
+		LOG.info("findReproductionSculpture");
+		try{
+			tx.begin();
+  			ReproductionSculpture repro = em.find(ReproductionSculpture.class, 1);
+  			assertEquals(repro.getID(), 1);
+		}catch (RuntimeException re) {
+			LOG.error("findReproductionSculpture failed", re);
 			throw re;
 		}finally{
 			tx.commit();

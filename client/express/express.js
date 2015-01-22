@@ -379,4 +379,102 @@ app.delete('/api/collectionPicture/:id', function(req,res) {
   )
 })
 
+// =========================== REPRODUCTION_PAINT =============================
 
+app.get('/api/reproductionPaint/:id', function(req,res) {
+  console.log('get reproductionPaint ' + req.params.id)
+  var newurl = path+'reproductionPaint/'+req.params.id;
+  request.get(newurl, function(error, response, body){
+    res.send(body)
+  })
+});
+
+app.post('/api/reproductionPaint', function(req,res) {
+  console.log('post reproductionPaint')
+  var newurl = path+'new/reproductionPaint';
+  request.post({
+    headers: {'content-type' : 'application/json'},
+    url: newurl,
+    json: req.body
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})
+
+app.put('/api/reproductionPaint/:id', function(req,res) {
+  console.log('put reproductionPaint')
+  var newurl = path+'update/reproductionPaint';
+  request({
+    headers: {'content-type' : 'application/json'},
+    method: 'PUT',
+    url: newurl,
+    json: req.body
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})
+
+app.delete('/api/reproductionPaint/:id', function(req,res) {
+  console.log('delete reproductionPaint')
+  var newurl = path+'delete/reproductionPaint/'+req.params.id;
+  request({
+    headers: {'content-type' : 'application/json'},
+    method: 'DELETE',
+    url: newurl
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})
+
+// =========================== REPRODUCTION_SCULPTURE =============================
+
+app.get('/api/reproductionSculpture/:id', function(req,res) {
+  console.log('get reproductionSculpture ' + req.params.id)
+  var newurl = path+'reproductionSculpture/'+req.params.id;
+  request.get(newurl, function(error, response, body){
+    res.send(body)
+  })
+});
+
+app.post('/api/reproductionSculpture', function(req,res) {
+  console.log('post reproductionSculpture')
+  var newurl = path+'new/reproductionSculpture';
+  request.post({
+    headers: {'content-type' : 'application/json'},
+    url: newurl,
+    json: req.body
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})
+
+app.put('/api/reproductionSculpture/:id', function(req,res) {
+  console.log('put reproductionSculpture')
+  var newurl = path+'update/reproductionSculpture';
+  request({
+    headers: {'content-type' : 'application/json'},
+    method: 'PUT',
+    url: newurl,
+    json: req.body
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})
+
+app.delete('/api/reproductionSculpture/:id', function(req,res) {
+  console.log('delete reproductionSculpture')
+  var newurl = path+'delete/reproductionSculpture/'+req.params.id;
+  request({
+    headers: {'content-type' : 'application/json'},
+    method: 'DELETE',
+    url: newurl
+    }, function(error, response, body){
+        console.log(body);
+    }
+  )
+})

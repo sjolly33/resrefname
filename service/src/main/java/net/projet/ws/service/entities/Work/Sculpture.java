@@ -1,5 +1,6 @@
 package net.projet.ws.service.entities.Work;
 import net.projet.ws.service.entities.Picture.Picture;
+import net.projet.ws.service.entities.Reproduction.ReproductionSculpture;
 
 
 import javax.ws.rs.GET;
@@ -31,6 +32,10 @@ public class Sculpture extends Work{
 	@Column(name="particularitySupport")
 	private List<String> _particularitiesSupport;
 
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="Reproductions")	
+	private List<ReproductionSculpture> _reproductions;
+
 	@XmlElement
  	public int getID() {
  		return _sculptureID;
@@ -56,5 +61,14 @@ public class Sculpture extends Work{
 	
 	public void setParticularitiesSupport(List<String> support){
 		_particularitiesSupport = new ArrayList<String>(support);
+	}
+
+	@XmlElement
+	public List<ReproductionSculpture> getReproductions(){
+		return new ArrayList<ReproductionSculpture>(_reproductions);
+	}
+
+	public void setReproductions(List<ReproductionSculpture> reproductions){
+		_reproductions = new ArrayList<ReproductionSculpture>(reproductions);
 	}
 }
