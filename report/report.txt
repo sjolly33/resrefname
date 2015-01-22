@@ -127,9 +127,11 @@ Ainsi, la modularité du modèle objet développé se voit réduit par la néces
 
 2) Interaction Client/Service
 
-La stratégie de développement a été de fournir des services (GET, POST, PUT et DELETE) à chaque entité persisté. Des requetes permettant l'accès direct à un musée ont été développées dans l'objectif de diminuer la taille des données à transiter. Cependant, les requetes 
+La stratégie de développement a été de fournir des services (GET, POST, PUT et DELETE) à chaque entité persisté. Des requetes permettant l'accès direct à une entité complète ont été développées dans l'objectif de diminuer la taille des données à transiter. Cependant, les requetes 
 sont peu ciblés et donc le front-end doit nécessairement envoyé l'ensemble d'une entité meme si un seul champ est renseigné (par exemple, envoi de tout les champs d'un auteur meme si ce dernier dispose de beaucoup de champs à null).
 La raison est le cout de développement que représente la décomposition des services. Egalement, en tenant compte du métier de conservateur, la fréquence des modifications seront faible tandis que leurs tailles seront importantes (nécessité de renseigner une oeuvre au mieux avant son exposition). 
+
+Egalement, il est possible d'effectuer des requêtes en envoyant à la fois l'ID d'un musée et l'ID d'une entité de ce même musée. Bien que le front-end développé ici n'utilise pas ces requêtes (dû à la structure du site en front-end), nous avons tout de même conservé ces dernières pour offrir la possibilité de diminuer le nombre de requêtes à un autre client. 
 
 3) Extensions des fonctionnalités
 

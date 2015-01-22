@@ -53,6 +53,17 @@ public class MuseumRoot{
 		return MuseumData.getMuseum(museumID);
 	}
 
+
+	// Get a specific picture. ID is got from front-end so {id} is in a specific museum
+	@GET
+	@Path("/picture/{id}")
+	@Produces("application/json")
+	public Picture getPicture(@PathParam("id") int pictureID){
+		return PictureData.getPicture(pictureID);
+	}
+
+
+	// Get all pictures but only in a museum otherwise it has no sense (picture of all museum not front)
 	@GET
 	@Path("/{id}/pictures")
 	@Produces("application/json")
@@ -70,11 +81,25 @@ public class MuseumRoot{
 	}
 
 	@GET
+	@Path("/paint/{id}")
+	@Produces("application/json")
+	public Paint getPaint(@PathParam("id") int paintID){
+		return WorkData.getPaint(paintID);
+	}
+
+	@GET
 	@Path("/{id}/paints")
 	@Produces("application/json")
 	public List<Paint> getPaints(@PathParam("id") int museumID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		return museum.getPaints();
+	}
+
+	@GET
+	@Path("/sculpture/{id}")
+	@Produces("application/json")
+	public Sculpture getSculpture(@PathParam("id") int sculptureID){
+		return WorkData.getSculpture(sculptureID);
 	}
 
 	@GET
@@ -85,6 +110,13 @@ public class MuseumRoot{
 		return museum.getSculptures();
 	}
 
+
+	@GET
+	@Path("/author{id}")
+	@Produces("application/json")
+	public Author getAuthor(@PathParam("id") int authorID){
+		return AuthorData.getAuthor(authorID);
+	}
 
 	@GET
 	@Path("/{id}/authors")
@@ -103,12 +135,28 @@ public class MuseumRoot{
 		return AuthorData.getAuthor(authors, authorID);
 	}
 
+
+	@GET
+	@Path("/collectionWork/{id}")
+	@Produces("application/json")
+	public CollectionWork getCollectionWork(@PathParam("id") int cWorkID){
+		return CollectionData.getCollectionWork(cWorkID);
+	}
+
 	@GET
 	@Path("/{id}/collectionsWork")
 	@Produces("application/json")
 	public List<CollectionWork> getCollectionsWork(@PathParam("id") int museumID){
 		Museum museum = MuseumData.getMuseum(museumID);
 		return museum.getCollectionsWorks();
+	}
+
+
+	@GET
+	@Path("/collectionPicture/{id}")
+	@Produces("application/json")
+	public CollectionPicture getCollectionPicture(@PathParam("id") int cPictureID){
+		return CollectionData.getCollectionPicture(cPictureID);
 	}
 
 	@GET
