@@ -271,50 +271,62 @@ $scope.date_work = "date_work";
 appControllers.controller('workerController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService', 'AuthorService',
   function($scope, $resource, $routeParams, $route, MuseumService, AuthorService) {
     console.log('workerController');
-    $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
+    $scope.initNewWorkerCtrl = function($scope){
+      $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
     $scope.save = function($form){
       if($form.$valid){
-    var new_worker = new AuthorService();
-    new_worker.name = $scope.name_worker;
-    new_worker.adress = $scope.adress_worker;
-    AuthorService.save(new_worker, function(){})
-    $scope.museumInfo.authors.push(new_worker); 
+        var new_worker = new AuthorService();
+        new_worker.name = $scope.name_worker;
+        new_worker.adress = $scope.adress_worker;
+        AuthorService.save(new_worker, function(){})
+        $scope.museumInfo.authors.push(new_worker); 
 
-    var newMuseum = new MuseumService();
-    newMuseum.id = $scope.museumInfo.id;
-    newMuseum.name = $scope.museumInfo.name;
-    newMuseum.theme = $scope.museumInfo.theme;
-    newMuseum.adress = $scope.museumInfo.adress;
-    newMuseum.information = $scope.museumInfo.information;
-    newMuseum.collectionsPictures = $scope.museumInfo.collectionsPictures;
-    newMuseum.collectionsWorks = $scope.museumInfo.collectionsWorks;
-    newMuseum.pictures = $scope.museumInfo.pictures;
-    newMuseum.authors = $scope.museumInfo.authors;
-    newMuseum.sculptures = $scope.museumInfo.sculptures;
-    newMuseum.paints = $scope.museumInfo.paints;
-    MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
+        // Pas forcement besoin
+        $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
+        var newMuseum = new MuseumService();
+        newMuseum.id = $scope.museumInfo.id;
+        newMuseum.name = $scope.museumInfo.name;
+        newMuseum.theme = $scope.museumInfo.theme;
+        newMuseum.adress = $scope.museumInfo.adress;
+        newMuseum.information = $scope.museumInfo.information;
+        newMuseum.collectionsPictures = $scope.museumInfo.collectionsPictures;
+        newMuseum.collectionsWorks = $scope.museumInfo.collectionsWorks;
+        newMuseum.pictures = $scope.museumInfo.pictures;
+        newMuseum.authors = $scope.museumInfo.authors;
+        newMuseum.sculptures = $scope.museumInfo.sculptures;
+        newMuseum.paints = $scope.museumInfo.paints;
+        MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
+        }
+      }
+    }
+
+  $scope.initViewWorkerCtrl = function($scope){
+    $scope.worker = AuthorService.get({id:$routeParams.id}, function (res, req){})
+    $scope.delete = function(){
+      AuthorService.remove({id:$scope.worker.id}, function (res, req){})
+    }
+    $scope.editWorkerController = function($scope){
+      console.log("workerEdit")
+        console.log($scope.worker)
+       $scope.name_worker = "name_worker";
+       $scope.adress_worker = "adress_worker";
+       console.log($routeParams.id)
+       
+      $scope.name_worker = $scope.worker.name;
+      $scope.adress_worker = $scope.worker.adress;      
+      $scope.edit = function ($form){
+      if($form.$valid){
+        var edit_worker = new AuthorService();
+        edit_worker.name = $scope.name_worker;
+        edit_worker.adress = $scope.adress_worker;
+        edit_worker.id = $scope.worker.id;
+        // TODO  : add paint and sculpture refs 
+        AuthorService.put({id:$routeParams.id}, edit_worker, function(res, req){})
+        console.log(edit_worker);
+        }
+      }
+    }
   }
-}
-
-$scope.editWorkerController = function($scope){
-
- // MuseumFactory -> recuperer worker en fonction de l'id puis :
- $scope.name_worker = "name_worker";
- $scope.adress_worker = "adress_worker";
-
- $scope.edit = function ($form){
-  if($form.$valid){
-    // Recuperaton des donnees du formulaire :
-    var edit_worker = {};
-    edit_worker.name = $scope.name_worker;
-    edit_worker.adress = $scope.adress_worker;
-
-    // Puis sauvegarde : 
-    console.log(edit_worker);
-    alert("edit worker in workerController");
-  }
-}
-}
 }]);
 
 
