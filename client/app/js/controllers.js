@@ -273,7 +273,7 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
     console.log('workerController');
     $scope.initNewWorkerCtrl = function($scope){
       $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
-    $scope.save = function($form){
+      $scope.save = function($form){
       if($form.$valid){
         var new_worker = new AuthorService();
         new_worker.name = $scope.name_worker;
@@ -282,7 +282,7 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
         $scope.museumInfo.authors.push(new_worker); 
 
         // Pas forcement besoin
-        $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
+        //$scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){})
         var newMuseum = new MuseumService();
         newMuseum.id = $scope.museumInfo.id;
         newMuseum.name = $scope.museumInfo.name;
@@ -295,6 +295,8 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
         newMuseum.authors = $scope.museumInfo.authors;
         newMuseum.sculptures = $scope.museumInfo.sculptures;
         newMuseum.paints = $scope.museumInfo.paints;
+        console.log(newMuseum)
+        console.log($scope.museumInfo)
         MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
         }
       }
