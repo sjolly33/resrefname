@@ -1,5 +1,6 @@
 package net.projet.ws.service.entities.Collection;
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.entities.Work.Sculpture;
@@ -16,6 +17,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 
 @XmlRootElement(name = "collectionWork")
 @Entity

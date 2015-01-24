@@ -2,12 +2,12 @@
 <dataset>
  <MUSEUM Museum_ID="1" THEME="Hazard" ADRESS="NY" NAME="Museum" />
  <MUSEUM Museum_ID="2" THEME="blabla" ADRESS="LA" NAME="Museum2"/>
- <PAINT PAINTID="2" Resume="work2" MUSEUM_PAINT_REF="1"/>
+ <PAINT PAINTID="2" Resume="work2" museum="1"/>
  <PAINT PAINTID="3" Resume="work3" TITLE="Title"/>
  <SCULPTURE SCULPTUREID="1" Resume="work4" TITLE="Title"/>
  <PICTURE PictureID="1" Resume="picture" TITLE="Title"/> 
  <AUTHOR AuthorID="1" name="Jean-Jacques" /> 
- <PAINT PAINTID="1" Resume="work1" MUSEUM_PAINT_REF="1">
+ <PAINT PAINTID="1" Resume="work1" museum="1">
  	 <AUTHOR AuthorID="6" name="Jean-Jacques"/>
  	 <AUTHOR AuthorID="7" name="Victor"/> 
  </PAINT>

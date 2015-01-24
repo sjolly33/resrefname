@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @MappedSuperclass
 public abstract class IMuseum{
@@ -27,6 +28,10 @@ public abstract class IMuseum{
 
 	@Column(name="TAGS")
 	private String _tags;
+
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="museum", nullable=true)
+	private Museum museum;
 
 	@XmlElement
  	public String getTitle() {
@@ -63,5 +68,14 @@ public abstract class IMuseum{
  	public void setTags(String tags) {
  		this._tags = tags;
  	}
+
+ 	@XmlTransient
+ 	public Museum getMuseum() {
+ 		return museum;
+ 	}
+
+ 	public void setMuseum(Museum museum){
+ 		this.museum = museum;
+ 	}    	
 }
 

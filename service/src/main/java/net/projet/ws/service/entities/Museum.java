@@ -45,27 +45,22 @@ public class Museum{
 	@Column(name="INFORMATION")
 	private String _information;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_PICTURE_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<Picture> _pictures;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_PAINT_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<Paint> _paints;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_SCULPTURE_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<Sculpture> _sculptures;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_CollectionPicture_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<CollectionPicture> _picturesCollections;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_CollectionWork_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<CollectionWork> _worksCollections;
 
-	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="museum")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="museum")
 	private List<Author> _authors;
 
 	@XmlElement

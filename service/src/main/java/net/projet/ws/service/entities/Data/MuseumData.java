@@ -79,6 +79,22 @@ public class MuseumData{
 			authors.get(i).setMuseum(museum1);
 		}
 
+		for(int i=0;i<pictures.size();++i){
+			pictures.get(i).setMuseum(museum1);
+		}
+
+		for(int i=0;i<cWorks.size();++i){
+			cWorks.get(i).setMuseum(museum1);
+		}
+
+		for(int i=0;i<cPictures.size();++i){
+			cPictures.get(i).setMuseum(museum1);
+		}
+
+		for(int i=0;i<works.size();++i){
+			works.get(i).setMuseum(museum1);
+		}
+
 		museums.add(museum1);
 		
 		EntityManager em = JpaUtil.getEntityManager();

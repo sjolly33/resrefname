@@ -1,6 +1,7 @@
 package net.projet.ws.service.entities.Work;
 
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Picture.Picture;
 import net.projet.ws.service.entities.Collection.CollectionWork;
 import net.projet.ws.service.entities.Worker.Author;
@@ -18,6 +19,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+
 
 @MappedSuperclass
 public abstract class Work extends IMuseum{
@@ -29,6 +32,7 @@ public abstract class Work extends IMuseum{
 	@JoinColumn(name = "author")
 	private Author author;
 */	
+
 	@Temporal(TemporalType.DATE)
 	private Date _date;
 
@@ -76,5 +80,4 @@ public abstract class Work extends IMuseum{
  	public void setDate(Date date){
  		_date = date;
  	}
-
 }
