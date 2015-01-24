@@ -53,12 +53,18 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
    $scope.theme_museum = "title_museum";
    $scope.adress_museum = "description_museum";
    $scope.information_museum = "museum_information";
+   $scope.workers = [];
    $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){
       console.log(res)
       $scope.title_museum=res.name;
       $scope.theme_museum=res.theme;
       $scope.adress_museum = res.adress;
       $scope.information_museum = res.information;
+      $scope.workers = res.authors;
+      $scope.paints = res.paints;
+      $scope.sculptures = res.sculptures;
+      $scope.collectionsPictures = res.collectionsPictures;
+      $scope.collectionsWorks = res.collectionsWorks;
    })
    $scope.edit = function ($form){
     if($form.$valid){
@@ -67,6 +73,11 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
       edit_museum.theme = $scope.theme_museum;
       edit_museum.adress = $scope.adress_museum;
       edit_museum.information = $scope.information_museum;
+      edit_museum.authors = $scope.workers;
+      edit_museum.paints = $scope.paints;
+      edit_museum.sculptures = $scope.sculptures;
+      edit_museum.collectionsPictures = $scope.collectionsPictures;
+      edit_museum.collectionsWorks = $scope.collectionsWorks;
       edit_museum.id = $routeParams.id;
       MuseumService.put({id:$routeParams.id}, edit_museum, function(res, rep){});
       }
