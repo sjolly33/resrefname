@@ -1,6 +1,7 @@
 package net.projet.ws.service.entities.Worker;
 
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Museum;
 import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.entities.Work.Sculpture;
@@ -17,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name = "author")
 @Entity
@@ -33,12 +35,17 @@ public class Author{
 
 	@Column(name="adress")
 	private String _adress;
-
+/*
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
 	private List<Paint> _paintsRef = new ArrayList<Paint>();
 
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
 	private List<Sculpture> _SculpturesRef = new ArrayList<Sculpture>();
+*/
+	
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name="museum", nullable=true)
+	private Museum museum;
 
 	@XmlElement
  	public int getID() {
@@ -66,7 +73,7 @@ public class Author{
  	public void setAdress(String adress){
  		_adress = adress;
  	}
-
+/*
  	@XmlElement
  	public List<Paint> getPaints() {
  		return _paintsRef;
@@ -83,5 +90,14 @@ public class Author{
 
  	public void setSculptures(List<Sculpture> works){
  		_SculpturesRef = works;
- 	}   	
+ 	}
+*/
+	@XmlTransient
+ 	public Museum getMuseum() {
+ 		return museum;
+ 	}
+
+ 	public void setMuseum(Museum museum){
+ 		this.museum = museum;
+ 	}    	
 }

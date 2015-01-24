@@ -65,8 +65,7 @@ public class Museum{
 	@JoinColumn(name="MUSEUM_CollectionWork_REF", referencedColumnName="Museum_ID")
 	private List<CollectionWork> _worksCollections;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Just listing so receive all consequences
-	@JoinColumn(name="MUSEUM_AUTHORS_REF", referencedColumnName="Museum_ID")
+	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="museum")
 	private List<Author> _authors;
 
 	@XmlElement

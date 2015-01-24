@@ -501,7 +501,17 @@ public class MuseumRoot{
 	@Path("/delete/author/{id}")
 	@Consumes("application/json")
 	public void deleteAuthor(@PathParam("id") int authorID){
-		AuthorData.deleteAuthor(AuthorData.getAuthor(authorID));
+		Author author = AuthorData.getAuthor(authorID);
+		List<Museum> museums = MuseumData.getMuseums();
+		for(int i=0; i<museums.size(); ++i){
+			List<Author> authorsMuseum = museums.get(i).getAuthors();
+			if(authorsMuseum.remove(author)){
+				museums.get(i).setAuthors(authorsMuseum);
+				this.updateMuseum(museums.get(i));
+			} 
+			this.updateMuseum(museums.get(i));
+		}
+		AuthorData.deleteAuthor(author);
 	}
 
 	@DELETE
