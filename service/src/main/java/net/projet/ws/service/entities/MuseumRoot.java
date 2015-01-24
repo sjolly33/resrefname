@@ -466,35 +466,116 @@ public class MuseumRoot{
 	@Path("/delete/picture/{id}")
 	@Consumes("application/json")
 	public void deletePicture(@PathParam("id") int pictureID){
-		PictureData.deletePicture(PictureData.getPicture(pictureID));
+		Picture picture = PictureData.getPicture(pictureID);
+
+		Paint paint = picture.getPaint();
+		List<Picture> pictures = paint.getPictures();
+		if(pictures.remove(picture)){
+			paint.setPictures(pictures);
+			this.updatePaint(paint);
+		}
+		
+		Sculpture sculpture = picture.getSculpture();
+		pictures = sculpture.getPictures();
+		if(pictures.remove(picture)){
+			sculpture.setPictures(pictures);
+			this.updateSculpture(sculpture);
+		}
+
+		Museum museum = picture.getMuseum();
+		List<Picture> picturesMuseum = museum.getPictures();
+		if(picturesMuseum.remove(picture)){
+			museum.setPictures(picturesMuseum);
+			this.updateMuseum(museum);
+		} 
+
+		PictureData.deletePicture(picture);
 	}
 
 	@DELETE
 	@Path("/delete/paint/{id}")
 	@Consumes("application/json")
 	public void deletePaint(@PathParam("id") int workID){
-		WorkData.deletePaint(WorkData.getPaint(workID));
+		Paint paint = WorkData.getPaint(workID);
+
+		Author author = paint.getAuthor();
+		List<Paint> authorPaints = author.getPaints();
+		if(authorPaints.remove(paint)){
+			author.setPaints(authorPaints);
+			this.updateAuthor(author);
+		}	
+
+		List<Picture> pictures = paint.getPictures();
+		for(int i=0;i<pictures.size();++i){
+			pictures.get(i).setPaint(null);
+			this.updatePicture(pictures.get(i));
+		}
+		
+		Museum museum = paint.getMuseum();
+		List<Paint> paintsMuseum = museum.getPaints();
+		if(paintsMuseum.remove(paint)){
+			museum.setPaints(paintsMuseum);
+			this.updateMuseum(museum);
+		} 
+
+		WorkData.deletePaint(paint);
 	}
 
 	@DELETE
 	@Path("/delete/sculpture/{id}")
 	@Consumes("application/json")
 	public void deleteSculpture(@PathParam("id") int workID){
-		WorkData.deleteSculpture(WorkData.getSculpture(workID));
+		Sculpture sculpture = WorkData.getSculpture(workID);
+		
+		Author author = sculpture.getAuthor();
+		List<Sculpture> authorSculptures = author.getSculptures();
+		if(authorSculptures.remove(sculpture)){
+			author.setSculptures(authorSculptures);
+			this.updateAuthor(author);
+		}	
+
+		List<Picture> pictures = sculpture.getPictures();
+		for(int i=0;i<pictures.size();++i){
+			pictures.get(i).setSculpture(null);
+			this.updatePicture(pictures.get(i));
+		}
+		
+		Museum museum = sculpture.getMuseum();
+		List<Sculpture> sculpturesMuseum = museum.getSculptures();
+		if(sculpturesMuseum.remove(sculpture)){
+			museum.setSculptures(sculpturesMuseum);
+			this.updateMuseum(museum);
+		} 
+
+		WorkData.deleteSculpture(sculpture);
 	}
 
 	@DELETE
 	@Path("/delete/collectionPicture/{id}")
 	@Consumes("application/json")
 	public void deleteCollectionPicture(@PathParam("id") int cPictureID){
-		CollectionData.deleteCollectionPicture(CollectionData.getCollectionPicture(cPictureID));
+		CollectionPicture cP = CollectionData.getCollectionPicture(cPictureID);
+		Museum museum = cP.getMuseum();
+		List<CollectionPicture> cPsMuseum = museum.getCollectionsPictures();
+		if(cPsMuseum.remove(cP)){
+			museum.setCollectionsPictures(cPsMuseum);
+			this.updateMuseum(museum);
+		} 
+		CollectionData.deleteCollectionPicture(cP);
 	}
 
 	@DELETE
 	@Path("/delete/collectionWork/{id}")
 	@Consumes("application/json")
 	public void deleteCollectionWork(@PathParam("id") int cWorkID){
-		CollectionData.deleteCollectionWork(CollectionData.getCollectionWork(cWorkID));
+		CollectionWork cW = CollectionData.getCollectionWork(cWorkID);
+		Museum museum = cW.getMuseum();
+		List<CollectionWork> cWsMuseum = museum.getCollectionsWorks();
+		if(cWsMuseum.remove(cW)){
+			museum.setCollectionsWorks(cWsMuseum);
+			this.updateMuseum(museum);
+		} 
+		CollectionData.deleteCollectionWork(cW);
 	}
 
 	@DELETE
@@ -502,15 +583,14 @@ public class MuseumRoot{
 	@Consumes("application/json")
 	public void deleteAuthor(@PathParam("id") int authorID){
 		Author author = AuthorData.getAuthor(authorID);
-		List<Museum> museums = MuseumData.getMuseums();
-		for(int i=0; i<museums.size(); ++i){
-			List<Author> authorsMuseum = museums.get(i).getAuthors();
-			if(authorsMuseum.remove(author)){
-				museums.get(i).setAuthors(authorsMuseum);
-				this.updateMuseum(museums.get(i));
-			} 
-			this.updateMuseum(museums.get(i));
-		}
+
+		Museum museum = author.getMuseum();
+		List<Author> authorsMuseum = museum.getAuthors();
+		if(authorsMuseum.remove(author)){
+			museum.setAuthors(authorsMuseum);
+			this.updateMuseum(museum);
+		} 
+
 		AuthorData.deleteAuthor(author);
 	}
 
@@ -527,6 +607,4 @@ public class MuseumRoot{
 	public void deleteReproductionSculpture(@PathParam("id") int reproductionSculptureID){
 		ReproductionData.deleteReproductionSculpture(ReproductionData.getReproductionSculpture(reproductionSculptureID));
 	}
-
-	//rajouter des chemins dans Path si unidirectionnel sinon Front-End + @PUT
 }

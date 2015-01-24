@@ -50,16 +50,19 @@ public class MuseumData{
 
 		List<Paint> works = museum1.getPaints();
 		List<Author> authors = museum1.getAuthors();
-		/*for(int i=0;i<works.size();++i){
+		for(int i=0;i<works.size();++i){
 			works.get(i).setAuthor(authors.get(0));
-		}*/
+		}
+
 		List<Picture> pictures = museum1.getPictures();
 		for(int i=0;i<pictures.size();++i){
 			pictures.get(i).setPaint(works.get(0));
 		}
-		/*for(int i=0;i<works.size();++i){
-			works.get(i).setPicture(pictures);
-		}*/
+
+		for(int i=0;i<works.size();++i){
+			works.get(i).setPictures(pictures);
+		}
+
 		museum1.setPaints(works);
 		museum1.setPictures(pictures);
 
@@ -77,6 +80,7 @@ public class MuseumData{
 
 		for(int i=0;i<authors.size();++i){
 			authors.get(i).setMuseum(museum1);
+			authors.get(i).setPaints(works);
 		}
 
 		for(int i=0;i<pictures.size();++i){

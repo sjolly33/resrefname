@@ -35,14 +35,13 @@ public class Author{
 
 	@Column(name="adress")
 	private String _adress;
-/*
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
+
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="author")
 	private List<Paint> _paintsRef = new ArrayList<Paint>();
 
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="author")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="author")
 	private List<Sculpture> _SculpturesRef = new ArrayList<Sculpture>();
-*/
-	
+
 	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="museum", nullable=true)
 	private Museum museum;
@@ -73,7 +72,7 @@ public class Author{
  	public void setAdress(String adress){
  		_adress = adress;
  	}
-/*
+
  	@XmlElement
  	public List<Paint> getPaints() {
  		return _paintsRef;
@@ -91,7 +90,7 @@ public class Author{
  	public void setSculptures(List<Sculpture> works){
  		_SculpturesRef = works;
  	}
-*/
+
 	@XmlTransient
  	public Museum getMuseum() {
  		return museum;

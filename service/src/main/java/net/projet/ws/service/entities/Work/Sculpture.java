@@ -26,13 +26,13 @@ public class Sculpture extends Work{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int _sculptureID;
 
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work2")
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="sculpture")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
 	@Column(name="particularitySupport")
 	private List<String> _particularitiesSupport;
 
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Reproductions")	
 	private List<ReproductionSculpture> _reproductions;
 
@@ -46,11 +46,11 @@ public class Sculpture extends Work{
  	}
 
  	@XmlElement
- 	public List<Picture> getPicture(){
+ 	public List<Picture> getPictures(){
  		return new ArrayList<Picture>(_pictures);
  	}
 
- 	public void setPicture(List<Picture> picture){
+ 	public void setPictures(List<Picture> picture){
  		_pictures = picture;
  	}
 

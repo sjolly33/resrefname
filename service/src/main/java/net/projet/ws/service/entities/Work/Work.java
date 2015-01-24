@@ -27,12 +27,11 @@ public abstract class Work extends IMuseum{
 
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
-/*
+
 	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "author")
 	private Author author;
-*/	
-
+	
 	@Temporal(TemporalType.DATE)
 	private Date _date;
 
@@ -53,16 +52,7 @@ public abstract class Work extends IMuseum{
  		_dimension.set(1,y);
  		_dimension.set(2,z);
  	}
-/*
-	@XmlElement
-	public Author getAuthor(){
-		return author;
-	}
 
-	public void setAuthor(Author author){
-		this.author = author;
-	}
-*/
  	@XmlElement
  	public String getResume(){
  		return _resume;
@@ -80,4 +70,13 @@ public abstract class Work extends IMuseum{
  	public void setDate(Date date){
  		_date = date;
  	}
+
+ 	@XmlTransient
+	public Author getAuthor(){
+		return author;
+	}
+
+	public void setAuthor(Author author){
+		this.author = author;
+	}
 }

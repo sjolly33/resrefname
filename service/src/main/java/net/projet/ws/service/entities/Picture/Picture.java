@@ -39,15 +39,13 @@ public class Picture extends IMuseum{
 	@Column(name="Resume")
 	private String _resume;
 
-	@ManyToOne(cascade=CascadeType.ALL) //Picture cannot exist without Work...
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="Paint_ID")
-	//@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
-	private Paint work;
+	private Paint paint;
 
-	@ManyToOne(cascade=CascadeType.ALL) //Picture cannot exist without Work...
+	@ManyToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="Sculpture_ID")
-	//@JoinColumn(name = "WorkRef", nullable=false) //TODO : Set it to false later
-	private Sculpture work2;
+	private Sculpture sculpture;
 
 	@XmlElement
  	public int getID() {
@@ -76,22 +74,22 @@ public class Picture extends IMuseum{
  		_date = date;
  	}
 
- 	@XmlElement
+ 	@XmlTransient
  	public Paint getPaint(){
- 		return work;
+ 		return paint;
  	}
 
  	public void setPaint(Paint work){
- 		this.work = work;
+ 		this.paint = work;
  	}
 
- 	@XmlElement
+ 	@XmlTransient
  	public Sculpture getSculpture(){
- 		return work2;
+ 		return sculpture;
  	}
 
  	public void setSculpture(Sculpture work){
- 		this.work2 = work;
+ 		this.sculpture = work;
  	}
 
 }

@@ -25,7 +25,7 @@ public class Paint extends Work{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int _paintID;
 
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="work")
+	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="paint")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
 	@Column(name="particularityTech")
@@ -34,7 +34,7 @@ public class Paint extends Work{
 	@Column(name="particularitySupport")
 	private String _particularitySupport;
 
-	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Reproductions")
 	private List<ReproductionPaint> _reproductions;
 
@@ -48,11 +48,11 @@ public class Paint extends Work{
  	}
 
  	@XmlElement
- 	public List<Picture> getPicture(){
+ 	public List<Picture> getPictures(){
  		return new ArrayList<Picture>(_pictures);
  	}
 
- 	public void setPicture(List<Picture> picture){
+ 	public void setPictures(List<Picture> picture){
  		_pictures = picture;
  	}
 
