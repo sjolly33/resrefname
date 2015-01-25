@@ -6,43 +6,7 @@ Nous avons utilisé Maven pour la gestion du projet.
 Ce dernier prend racine sur un méta-projet servant à capitaliser les dépendances redondantes à chaque sous-projet. Nous avons développé deux sous projets. L'un correspondant au front-end (client) de l'application et l'autre au back-end (service).
 
 
-	2) Architecture Client
-
-	// Victor et Adrien
-
-Le client a été développé en Web 2.0 avec un design MVC à l'aide du framework AngularJS.
-L'architecture du client prend la forme suivante : 
-
-client
-├── app
-│   ├── css
-│   │   ├── style.css
-│   │   └── vendor
-│   │       └── bootstrap.min.css
-│   ├── index.html
-│   ├── js
-│   │   ├── app.js
-│   │   ├── controllers.js
-│   │   └── services.js
-│   ├── karma.conf.js
-│   ├── package.json
-│   ├── protractor.conf.js
-│   ├── test
-│   │   └── E2E
-│   │       └── viewAccueil.js
-│   └── view
-│       ├── create_museum.html
-│       ├── create_worker.html
-│       ├── create_work.html
-│       ├── home.html
-│       ├── museum.html
-│       ├── search.html
-│       ├── worker.html
-│       └── work.html
-├── package.json
-├── pom.xml
-
-	3) Architecture Service
+	2) Architecture Service
 // A REVOIR
 Le back-end a été développé en J2EE à l'aide des framework Jersey et JPA.
 L'architecture du service prend la forme suivante : 
@@ -114,9 +78,85 @@ Une phase de test a été intégrée au cycle de Maven avant la phase de déploi
 	5 - répète les étapes 3 et 4 jusqu'à ce que tous les tests soient terminés
 	6 - envoi les résultats des tests dans des fichiers de sorties 
 
+	
+	3) Architecture Client
+
+Le client a été développé en Web 2.0 avec un design MVC à l'aide du framework AngularJS.
+L'architecture du client prend la forme suivante : 
+
+client
+├── app
+│   ├── css
+│   │   ├── style.css
+│   │   └── vendor
+│   │       └── bootstrap.min.css
+│   ├── index.html
+│   ├── js
+│   │   ├── app.js
+│   │   ├── controllers.js
+│   │   └── services.js
+│   ├── karma.conf.js
+│   ├── package.json
+│   ├── protractor.conf.js
+│   ├── test
+│   │   └── E2E
+│   │       └── viewAccueil.js
+│   └── view
+│       ├── create_museum.html
+│       ├── create_worker.html
+│       ├── create_work.html
+│       ├── home.html
+│       ├── museum.html
+│       ├── search.html
+│       ├── worker.html
+│       └── work.html
+├── package.json
+├── pom.xml
+
+La communication avec le service de musée passe par l'intermédiaire d'un serveur express. Ainsi, seul le serveur express dispose des chemins pour accéder et potentiellement modifier les requêtes reçus/envoyés au serveur du musée. 
 
 II) Fonctionnalités
-// Solene et Victor
+
+Le gestionnaire de musée permet d'effectuer des requêtes CRUD sur des :
+	- musées;
+	- oeuvres;
+	- artistes;
+	- photos;
+	- collections;
+	- reproductions;
+
+Pour chacune des entités, sauf l'artiste, présentent dans le musée, le visiteur peut déposer un commentaire et chacune de ces entités est renseigné par un tag. Aussi chacune de ses entités dipose d'un titre et d'une description. 
+Les oeuvres, artistes et photos sont liés de manière bidirectionnel dans l'objectif de faciliter les associations entre ces entités.
+Les reproductions ne sont accessibles qu'à partir des oeuvres et il n'existe pas de collections de reproductions. Les collections ne sont accessibles qu'à partir d'un musée.
+
+1) Musées
+
+Le gestionnaire des musées permet de gérer plusieurs musées de la façon qui suit :
+	- l'ensemble des entités sont fortements liés aux musées. Ainsi, la suppression d'un musée entrainera la suppression de l'ensemble des entitiés liés de manière bidirectionnelle au musée;
+	- chaque musée est totalement indépendant et donc il n'est pas possible de capitaliser de l'information entre les différents musées.
+Chaque musée dispose de divers caractéristiques comme un thème, une adresse, etc.
+
+2) Oeuvres
+
+Il existe deux types d'oeuvres : peinture et sculpture.
+Le premier peut disposer d'une particularité technique et d'une particularité de support. Le second dispose de plusieurs particularités de support.
+Les oeuvres dispose aussi de divers champs (résumé, dimensions, etc). L'oeuvre est liée à un certains nombre de photos et un auteur.
+
+3) Photos
+
+Simplement, une photo renseigne une oeuvre. La photo dispose de caractéristiques propres mais n'offre pas la possibilité de choisir l'angle de prise de vue. Une photo est liée à une oeuvre.
+
+4) Artistes
+
+Ils sont simplement renseignés par un nom et une adresse et est lié à un certain nombre d'oeuvres. 
+
+5) Collections
+
+Les collections sont soit des collections d'oeuvres (lieés unidirectionnellement à une oeuvre) soit des collections de photos (lieés unidirectionnellement à des photos). 
+
+6) Reproductions
+
+Les reproductions ne concernent que les oeuvres. Il n'est possible d'accéder à une reproduction que à partir d'une oeuvre. Les reproductions disposent de caractéristiques comme le nombre restant, le prix et les particularités de cette reproduction.  
 
 III) Discussions
 
@@ -125,7 +165,6 @@ III) Discussions
 Nous avons consulté les annotations proposées par JPA 2.0 dans l'objectif de profiter au maximum des avantages du monde objet. Néanmoins, nous nous sommes heurtés à un certains nombres de problèmes de conception notamment en ce qui concerne les relations d'héritages et de polymorphismes (conflits entre tables, etc). De ce fait, seul les classes les plus bas niveau ont été définies comme entités. Par exemple, les classes Work et IMuseum sont toutes les deux abstraites et sont renseignées d'une annotation "@MappedSuperclass" signifiant que les champs sont factorisés pour les sous-classes entités.
 Ainsi, la modularité du modèle objet développé se voit réduit par la nécessité de travailler majoritairement avec des types concrèts s'entre-référençant. Ce problème n'en est pas forcément un car, dans le contexte métier présent, les ajouts de catégories d'objets se feront rare.
 
-Reproductions embedded
 
 2) Interaction Client/Service
 
@@ -137,5 +176,10 @@ Egalement, il est possible d'effectuer des requêtes en envoyant à la fois l'ID
 
 3) Extensions des fonctionnalités
 
-//Solene
+Avec l'apport d'un serveur express côté client, il serait envisageable de :
+	- communiquer avec plusieurs services (par exemple, 1 pour les auteurs, 1 autre pour les oeuvres, etc);
+	- déployer les clients à part d'express dans l'objectif de connecter plusieurs clients à express;
 
+Par rapport aux fonctionnalités présentent, il y a de nombreuses ouvertures :
+	- envoi de liens pour les photos avec chargement de ces dernières côté front-end;
+	- recherche d'oeuvre/de photos/de musées en fonction de mots clés;
