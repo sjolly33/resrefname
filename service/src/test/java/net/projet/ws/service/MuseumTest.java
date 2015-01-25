@@ -119,6 +119,8 @@ public class MuseumTest
 		assertTrue(true);
 	}
 
+// ------------------------- Museum -----------------------------
+
 	@Test
 	public final void findMuseum() 
 	{
@@ -211,6 +213,8 @@ public class MuseumTest
 		}
 	}
 
+// ------------------------- Work -----------------------------
+
 	@Test
 	public void findWork() throws Exception {
 		LOG.info("findWork");
@@ -243,6 +247,64 @@ public class MuseumTest
 	}
 
 	@Test
+	public void findWorkByAuthor() throws Exception {
+		LOG.info("findWorkByAuthor");
+		try{
+			tx.begin();
+  			Paint work = em.find(Paint.class, 1);
+  			assertEquals(work.getID(), 1);
+  			Author author = em.find(Author.class, 1);
+  			assertTrue(author.getPaints().indexOf(work) > -1);
+		}catch (RuntimeException re) {
+			LOG.error("findWorkByAuthor failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findWorkByCollectionWork() throws Exception {
+		LOG.info("findcWork");
+		try{
+			tx.begin();
+  			CollectionWork cWork = em.find(CollectionWork.class, 1);
+  			assertEquals(cWork.getID(), 1);
+  			Paint paint = em.find(Paint.class, 1);
+  			assertTrue(cWork.getRefPaint().indexOf(paint) > -1);
+		}catch (RuntimeException re) {
+			LOG.error("findcWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+/*
+	@Test
+	public final void createWork() throws Exception
+	{
+		LOG.info("createWork");
+		try{
+			tx.begin();
+			Paint work = new Paint();
+			work.setID(42);
+			work.setTitle("lol");
+			work.setResume("toto");
+			work.setParticularityTech("pen");
+			work.setParticularitySupport("bomb !...??");
+			em.persist(work);
+			assertTrue(em.find(Work.class, 42) != null);
+		}catch (RuntimeException re) {
+			LOG.error("createWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+*/
+// ------------------------- Picture -----------------------------
+
+	@Test
 	public void findPicture() throws Exception {
 		LOG.info("findWork");
 		try{
@@ -258,6 +320,42 @@ public class MuseumTest
 	}
 
 	@Test
+	public void findPictureByWork() throws Exception {
+		LOG.info("findPictureByWork");
+		try{
+			tx.begin();
+			Paint paint = em.find(Paint.class, 1);
+			assertEquals(paint.getID(), 1);
+  			Picture picture = em.find(Picture.class, 1);
+  			assertTrue(paint.getPictures().indexOf(picture) > -1);
+		}catch (RuntimeException re) {
+			LOG.error("findPictureByWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findPictureByCollectionPicture() throws Exception {
+		LOG.info("findcPicture");
+		try{
+			tx.begin();
+  			CollectionPicture cPicture = em.find(CollectionPicture.class, 1);
+  			assertEquals(cPicture.getID(), 1);
+  			Picture picture = em.find(Picture.class, 1);
+  			assertTrue(cPicture.getRefPicture().indexOf(picture) > -1);
+		}catch (RuntimeException re) {
+			LOG.error("findcPicture failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+// ------------------------- Author -----------------------------
+
+	@Test
 	public void findAuthor() throws Exception {
 		LOG.info("findAuthor");
 		try{
@@ -271,6 +369,8 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
+
+// ------------------------- Collection -----------------------------
 
 	@Test
 	public void findCollectionPicture() throws Exception {
@@ -302,6 +402,9 @@ public class MuseumTest
 		}
 	}
 
+
+// ------------------------- Reproduction -----------------------------
+
 	@Test
 	public void findReproductionPaint() throws Exception {
 		LOG.info("findReproductionPaint");
@@ -311,6 +414,22 @@ public class MuseumTest
   			assertEquals(repro.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findReproductionPaint failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public void findReproductionPaintByWork() throws Exception {
+		LOG.info("findReproductionPaintByWork");
+		try{
+			tx.begin();
+  			Paint work = em.find(Paint.class, 1);
+  			ReproductionPaint repro = em.find(ReproductionPaint.class, 1);
+  			assertTrue(work.getReproductions().indexOf(repro) > -1);
+		}catch (RuntimeException re) {
+			LOG.error("findReproductionPaintByWork failed", re);
 			throw re;
 		}finally{
 			tx.commit();

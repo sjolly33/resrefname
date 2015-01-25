@@ -31,11 +31,11 @@ public class CollectionWork extends IMuseum{
 	private int _cWorkID;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing works... 
-	@JoinColumn(name="COLLECTION_PAINT_REF", referencedColumnName="CWORKID")
+	@JoinColumn(name="COLLECTION_PAINT_REF")
 	private List<Paint> _paints;
 
  	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing works... 
-	@JoinColumn(name="COLLECTION_SCULPTURE_REF", referencedColumnName="CWORKID")	
+	@JoinColumn(name="COLLECTION_SCULPTURE_REF")	
 	private List<Sculpture> _sculptures;
 
 	@XmlElement
