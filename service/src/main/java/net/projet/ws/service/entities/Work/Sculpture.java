@@ -36,6 +36,9 @@ public class Sculpture extends Work{
 	@JoinColumn(name="Reproductions")	
 	private List<ReproductionSculpture> _reproductions;
 
+	@Column(name="type")
+	private final String type = "sculpture";
+
 	@XmlElement
  	public int getID() {
  		return _sculptureID;
@@ -70,5 +73,10 @@ public class Sculpture extends Work{
 
 	public void setReproductions(List<ReproductionSculpture> reproductions){
 		_reproductions = new ArrayList<ReproductionSculpture>(reproductions);
+	}
+
+	@XmlElement
+	public String getType(){
+		return this.type;
 	}
 }

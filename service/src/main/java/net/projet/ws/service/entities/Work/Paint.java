@@ -38,6 +38,9 @@ public class Paint extends Work{
 	@JoinColumn(name="Reproductions")
 	private List<ReproductionPaint> _reproductions;
 
+	@Column(name="type")
+	private final String type = "paint";
+
 	@XmlElement
  	public int getID() {
  		return _paintID;
@@ -81,5 +84,10 @@ public class Paint extends Work{
 
 	public void setReproductions(List<ReproductionPaint> reproductions){
 		_reproductions = new ArrayList<ReproductionPaint>(reproductions);
+	}
+
+	@XmlElement
+	public String getType(){
+		return this.type;
 	}
 }
