@@ -213,6 +213,22 @@ public class MuseumTest
 		}
 	}
 
+	@Test
+	public void deleteOneMuseum() throws Exception {
+		LOG.info("deleteOneMuseum");
+		try{
+			tx.begin();
+  			Museum museum = em.find(Museum.class, 2);
+  			em.remove(museum);
+  			assertEquals(em.find(Museum.class, 2), null);
+		}catch (RuntimeException re) {
+			LOG.error("deleteOneMuseum failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
 // ------------------------- Work -----------------------------
 
 	@Test
@@ -302,6 +318,41 @@ public class MuseumTest
 		}
 	}
 */
+
+	@Test
+	public final void updateWork() throws Exception
+	{
+		LOG.info("updateWork");
+		try{
+			tx.begin();
+  			Paint work = em.find(Paint.class, 1);
+			work.setTitle("lol");
+  			em.merge(work);
+  			assertEquals((em.find(Paint.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+/*
+	@Test
+	public void deleteWork() throws Exception {
+		LOG.info("deleteWork");
+		try{
+			tx.begin();
+  			Paint work = em.find(Paint.class, 1);
+  			em.remove(work);
+  			assertEquals(em.find(Paint.class, 1), null);
+		}catch (RuntimeException re) {
+			LOG.error("deleteWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+*/
 // ------------------------- Picture -----------------------------
 
 	@Test
@@ -353,6 +404,24 @@ public class MuseumTest
 		}
 	}
 
+	@Test
+	public final void updatePicture() throws Exception
+	{
+		LOG.info("updatePicture");
+		try{
+			tx.begin();
+  			Picture picture = em.find(Picture.class, 1);
+			picture.setTitle("lol");
+  			em.merge(picture);
+  			assertEquals((em.find(Picture.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updatePicture failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
 // ------------------------- Author -----------------------------
 
 	@Test
@@ -364,6 +433,24 @@ public class MuseumTest
   			assertEquals(author.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findAuthor failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public final void updateAuthor() throws Exception
+	{
+		LOG.info("updateAuthor");
+		try{
+			tx.begin();
+  			Author author = em.find(Author.class, 1);
+			author.setName("lol");
+  			em.merge(author);
+  			assertEquals((em.find(Author.class, 1)).getName(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateAuthor failed", re);
 			throw re;
 		}finally{
 			tx.commit();
@@ -388,6 +475,24 @@ public class MuseumTest
 	}
 
 	@Test
+	public final void updateCollectionPicture() throws Exception
+	{
+		LOG.info("updateCollectionPicture");
+		try{
+			tx.begin();
+  			CollectionPicture cPicture = em.find(CollectionPicture.class, 1);
+			cPicture.setTitle("lol");
+  			em.merge(cPicture);
+  			assertEquals((em.find(CollectionPicture.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateCollectionPicture failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
 	public void findCollectionWork() throws Exception {
 		LOG.info("findcWork");
 		try{
@@ -396,6 +501,24 @@ public class MuseumTest
   			assertEquals(cWork.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findcWork failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public final void updateCollectionWork() throws Exception
+	{
+		LOG.info("updateCollectionWork");
+		try{
+			tx.begin();
+  			CollectionWork cWork = em.find(CollectionWork.class, 1);
+			cWork.setTitle("lol");
+  			em.merge(cWork);
+  			assertEquals((em.find(CollectionWork.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateCollectionWork failed", re);
 			throw re;
 		}finally{
 			tx.commit();
@@ -414,6 +537,24 @@ public class MuseumTest
   			assertEquals(repro.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findReproductionPaint failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public final void updateReproductionPaint() throws Exception
+	{
+		LOG.info("updateReproductionPaint");
+		try{
+			tx.begin();
+  			ReproductionPaint repro = em.find(ReproductionPaint.class, 1);
+			repro.setTitle("lol");
+  			em.merge(repro);
+  			assertEquals((em.find(ReproductionPaint.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateReproductionPaint failed", re);
 			throw re;
 		}finally{
 			tx.commit();
@@ -445,6 +586,24 @@ public class MuseumTest
   			assertEquals(repro.getID(), 1);
 		}catch (RuntimeException re) {
 			LOG.error("findReproductionSculpture failed", re);
+			throw re;
+		}finally{
+			tx.commit();
+		}
+	}
+
+	@Test
+	public final void updateReproductionSculpture() throws Exception
+	{
+		LOG.info("updateReproductionSculpture");
+		try{
+			tx.begin();
+  			ReproductionSculpture repro = em.find(ReproductionSculpture.class, 1);
+			repro.setTitle("lol");
+  			em.merge(repro);
+  			assertEquals((em.find(ReproductionSculpture.class, 1)).getTitle(), "lol");
+		}catch (RuntimeException re) {
+			LOG.error("updateReproductionSculpture failed", re);
 			throw re;
 		}finally{
 			tx.commit();
