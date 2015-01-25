@@ -46,6 +46,7 @@ import java.sql.DriverManager;
 import org.apache.log4j.Logger;
 
 
+// Class to test the application with some simple tests
 public class MuseumTest
 {	
 
