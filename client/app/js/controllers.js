@@ -456,11 +456,18 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
         $scope.collection.tags = res.tags;
         $scope.collection.type = res.type;
         if(res.type == "collectionWork"){
-          $scope.collection.refWork = res.refWork; 
+          for(var i = 0; i < res.refPaint.length; i++)
+            $scope.collection.refWork.push(res.refPaint[i]);
+          for(var i = 0; i < res.refSculpture.length; i++)
+            $scope.collection.refWork.push(res.refSculpture[i]);
         }
-        else
-          $scope.collection.refPicture = res.refPicture;
-
+        else{
+          for(var i = 0; i < res.refPicture.length; i++)
+            $scope.collection.refPicture.push(res.refPicture[i]);
+        }
+        console.log("$scope.collection");        
+        console.log($scope.collection);
+        console.log(res);
         return res;
       })
       $scope.delete = function(){
