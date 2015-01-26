@@ -140,10 +140,10 @@ app.put('/api/work/:id', function(req,res) {
   )
 })
 
-app.delete('/api/work/:id', function(req,res) {
+app.delete('/api/work/:id:type', function(req,res) {
   console.log('delete work')
   var newurl = "";
-  if(req.body.type == "paint"){
+  if(req.params.type == "paint"){
     newurl = path+'delete/paint/'+req.params.id;
   }
   else
@@ -314,10 +314,10 @@ app.put('/api/collection/:id', function(req,res) {
   )
 })
 
-app.delete('/api/collection/:id', function(req,res) {
-  console.log('delete colelction')
+app.delete('/api/collection/:id:type', function(req,res) {
+  console.log('delete collection')
   var newurl = "";
-  if(req.body.type == "collectionWork"){
+  if(req.params.type == "collectionWork"){
     newurl = path+'delete/collectionWork/'+req.params.id;
   }
   else
@@ -389,10 +389,10 @@ app.put('/api/reproduction/:id', function(req,res) {
   )
 })
 
-app.delete('/api/reproduction/:id', function(req,res) {
+app.delete('/api/reproduction/:id:type', function(req,res) {
   console.log('delete reproduction')
   var newurl = ""
-  if(req.body.type == "reproductionPaint"){
+  if(req.params.type == "reproductionPaint"){
     newurl = path+'delete/reproductionPaint/'+req.params.id;
   }
   else

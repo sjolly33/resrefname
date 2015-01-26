@@ -28,7 +28,7 @@ MuseumServices.factory('AuthorService', ['$resource',
 MuseumServices.factory('WorkService', ['$resource',
   function($resource){
 
-    return $resource('./../api/work/:id', {id: '@id'}, {
+    return $resource('./../api/work/:id:type', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
@@ -50,7 +50,7 @@ MuseumServices.factory('PictureService', ['$resource',
 MuseumServices.factory('CollectionService', ['$resource',
   function($resource){
 
-    return $resource('./../api/collection/:id', {id: '@id'}, {
+    return $resource('./../api/collection/:id:type', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
@@ -61,7 +61,7 @@ MuseumServices.factory('CollectionService', ['$resource',
 MuseumServices.factory('ReproductionService', ['$resource',
   function($resource){
 
-    return $resource('./../api/reproduction/:id', {id: '@id'}, {
+    return $resource('./../api/reproduction/:id:type', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
