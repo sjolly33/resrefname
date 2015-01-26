@@ -1,15 +1,16 @@
 'use strict';
-var appControllers = angular.module('MuseumCtrls', []);
+var appControllers = angular.module('MuseumCtrls', ['angularFileUpload']);
 
 ////////////////////////////////////////////////////////////////////////
 // MUSEUM
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('museumController', ['$scope', '$resource', '$routeParams','$route', 'MuseumService',
-  function($scope, $resource, $routeParams, $route, MuseumService) {
+appControllers.controller('museumController', ['$scope', '$resource', '$routeParams','$route', 'MuseumService', '$location', 
+  function($scope, $resource, $routeParams, $route, MuseumService, $location) {
 
     console.log('museumController');
 
     $scope.initMuseumCtrl = function($scope){
+
       $scope.works_list = []
       $scope.workers_list = []
       $scope.collections_list = []
@@ -48,6 +49,7 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
         new_museum.information = $scope.information_museum;
         MuseumService.save(new_museum,function(res, req){})
       }
+      $location.path('/museum/'+$routeParams.id);
     }
 
     $scope.editMuseumController = function($scope){
@@ -83,6 +85,7 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
         edit_museum.id = $routeParams.id;
         MuseumService.put({id:$routeParams.id}, edit_museum, function(res, rep){});
       }
+      $location.path('/museum/'+$routeParams.id);
     }
   }
 
@@ -92,8 +95,8 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
 ////////////////////////////////////////////////////////////////////////
 // HOME
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('homeController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService',
-  function($scope, $resource, $routeParams, $route, MuseumService) {
+appControllers.controller('homeController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService', '$location',
+  function($scope, $resource, $routeParams, $route, MuseumService, $location) {
     console.log('homeController');
 
     $scope.museums_list = MuseumService.query()
@@ -104,8 +107,8 @@ appControllers.controller('homeController', ['$scope', '$resource', '$routeParam
 ////////////////////////////////////////////////////////////////////////
 // SEARCH
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('searchController', ['$scope','$routeParams', '$route', 
-  function($scope, $resource, $routeParams, $route) {
+appControllers.controller('searchController', ['$scope','$routeParams', '$route', '$location',
+  function($scope, $resource, $routeParams, $route, $location) {
     console.log('searchController');
   }]);
 
@@ -115,8 +118,8 @@ appControllers.controller('searchController', ['$scope','$routeParams', '$route'
 // WORK
 ////////////////////////////////////////////////////////////////////////
 
-appControllers.controller('workController', ['$scope','$resource', '$routeParams', '$route', '$sce','MuseumService', 'PaintService', 'AuthorService', 'SculptureService',
-  function($scope, $resource, $routeParams, $route, $sce , MuseumService, PaintService, AuthorService, SculptureService) {
+appControllers.controller('workController', ['$scope','$resource', '$routeParams', '$route', '$sce','MuseumService', 'PaintService', 'AuthorService', 'SculptureService', '$location',
+  function($scope, $resource, $routeParams, $route, $sce , MuseumService, PaintService, AuthorService, SculptureService, $location) {
 
     console.log('workController');
 
@@ -293,6 +296,7 @@ alert("PAUSE")
 MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
 
 alert("save work in workController");
+$location.path('/museum/'+$routeParams.id);
 }
 
 }
@@ -307,36 +311,36 @@ $scope.initViewWorkCtrl = function($scope,$compile, $http){
  $scope.work = PaintService.get({id:$routeParams.id2}, function (res, req){})
  $scope.museumInfo = MuseumService.get({id:$routeParams.id1}, function (res, req){
 
-  
-    $scope.author="";
-    for(var i = 0; i < $scope.museumInfo.authors.length; i++){
-     for(var j = 0; j < $scope.museumInfo.authors[i].paints.length; j++){
-      if($scope.museumInfo.authors[i].paints[j].id == $scope.work.id){
-       $scope.work.author= $scope.museumInfo.authors[i].name;
-     }
+
+  $scope.author="";
+  for(var i = 0; i < $scope.museumInfo.authors.length; i++){
+   for(var j = 0; j < $scope.museumInfo.authors[i].paints.length; j++){
+    if($scope.museumInfo.authors[i].paints[j].id == $scope.work.id){
+     $scope.work.author= $scope.museumInfo.authors[i].name;
    }
  }
+}
 
-   var dimension_to_string = "";
-   for(var i=0;i<$scope.work.dimension.length;i++){
-    if(i==0){
-      dimension_to_string = $scope.work.dimension[i];
-    }else{
-      dimension_to_string = dimension_to_string +" x "+$scope.work.dimension[i];
-    }
+var dimension_to_string = "";
+for(var i=0;i<$scope.work.dimension.length;i++){
+  if(i==0){
+    dimension_to_string = $scope.work.dimension[i];
+  }else{
+    dimension_to_string = dimension_to_string +" x "+$scope.work.dimension[i];
   }
-  $scope.work.dimension = dimension_to_string;
+}
+$scope.work.dimension = dimension_to_string;
 
-  var date = new Date($scope.work.date);
-  var yyyy = date.getFullYear().toString();
-  var mm = (date.getMonth()+1).toString(); 
-  var dd  = (date.getDate()).toString();
-  date =  yyyy +"/"+ (mm[1]?mm:"0"+mm[0]) +"/"+ (dd[1]?dd:"0"+dd[0]); 
-  $scope.work.date = date;
+var date = new Date($scope.work.date);
+var yyyy = date.getFullYear().toString();
+var mm = (date.getMonth()+1).toString(); 
+var dd  = (date.getDate()).toString();
+date =  yyyy +"/"+ (mm[1]?mm:"0"+mm[0]) +"/"+ (dd[1]?dd:"0"+dd[0]); 
+$scope.work.date = date;
 
-  console.log($scope.museumInfo);
-  console.log($scope.work);
-  console.log($scope.work.id);
+console.log($scope.museumInfo);
+console.log($scope.work);
+console.log($scope.work.id);
 
 
 })
@@ -428,6 +432,7 @@ $scope.editWorkCtrl= function($scope){
 
       alert("edit work in editWorkController "+$routeParams.id2);
     }
+    $location.path('/museum/'+$routeParams.id1);
   }
 })
 
@@ -447,8 +452,8 @@ $scope.viewNextPicture = function(){
 ////////////////////////////////////////////////////////////////////////
 // WORKER
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('workerController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService', 'AuthorService',
-  function($scope, $resource, $routeParams, $route, MuseumService, AuthorService) {
+appControllers.controller('workerController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService', 'AuthorService', '$location',
+  function($scope, $resource, $routeParams, $route, MuseumService, AuthorService, $location) {
 
     console.log('workerController');
 
@@ -484,6 +489,7 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
         console.log($scope.museumInfo)
         MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
       }
+      $location.path('/museum/'+$routeParams.id);
     }
   }
 
@@ -512,6 +518,7 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
         console.log(edit_worker);
       }
     }
+    $location.path('/museum/'+$routeParams.id);
   }
 }
 
@@ -565,6 +572,7 @@ appControllers.controller('collectionController', ['$scope','$routeParams', '$ro
     console.log(new_collection);
     alert("save collection in collectionController");
   }
+  $location.path('/museum/'+$routeParams.id);
 }
 
 
@@ -603,7 +611,7 @@ $scope.editCollectionController = function($scope){
     alert("edit collection in pictureController");
   }
 }
-
+$location.path('/museum/'+$routeParams.id);
 }
 
 }]);
@@ -611,9 +619,22 @@ $scope.editCollectionController = function($scope){
 ////////////////////////////////////////////////////////////////////////
 // PICTURE
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('pictureController', ['$scope','$routeParams', '$route', 
-  function($scope, $resource, $routeParams, $route) {
+appControllers.controller('pictureController', ['$scope','$routeParams', '$route', '$upload',
+  function($scope, $resource, $routeParams, $route, $upload) {
 
+    $scope.newPictureController = function($scope, $upload){
+      $scope.$watch('files', function() {
+        $scope.upload = $upload.upload({
+          url: 'server/upload/url',
+          data: {myObj: $scope.myModelObj},
+          file: $scope.files
+        }).progress(function(evt) {
+          console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :'+ evt.config.file.name);
+        }).success(function(data, status, headers, config) {
+          console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+        });
+      })
+    }
     console.log('pictureController');
 
     $scope.ADD = function($http, $scope){
@@ -666,6 +687,7 @@ appControllers.controller('pictureController', ['$scope','$routeParams', '$route
     console.log(edit_picture);
     alert("edit picture in pictureController");
   }
+  $location.path('/museum/'+$routeParams.id);
 }
 }
 
@@ -684,6 +706,8 @@ $scope.save = function ($form){
     console.log(new_picture);
     alert("save picture in pictureController");
   }
+  $location.path('/museum/'+$routeParams.id);
 }
 
 }]);
+
