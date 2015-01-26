@@ -21,6 +21,11 @@ app.listen(port, function () {
 
 var path = 'http://localhost:8080/rest/museum/'
 
+var sendRes = function(res, body){
+  console.log(body);
+  res.send(body);
+}
+
 // =========================== MUSEUM =============================
 
 app.get('/api/museum', function(req,res) {
@@ -83,14 +88,18 @@ app.delete('/api/museum/:id', function(req,res) {
 
 app.get('/api/work/:id', function(req,res) {
   console.log('get work ' + req.params.id)
-  var newurl = "";
-  if(req.body.type == "paint"){
-     newurl = path+'paint/'+req.params.id;
-  }
-  else
-    newurl = path+'sculpture/'+req.params.id;
+  var newurl = path+'paint/'+req.params.id;
   request.get(newurl, function(error, response, body){
-    res.send(body)
+    if(body){
+      sendRes(res, body);
+      return;
+    }
+    else{
+      newurl = path+'sculpture/'+req.params.id;
+      request.get(newurl, function(error, response, body){
+        sendRes(res, body);
+      })
+    }
   })
 });
 
@@ -251,17 +260,20 @@ app.delete('/api/author/:id', function(req,res) {
 
 // =========================== COLLECTION =============================
 
-
 app.get('/api/collection/:id', function(req,res) {
   console.log('get collection ' + req.params.id)
-  var newurl = "";
-  if(req.body.type == "collectionWork"){
-    newurl = path+'collectionWork/'+req.params.id;
-  }
-  else
-    newurl = path+'collectionPicture/'+req.params.id;
+  var newurl = path+'collectionWork/'+req.params.id;
   request.get(newurl, function(error, response, body){
-    res.send(body)
+    if(body){
+      sendRes(res, body);
+      return;
+    }
+    else{
+      newurl = path+'collectionPicture/'+req.params.id;
+      request.get(newurl, function(error, response, body){
+        sendRes(res, body);
+      })
+    }
   })
 });
 
@@ -324,14 +336,18 @@ app.delete('/api/collection/:id', function(req,res) {
 
 app.get('/api/reproduction/:id', function(req,res) {
   console.log('get reproductionPaint ' + req.params.id)
-  var newurl = "";
-  if(req.body.type == "reproductionPaint"){
-    newurl = path+'reproductionPaint/'+req.params.id;
-  }
-  else
-    newurl = path+'reproductionSculpture/'+req.params.id;
+  var newurl =  path+'reproductionPaint/'+req.params.id;
   request.get(newurl, function(error, response, body){
-    res.send(body)
+    if(body){
+      sendRes(res, body);
+      return;
+    }
+    else{
+      newurl = path+'reproductionSculpture/'+req.params.id;;
+      request.get(newurl, function(error, response, body){
+        sendRes(res, body);
+      })
+    }
   })
 });
 
