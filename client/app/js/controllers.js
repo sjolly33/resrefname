@@ -545,17 +545,7 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
         });
         $scope.edit = function ($form){
           if($form.$valid){
-<<<<<<< HEAD
-            var new_collection = new CollectionService();
-            new_collection.id = $scope.collection.id;
-            new_collection.title = $scope.collection.title;
-            new_collection.description = $scope.collection.description;
-            new_collection.comment = $scope.collection.comment;
-            new_collection.tags =  $scope.collection.tags;
-            new_collection.type = $scope.collection.type;
 
-            CollectionService.put({id:new_collection.id}, new_collection, function (res, req){})
-=======
           var new_collection = new CollectionService();
           new_collection.id = $scope.collection.id;
           new_collection.title = $scope.collection.title;
@@ -579,7 +569,7 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
           }
 
           CollectionService.put({id:new_collection.id}, new_collection, function (res, req){})
->>>>>>> ffb159e9d8db3fc59a4ec54eb922d3e51152ddae
+
             $location.path('/museum/'+$scope.museum.id);
           }
         }
