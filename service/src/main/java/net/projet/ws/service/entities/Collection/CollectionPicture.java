@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class CollectionPicture extends Collection{
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing pictures... 
-	@JoinColumn(name="COLLECTION_PICTURE_REF", referencedColumnName="CPICTUREID")
+	@JoinColumn(name="COLLECTION_PICTURE_REF")
 	private List<Picture> _pictures;
 
 	@Column(name="type")
