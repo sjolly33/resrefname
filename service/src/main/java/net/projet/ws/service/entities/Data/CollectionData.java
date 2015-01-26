@@ -161,7 +161,7 @@ public class CollectionData{
 	public static CollectionWork getCollectionWork(int id){
 		LOG.info("getcPicture");
 		int index = 0;
-		CollectionWork cWork = new CollectionWork();
+		CollectionWork cWork = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{

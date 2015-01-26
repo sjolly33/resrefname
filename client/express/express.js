@@ -140,7 +140,7 @@ app.put('/api/work/:id', function(req,res) {
   )
 })
 
-app.delete('/api/work/:id:type', function(req,res) {
+app.delete('/api/work/:id/:type', function(req,res) {
   console.log('delete work')
   var newurl = "";
   if(req.params.type == "paint"){
@@ -247,6 +247,7 @@ app.put('/api/author/:id', function(req,res) {
 
 app.delete('/api/author/:id', function(req,res) {
   console.log('delete author')
+  console.log(req.params.id);
   var newurl = path+'delete/author/'+req.params.id;
   request({
     headers: {'content-type' : 'application/json'},
@@ -314,7 +315,7 @@ app.put('/api/collection/:id', function(req,res) {
   )
 })
 
-app.delete('/api/collection/:id:type', function(req,res) {
+app.delete('/api/collection/:id/:type', function(req,res) {
   console.log('delete collection')
   var newurl = "";
   if(req.params.type == "collectionWork"){
@@ -389,7 +390,7 @@ app.put('/api/reproduction/:id', function(req,res) {
   )
 })
 
-app.delete('/api/reproduction/:id:type', function(req,res) {
+app.delete('/api/reproduction/:id/:type', function(req,res) {
   console.log('delete reproduction')
   var newurl = ""
   if(req.params.type == "reproductionPaint"){

@@ -134,161 +134,63 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
 
       $scope.typeWork =
       [
-      {id: 1 , name :"Painting"},
-      {id: 2 , name :"Sculpture"}/*,
+      {id: 1 , name :"paint"},
+      {id: 2 , name :"sculpture"}/*,
       {id: 3 , name :"Photography"},
       {id: 4 , name :"Drawing"}*/
       ]
+    })
 
-/*
-      $scope.addTag = function () {
-        $scope.tags.push({
-          url: ""
-        })}
+      $scope.save = function($form){
+        console.log("save")
+       // if($form.$valid){
+ 
+          var new_work = new WorkService();
 
-        $scope.removeTag = function () {
-          $scope.tags.splice(-1,1)
-        }
-        */
+          new_work.title = $scope.title_work;
+          new_work.description = $scope.description_work;
+          var myString = $scope.dimension_work.replace(/[^\d.x]/g,'');
+          var reg = new RegExp("[x.]+", "g");
+          var tab_dimension = myString.split(reg);
+          new_work.dimension = tab_dimension; 
+          new_work.resume = $scope.resume_work;
+          new_work.date = $scope.date_work;
+          new_work.pictures = [];
+          new_work.type = $scope.typeWork_model;
+          console.log(new_work.test);
+          console.log($scope.test);
 
-/*
-        $scope.painting = function(){
-          $scope.specialities_name = "Painting";
-          $scope.specialities =
-          [
-          {
-            name: "Technical work",
-            options: [
-            {id: 1 , name :"Watercolor"},
-            {id: 2 , name :"Gouache"},
-            {id: 3 , name :"Oil paints"},
-            {id: 4 , name :"Acrylic"},
-            {id: 5 , name :"Other"}
-            ]
-          },
-          {
-            name: "Sheld work",
-            options: [
-            {id: 1 , name :"None"},
-            {id: 2 , name :"Flax"},
-            {id: 3 , name :"Cotton"},
-            {id: 4 , name :"Cardboard"},
-            {id: 5 , name :"Paper"},
-            {id: 6 , name :"Wood"},
-            {id: 7 , name :"Other"}
-            ]
+          console.log("new_work");
+          console.log(new_work);
+
+          WorkService.save(new_work, function(){});
+
+          if($scope.typeWork_model == "paint"){
+            $scope.museumInfo.paints.push(new_work);
           }
-          ];
-        }
-
-        $scope.sculture = function(){
-          $scope.specialities_name = "Sculture";
-          $scope.specialities =
-          [
-          {
-            name: "Material Work",
-            options: [
-            {id: 1 , name :"Wax"},
-            {id: 2 , name :"Clay"},
-            {id: 3 , name :"Plasticine"},
-            {id: 4 , name :"Plaster"},
-            {id: 5 , name :"Cement"},
-            {id: 6 , name :"Stone"},
-            {id: 7 , name :"Wood"},
-            {id: 8 , name :"Other"}
-
-            ]
-          }
-          ];
-        }
-
-        $scope.photography = function(){
-          $scope.specialities_name = "Photography";
-          $scope.specialities =
-          [
-          {
-            name: "Material Work",
-            options: [
-            {id: 1 , name :"None"},
-            {id: 2 , name :"Clay"},
-            {id: 3 , name :"Aluminium"},
-            {id: 4 , name :"Wood"},
-            {id: 5 , name :"Cardboard"},
-            {id: 6 , name :"Other"}
-            ]
-          }
-          ];
-        }
-
-        $scope.drawing = function(){
-          $scope.specialities_name = "";
-          alert("Function coming soon");
-        }
-
-        */
-
-
-        $scope.save = function($form){
-
-          if($form.$valid){
-          /*  if($scope.typeWork_model == "Painting"){
-              var new_work = new PaintService();
-            }
-            if($scope.typeWork_model == "Sculpture"){
-              var new_work = new SculptureService();
-            }*/
-            var new_work = new WorkService();
-
-            new_work.title = $scope.title_work;
-            new_work.description = $scope.description_work;
-            var myString = $scope.dimension_work.replace(/[^\d.x]/g,'');
-            var reg = new RegExp("[x.]+", "g");
-            var tab_dimension = myString.split(reg);
-            new_work.dimension = tab_dimension; 
-            new_work.resume = $scope.resume_work;
-            new_work.date = $scope.date_work;
-            new_work.pictures = [];
-            new_work.type = $scope.typeWork_model;
-            console.log(new_work.test);
-            console.log($scope.test);
-
-            //new_work.specialities = $scope.specialities;
-            //new_work.tags = $scope.tags;
-
-            console.log(new_work);
-
-            WorkService.save(new_work, function(){});
-
-            if($scope.typeWork_model == "Painting"){
-              $scope.museumInfo.paints.push(new_work);
-            }
-            if($scope.typeWork_model == "Sculpture"){
-              new_work.particularitiesSupport = [];
-              $scope.museumInfo.sculptures.push(new_work);
-            }
-
-            var newMuseum = new MuseumService();
-            newMuseum.id = $scope.museumInfo.id;
-            newMuseum.name = $scope.museumInfo.name;
-            newMuseum.theme = $scope.museumInfo.theme;
-            newMuseum.adress = $scope.museumInfo.adress;
-            newMuseum.information = $scope.museumInfo.information;
-            newMuseum.collectionsPictures = $scope.museumInfo.collectionsPictures;
-            newMuseum.collectionsWorks = $scope.museumInfo.collectionsWorks;
-            newMuseum.pictures = $scope.museumInfo.pictures;
-            newMuseum.authors = $scope.museumInfo.authors;
-            newMuseum.sculptures = $scope.museumInfo.sculptures;
-            newMuseum.paints = $scope.museumInfo.paints;
-            MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
-
-            alert("Work saved !");
-            
-            $location.path('/museum/'+$routeParams.id);
+          if($scope.typeWork_model == "sculpture"){
+            new_work.particularitiesSupport = [];
+            $scope.museumInfo.sculptures.push(new_work);
           }
 
-        }
-      })
-}
+          var newMuseum = new MuseumService();
+          newMuseum.id = $scope.museumInfo.id;
+          newMuseum.name = $scope.museumInfo.name;
+          newMuseum.theme = $scope.museumInfo.theme;
+          newMuseum.adress = $scope.museumInfo.adress;
+          newMuseum.information = $scope.museumInfo.information;
+          newMuseum.collectionsPictures = $scope.museumInfo.collectionsPictures;
+          newMuseum.collectionsWorks = $scope.museumInfo.collectionsWorks;
+          newMuseum.pictures = $scope.museumInfo.pictures;
+          newMuseum.authors = $scope.museumInfo.authors;
+          newMuseum.sculptures = $scope.museumInfo.sculptures;
+          newMuseum.paints = $scope.museumInfo.paints;
+          MuseumService.put({id:$routeParams.id}, newMuseum, function(res, req){});
+          //}
+          $location.path('/museum/'+$routeParams.id);
+      //  }
+      }
+    }
 
 
 $scope.initViewWorkCtrl = function($scope, $compile, $http){
@@ -529,92 +431,111 @@ appControllers.controller('workerController', ['$scope', '$resource', '$routePar
 ////////////////////////////////////////////////////////////////////////
 // COLLECTION
 ////////////////////////////////////////////////////////////////////////
-appControllers.controller('collectionController', ['$scope','$routeParams', '$route', 
-  function($scope, $resource, $routeParams, $route) {
+appControllers.controller('collectionController', ['$scope', '$resource', '$routeParams', '$route', 'MuseumService', 'CollectionService', 'WorkService', 'PictureService', '$location',
+  function($scope, $resource, $routeParams, $route, MuseumService, CollectionService, WorkService, PictureService, $location) {
     console.log('collectionController');
 
-    // JSON STATIC A CHANGER
-    $scope.works_list = [
-    {'id' : '2' ,'title' : "La joconde"},
-    {'id' : '10' ,'title' : 'Un tableau moche'},
-    {'id' : '27'  ,'title' : 'Une statuette'},
-    ];
-
-    $scope.pictures_list = [
-    {'id' : '2' ,'title' : "La joconde",'url' :"./img/test1.jpg"},
-    {'id' : '10' ,'title' : 'Un tableau moche','url' :"./img/test1.jpg"},
-    {'id' : '27'  ,'title' : 'Une statuette','url' :"./img/test1.jpg"},
-    ];
-
-    $scope.ADD = function($http, $scope){
-
-      $scope.tags = [];
-
-      $scope.addTag = function () {
-        $scope.tags.push({
-          url: ""
-        })}
-
-        $scope.removeTag = function () {
-          $scope.tags.splice(-1,1)
+    $scope.initViewCollection = function($scope){
+      $scope.museum = {id:null};
+      $scope.museum.id = $routeParams.id1;
+      $scope.collection = {
+        id:0,
+        title:null,
+        description:null,
+        comment:null,
+        tags:null,
+        refWork:[],
+        refPicture:[],
+        type:null
+      }
+      CollectionService.get({id:$routeParams.id2}, function (res, req){
+        $scope.collection.id = res.id;
+        $scope.collection.title = res.title;
+        $scope.collection.description = res.description;
+        $scope.collection.comment = res.comment;
+        $scope.collection.tags = res.tags;
+        $scope.collection.type = res.type;
+        if(res.type == "collectionWork"){
+          $scope.collection.refWork = res.refWork; 
         }
+        else
+          $scope.collection.refPicture = res.refPicture;
+
+        return res;
+      })
+      $scope.delete = function(){
+        console.log($routeParams.id2);
+        console.log($scope.collection.type);
+        CollectionService.remove({id:$routeParams.id2, type:$scope.collection.type}, function (res, req){})
+        $location.path('/museum/'+$scope.museum.id);
       }
 
-      $scope.save = function ($form){
+      $scope.editCollectionController = function($scope){
+
+        $scope.edit = function ($form){
+          if($form.$valid){
+          var new_collection = new CollectionService();
+          new_collection.id = $scope.collection.id;
+          new_collection.title = $scope.collection.title;
+          new_collection.description = $scope.collection.description;
+          new_collection.comment = $scope.collection.comment;
+          new_collection.tags =  $scope.collection.tags;
+          new_collection.type = $scope.collection.type;
+
+          CollectionService.put({id:new_collection.id}, new_collection, function (res, req){})
+            $location.path('/museum/'+$scope.museum.id);
+          }
+        }
+      }
+    }
+
+    $scope.initNewCollectionController = function($scope){
+      $scope.museum = MuseumService.get({id:$routeParams.id}, function (res, req){});
+      $scope.collection = {
+        id:0,
+        title:null,
+        description:null,
+        comment:null,
+        tags:null,
+        refWork:[],
+        refPicture:[],
+        type:null
+      }
+      $scope.save = function($form){
         if($form.$valid){
-    // Recuperaton des donnees du formulaire :
-    var new_collection = {};
-    new_collection.title = $scope.title_collection;
-    new_collection.description = $scope.description_collection;
-    new_collection.comments = $scope.comment_collection;
-    new_collection.tags = $scope.tags;
-
-    // Puis sauvegarde : 
-    console.log(new_collection);
-    alert("save collection in collectionController");
-  }
-  $location.path('/museum/'+$routeParams.id);
-}
-
-
-$scope.editCollectionController = function($scope){
-
- // MuseumFactory -> recuperer collection en fonction de l'id puis :
- $scope.title_collection = "title_collection";
- $scope.description_collection = "description_collection";
- $scope.comment_collection = "comment_collection";
- $scope.tags = [
- {"text" : "tag1"},
- {"text" : "tag2"},
- {"text" : "tag3"}
- ];
-
- $scope.addTag = function () {
-  $scope.tags.push({
-    url: ""
-  })}
-
-  $scope.removeTag = function () {
-    $scope.tags.splice(-1,1)
-  }
-
-  $scope.edit = function ($form){
-    if($form.$valid){
-    // Recuperaton des donnees du formulaire :
-    var new_collection = {};
-    new_collection.title = $scope.title_collection;
-    new_collection.description = $scope.description_collection;
-    new_collection.comments = $scope.comment_collection;
-    new_collection.tags = $scope.tags;
-
-    // Puis sauvegarde : 
-    console.log(edit_collection);
-    alert("edit collection in pictureController");
-  }
-}
-$location.path('/museum/'+$routeParams.id);
-}
-
+          var new_collection = new CollectionService();
+          new_collection.title = $scope.collection.title;
+          new_collection.description = $scope.collection.description;
+          new_collection.comment = $scope.collection.comment;
+          new_collection.tags =  $scope.collection.tags;
+          new_collection.type = $scope.collection.type;
+          CollectionService.save(new_collection, function (res, req){});
+          
+          if($scope.collection.type == "collectionWork"){
+            $scope.museum.collectionsWorks.push(new_collection);
+          }
+          else{
+            $scope.museum.collectionsPictures.push(new_collection);
+          }
+          var newMuseum = new MuseumService();
+          newMuseum.id = $scope.museum.id;
+          newMuseum.name = $scope.museum.name;
+          newMuseum.theme = $scope.museum.theme;
+          newMuseum.adress = $scope.museum.adress;
+          newMuseum.information = $scope.museum.information;
+          newMuseum.collectionsPictures = $scope.museum.collectionsPictures;
+          newMuseum.collectionsWorks = $scope.museum.collectionsWorks;
+          newMuseum.pictures = $scope.museum.pictures;
+          newMuseum.authors = $scope.museum.authors;
+          newMuseum.sculptures = $scope.museum.sculptures;
+          newMuseum.paints = $scope.museum.paints;
+          console.log(newMuseum)
+          console.log($scope.museum)
+          MuseumService.put({id:$scope.museum.id}, newMuseum, function(res, req){});
+        }
+        $location.path('/museum/'+$scope.museum.id);
+      }
+    }
 }]);
 
 ////////////////////////////////////////////////////////////////////////
