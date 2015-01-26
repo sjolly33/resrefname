@@ -1,0 +1,27 @@
+\chapter{Discussions}
+\section{Domaine objet et relationnel}
+\paragraph{}
+Nous avons consulté les annotations proposées par JPA 2.0 dans l'objectif de profiter au maximum des avantages du monde objet. Néanmoins, nous nous sommes heurtés à un certain nombre de problèmes de conception, notamment en ce qui concerne les relations d'héritage et de polymorphisme (conflits entre tables, etc). De ce fait, seules les classes de plus bas niveau ont été définies comme entités. Par exemple, les classes Work et IMuseum sont toutes les deux abstraites et sont renseignées par une annotation \og{}@MappedSuperclass\fg{} signifiant que les champs sont factorisés pour les sous-classes entités. Ainsi, la modularité du modèle objet développé se voit réduite par la nécessité de travailler majoritairement avec des types concrets qui s'entre-référencent. Ceci n'est pas un problème car, dans le contexte métier actuel, les ajouts de catégories d'objets se feront rares.
+
+\section{Interactions client~/~service}
+\paragraph{}
+La stratégie de développement a été de fournir des services (GET, POST, PUT et DELETE) pour chaque entité persistée. Des requêtes permettant l'accès direct à une entité complète ont été développées dans l'objectif de diminuer la taille des données à transiter.
+\paragraph{}
+En tenant compte du cadre d'utilisation de notre logiciel, nous pouvons prévoir que les modifications seront importantes mais à faible fréquence (modifications importantes avant exposition, ...). Le coût de développement que représentait la décomposition des services était trop élevé pour une manipulation occasionnelle. Les requêtes sont donc peu ciblées : le front-end doit nécessairement envoyer l'ensemble d'une entité même si un seul champ est renseigné.
+\paragraph{}
+Il est également possible d'effectuer des requêtes en envoyant à la fois l'ID d'un musée et l'ID d'une entité de ce même musée. Bien que le front-end développé ici n'utilise pas ces requêtes (dû à la structure du site en front-end), nous avons tout de même conservé ces dernières pour offrir la possibilité de diminuer le nombre de requêtes à un autre client.
+
+\section{Extensions des fonctionnalités}
+\paragraph{}
+Certaines extensions sont envisagées, grâce à l'apport du serveur express côté client:
+\begin{itemize}
+\item communiquer avec plusieurs services (par exemple, un pour les auteurs, un pour les \oe{}uvres, etc);
+\item déployer les clients à part d'express dans l'objectif de connecter plusieurs clients à express.
+\end{itemize}
+
+\paragraph{}
+Les fonctionnalités présentes permettent également des ouvertures:
+\begin{itemize}
+\item partage du système d'information entre plusieurs musées;
+\item recherche d'oeuvres~/~de photos~/~de musées en fonction de mots clés.
+\end{itemize}

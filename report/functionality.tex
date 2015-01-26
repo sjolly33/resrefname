@@ -1,0 +1,67 @@
+\chapter{Fonctionalités}
+\paragraph{}
+Le gestionnaire de musée permet d'effectuer des requêtes CRUD sur des:
+\begin{itemize}
+\item musées;
+\item \oe{}uvres;
+\item artistes;
+\item photos;
+\item collections;
+\item reproductions.
+\end{itemize}
+
+\paragraph{}
+Chaque entité présente dans le musée (excepté l'artiste):
+\begin{itemize}
+\item peut être commentée par le visiteur;
+\item est renseignée par un tag;
+\item dispose d'un titre et d'une description.
+\end{itemize}
+
+\paragraph{}
+Les \oe{}uvres, artistes et photos sont liés de manière bidirectionnelle dans l'objectif de faciliter les associations entre ces entités.
+Les reproductions ne sont accessibles qu'à partir des \oe{}uvres et il n'existe pas de collections de reproductions. Les collections ne sont accessibles qu'à partir d'un musée.
+
+\section{Musées}
+\paragraph{}
+Le gestionnaire de musées permet de gérer plusieurs musées de la façon qui suit:
+\begin{itemize}
+\item les entités sont fortement liées aux musées. Ainsi, la suppression d'un musée entraînera la suppression de l'ensemble des entités liées de manière bidirectionnelle au musée;
+\item chaque musée est totalement indépendant et donc, il n'est pas possible de capitaliser de l'information entre les différents musées.
+Chaque musée dispose de caractéristiques (thème, adresse, ...).
+\end{itemize}
+
+\section{Œuvres}
+\paragraph{}
+Il existe deux types d'\oe{}uvres : peintures et sculptures. Le premier peut disposer d'une particularité technique et d'une particularité de support. Le second dispose de plusieurs particularités de support.
+Les \oe{}uvres disposent aussi de divers champs (résumé, dimensions, ...). Une \oe{}uvre est liée à 0..n photo(s) et à un auteur.
+
+\section{Photos}
+\paragraph{}
+Une photo renseigne l'\oe{}uvre à laquelle elle est liée. La photo dispose de caractéristiques propres mais n'offre pas la possibilité de choisir l'angle de prise de vue.
+
+\section{Artistes}
+\paragraph{}
+Les artistes sont renseignés par un nom et une adresse. Ils sont liés à 0..n \oe{}uvre(s). 
+
+\section{Collections}
+\paragraph{}
+Il en existe deux types:
+\begin{itemize}
+\item les collections d'\oe{}uvres sont liées unidirectionnellement à des \oe{}uvres;
+\item les collections de photos sont liées unidirectionnellement à des photos.
+\end{itemize}
+
+\section{Reproductions}
+\paragraph{}
+Les reproductions ne concernent que les \oe{}uvres. Il n'est possible d'accéder à une reproduction qu'à partir d'une \oe{}uvre. Les reproductions disposent de caractéristiques comme le nombre restant, le prix et les particularités de cette reproduction, ....
+
+\section{Fonctionnalités absentes en front-end}
+\paragraph{}
+Les fonctionnalités décrient ci-dessus n'ont pas toutes été intégrées sur le front-end. Parmi ces dernières, il y a :
+\begin{itemize}
+\item l'accès aux reproductions;
+\item l'ajout de nouveaux commentaires;
+\item l'ajout de multiples tags;
+\item l'upload et le download de photos.
+\end{itemize}
