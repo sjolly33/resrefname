@@ -1,78 +1,78 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<modelVersion>4.0.0</modelVersion>
-<parent>
-<groupId>net.projet</groupId>
-<artifactId>projet</artifactId>
-<version>1.0-SNAPSHOT</version>
-</parent>
-<groupId>net.projet.ws.client</groupId>
-<artifactId>client</artifactId>
-<version>1.0-SNAPSHOT</version>
-<name>client</name>
-<url>http://maven.apache.org</url>
-<dependencies>
-<dependency>
-<groupId>junit</groupId>
-<artifactId>junit</artifactId>
-<scope>test</scope>
-</dependency>
-<dependency>
-<groupId>log4j</groupId>
-<artifactId>log4j</artifactId>
-</dependency>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.projet</groupId>
+    <artifactId>projet</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>net.projet.ws.client</groupId>
+  <artifactId>client</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>client</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
 
-<!-- nodeJS -->
-<dependency>
-  <groupId>com.github.skwakman.nodejs-maven-plugin</groupId>
-  <artifactId>nodejs-maven-plugin</artifactId>
-  <version>1.0.4</version>
-</dependency>
+    <!-- nodeJS -->
+    <dependency>
+      <groupId>com.github.skwakman.nodejs-maven-plugin</groupId>
+      <artifactId>nodejs-maven-plugin</artifactId>
+      <version>1.0.4</version>
+    </dependency>
 
-<!-- npm -->
-<dependency>
-  <groupId>org.sonatype.nexus.plugins</groupId>
-  <artifactId>nexus-npm-repository-client</artifactId>
-  <version>2.11.1-01</version>
-</dependency>
+    <!-- npm -->
+    <dependency>
+      <groupId>org.sonatype.nexus.plugins</groupId>
+      <artifactId>nexus-npm-repository-client</artifactId>
+      <version>2.11.1-01</version>
+    </dependency>
 
-</dependencies>
-<build>
-<finalName>client</finalName>
-  <plugins>
-    <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>exec-npm-install</id>
-          <phase>generate-sources</phase>
-          <configuration>
-            <executable>npm</executable>
-            <arguments>
-              <argument>install</argument>
-            </arguments>
-          </configuration>
-          <goals>
-            <goal>exec</goal>
-          </goals>
-        </execution>
-        <execution>
-          <id>exec-nodejs-express</id>
-          <phase>generate-sources</phase>
-          <configuration>
-            <executable>nodejs</executable>
-            <arguments>
-              <argument>express/express.js</argument>
-            </arguments>
-          </configuration>
-          <goals>
-            <goal>exec</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-   </plugins>
-</build>
+  </dependencies>
+  <build>
+  <finalName>client</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>exec-npm-install</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <executable>npm</executable>
+              <arguments>
+                <argument>install</argument>
+              </arguments>
+            </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>exec-nodejs-express</id>
+            <phase>generate-sources</phase>
+            <configuration>
+              <executable>nodejs</executable>
+              <arguments>
+                <argument>express/express.js</argument>
+              </arguments>
+            </configuration>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+     </plugins>
+  </build>
 </project>
