@@ -18,25 +18,14 @@ import javax.persistence.*;
 @Table(name="REPRODUCTIONPAINT")
 public class ReproductionPaint extends Reproduction{
 
-	@Id 
-	@Column(name="REPRODUCTION_PAINTID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _reproductionID;
-
 	@Column(name="particularityTech")
 	private String _particularityTech;
 
 	@Column(name="particularitySupport")
 	private String _particularitySupport;
 
-	@XmlElement
- 	public int getID() {
- 		return _reproductionID;
- 	}
-
- 	public void setID(int id){
- 		_reproductionID = id;
- 	}
+	@Column(name="type")
+	private final String type="reproductionPaint";
 
  	@XmlElement
  	public String getParticularityTech(){
@@ -54,5 +43,10 @@ public class ReproductionPaint extends Reproduction{
 	
 	public void setParticularitySupport(String support){
 		_particularitySupport = support;
+	}
+
+	@XmlElement
+	public String getType(){
+		return this.type;
 	}
 }

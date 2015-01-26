@@ -18,23 +18,12 @@ import javax.persistence.*;
 @Table(name="REPRODUCTIONSCULPTURE")
 public class ReproductionSculpture extends Reproduction{
 
-	@Id 
-	@Column(name="REPRODUCTION_SCULPTUREID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _reproductionID;
-
 	@Column(name="particularitySupport")
 	private List<String> _particularitiesSupport;
-
-	@XmlElement
- 	public int getID() {
- 		return _reproductionID;
- 	}
-
- 	public void setID(int id){
- 		_reproductionID = id;
- 	}
-
+	
+	@Column(name="type")
+	private final String type="reproductionSculpture";
+	
 	@XmlElement
 	public List<String> getParticularitySupport(){
 		return new ArrayList<String>(_particularitiesSupport);
@@ -43,4 +32,9 @@ public class ReproductionSculpture extends Reproduction{
 	public void setParticularitiesSupport(List<String> support){
 		_particularitiesSupport = new ArrayList<String>(support);
 	}
+
+	@XmlElement
+	public String getType(){
+		return this.type;
+	}	
 }

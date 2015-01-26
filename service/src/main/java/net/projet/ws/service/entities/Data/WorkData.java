@@ -36,11 +36,13 @@ public class WorkData{
 		LOG.info("initPaint");
 		Paint paint1 = new Paint();
 		paint1.setReproductions(ReproductionData.initReproductionPaints());
+		paint1.setTitle("Miku painting. Kawaii desu ne !");
 		//work1.setTitle("THE paint");
 		//work1.setDescription("Work en souvenir de qqchose");
 		paints.add(paint1);
 		Paint paint2 = new Paint();
 		paints.add(paint2);
+		paint2.setTitle("Anata !");
 		return new ArrayList<Paint>(paints);
 	}
 

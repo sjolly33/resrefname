@@ -21,25 +21,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "collectionPicture")
 @Entity
 @Table(name="COLLECTIONPICTURE")
-public class CollectionPicture extends IMuseum{
-
-	@Id 
-	@Column(name="CPICTUREID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _cPictureID; 
+public class CollectionPicture extends Collection{
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing pictures... 
 	@JoinColumn(name="COLLECTION_PICTURE_REF", referencedColumnName="CPICTUREID")
 	private List<Picture> _pictures;
 
-	@XmlElement
- 	public int getID() {
- 		return _cPictureID;
- 	}
-
- 	public void setID(int id){
- 		_cPictureID = id;
- 	}
+	@Column(name="type")
+	private final String type="collectionPicture";
 
  	@XmlElement
  	public List<Picture> getRefPicture() {
@@ -49,5 +38,10 @@ public class CollectionPicture extends IMuseum{
  	public void setRefPicture(List<Picture> pictures) {
  		this._pictures = new ArrayList(pictures);
  	}
+
+	@XmlElement
+	public String getType(){
+		return this.type;
+	}
 
 }

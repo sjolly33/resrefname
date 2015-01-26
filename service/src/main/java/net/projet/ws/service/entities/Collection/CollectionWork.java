@@ -23,12 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement(name = "collectionWork")
 @Entity
 @Table(name="COLLECTIONWORK")
-public class CollectionWork extends IMuseum{
-
-	@Id 
-	@Column(name="CWORKID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _cWorkID;
+public class CollectionWork extends Collection{
 
 	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}) //Collection is a set of existing works... 
 	@JoinColumn(name="COLLECTION_PAINT_REF")
@@ -38,14 +33,8 @@ public class CollectionWork extends IMuseum{
 	@JoinColumn(name="COLLECTION_SCULPTURE_REF")	
 	private List<Sculpture> _sculptures;
 
-	@XmlElement
- 	public int getID() {
- 		return _cWorkID;
- 	}
-
- 	public void setID(int id){
- 		_cWorkID = id;
- 	}
+	@Column(name="type")
+	private final String type="collectionWork";
 
  	@XmlElement
  	public List<Paint> getRefPaint() {
@@ -64,4 +53,10 @@ public class CollectionWork extends IMuseum{
  	public void setRefSculpture(List<Sculpture> works) {
  		this._sculptures = new ArrayList(works);
  	}
+
+ 	@XmlElement
+	public String getType(){
+		return this.type;
+	}
+
 }

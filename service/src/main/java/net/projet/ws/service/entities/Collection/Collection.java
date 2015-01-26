@@ -1,5 +1,7 @@
-package net.projet.ws.service.entities.Reproduction;
+package net.projet.ws.service.entities.Collection;
 import net.projet.ws.service.entities.IMuseum;
+import net.projet.ws.service.entities.Museum;
+import net.projet.ws.service.entities.Picture.Picture;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,46 +15,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @MappedSuperclass
-public abstract class Reproduction extends IMuseum{
+public abstract class Collection extends IMuseum{
 
 	@Id 
-	@Column(name="REPRODUCTION_ID", nullable=false)
+	@Column(name="CollectionID", nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _reproductionID;
-
-	@Column(name="price")	
-	private Float _price;
-
-	@Column(name="quantityLeft")
-	private int _quantity;
+	private int _collectionID;
 
 	@XmlElement
  	public int getID() {
- 		return _reproductionID;
+ 		return _collectionID;
  	}
 
  	public void setID(int id){
- 		_reproductionID = id;
+ 		_collectionID = id;
  	}
-
-	@XmlElement
-	public Float getPrice(){
-		return _price;
-	}
-
-	public void setPrice(Float price){
-		_price = price;
-	}	
-
-	@XmlElement
-	public int getQuantity(){
-		return _quantity;
-	}
-
-	public void setQuantity(int quantity){
-		_quantity = quantity;
-	}
-
-}
+ }

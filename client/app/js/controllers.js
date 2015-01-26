@@ -16,6 +16,8 @@ appControllers.controller('museumController', ['$scope', '$resource', '$routePar
       $scope.collections_list = []
       $scope.museum = {id:0, name: null, theme: null, adress: null, information: null};
       $scope.museumInfo = MuseumService.get({id:$routeParams.id}, function (res, req){
+       console.log("res");
+       console.log(res);
        $scope.museum.id = res.id;
        $scope.museum.name = res.name;
        $scope.museum.theme = res.theme;

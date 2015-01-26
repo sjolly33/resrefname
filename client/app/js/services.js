@@ -28,7 +28,7 @@ MuseumServices.factory('AuthorService', ['$resource',
 MuseumServices.factory('WorkService', ['$resource',
   function($resource){
 
-    return $resource('./../api/paint/:id', {id: '@id'}, {
+    return $resource('./../api/work/:id', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
@@ -47,10 +47,10 @@ MuseumServices.factory('PictureService', ['$resource',
     });
   }]);
 
-MuseumServices.factory('CollectionWork', ['$resource',
+MuseumServices.factory('CollectionService', ['$resource',
   function($resource){
 
-    return $resource('./../api/collectionWork/:id', {id: '@id'}, {
+    return $resource('./../api/collection/:id', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
@@ -58,32 +58,10 @@ MuseumServices.factory('CollectionWork', ['$resource',
     });
   }]);
 
-MuseumServices.factory('CollectionPicture', ['$resource',
+MuseumServices.factory('ReproductionService', ['$resource',
   function($resource){
 
-    return $resource('./../api/collectionPicture/:id', {id: '@id'}, {
-      get: {method:'GET', isArray:false},
-      post: {method:'POST', isArray:false},
-      put: {method:'PUT', isArray:false},
-      remove: {method:'DELETE', isArray:false}
-    });
-  }]);
-
-MuseumServices.factory('ReproductionPaint', ['$resource',
-  function($resource){
-
-    return $resource('./../api/reproductionPaint/:id', {id: '@id'}, {
-      get: {method:'GET', isArray:false},
-      post: {method:'POST', isArray:false},
-      put: {method:'PUT', isArray:false},
-      remove: {method:'DELETE', isArray:false}
-    });
-  }]);
-
-MuseumServices.factory('ReproductionSculpture', ['$resource',
-  function($resource){
-
-    return $resource('./../api/reproductionSculpture/:id', {id: '@id'}, {
+    return $resource('./../api/reproduction/:id', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},
