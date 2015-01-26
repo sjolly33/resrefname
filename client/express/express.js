@@ -15,14 +15,12 @@ app.use(express.static(path.join(application_root ,'../app/')));
 
 var port = 4711;
 app.listen(port, function () {
-    'use strict'
     console.log('Express server listening on port %d in %s mode', port, app.settings.env)
 });
 
 var path = 'http://localhost:8080/rest/museum/'
 
 var sendRes = function(res, body){
-  console.log(body);
   res.send(body);
 }
 
@@ -51,9 +49,7 @@ app.post('/api/museum', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -65,9 +61,7 @@ app.put('/api/museum/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -78,9 +72,7 @@ app.delete('/api/museum/:id', function(req,res) {
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -115,9 +107,7 @@ app.post('/api/work', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -134,9 +124,7 @@ app.put('/api/work/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -152,9 +140,7 @@ app.delete('/api/work/:id/:type', function(req,res) {
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -175,9 +161,7 @@ app.post('/api/picture', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -189,9 +173,7 @@ app.put('/api/picture/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -202,9 +184,7 @@ app.delete('/api/picture/:id', function(req,res) {
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -225,9 +205,7 @@ app.post('/api/author', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -239,23 +217,18 @@ app.put('/api/author/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
 app.delete('/api/author/:id', function(req,res) {
   console.log('delete author')
-  console.log(req.params.id);
   var newurl = path+'delete/author/'+req.params.id;
   request({
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -290,9 +263,7 @@ app.post('/api/collection', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -309,9 +280,7 @@ app.put('/api/collection/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -327,9 +296,7 @@ app.delete('/api/collection/:id/:type', function(req,res) {
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -364,9 +331,7 @@ app.post('/api/reproduction', function(req,res) {
     headers: {'content-type' : 'application/json'},
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -384,9 +349,7 @@ app.put('/api/reproduction/:id', function(req,res) {
     method: 'PUT',
     url: newurl,
     json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })
 
@@ -402,8 +365,6 @@ app.delete('/api/reproduction/:id/:type', function(req,res) {
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',
     url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
+    }, function(error, response, body){}
   )
 })

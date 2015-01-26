@@ -1,8 +1,8 @@
 {
-"name": "QCM",
+"name": "MUSEUM",
 "version": "1.0.0",
-"name": "QCM-server",
-"description": "QCM server for AngularJS",
+"name": "MUSEUM-server",
+"description": "MUSEUM server for AngularJS",
 "dependencies": {
     "express": "*",
     "body-parser": "*",

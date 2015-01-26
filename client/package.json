@@ -1,7 +1,7 @@
 {
-"name": "QCM",
+"name": "MUSEUM",
 "version": "1.0.0",
-"description": "angular with a QCM app",
+"description": "angular with a MUSEUM app",
 "scripts": {
     "install": "cd app && npm install",
     "postinstall": "cd express && npm install"
