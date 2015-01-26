@@ -46,6 +46,10 @@
 				<br>
 				<label> Description : {{work.description}} </label>
 				<br>
+				 <div ng-repeat="particularity in particularities">
+                    <label> Speciality {{$index+1}} : {{particularity}}</label>
+                    <br>
+                </div>
 			</fieldset>
 		</div>
 
