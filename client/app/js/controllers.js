@@ -238,12 +238,16 @@ console.log($scope.museumInfo);
 console.log($scope.work);
 console.log($scope.work.id);
 
+$scope.delete = function(){
+  alert($scope.work.id+" "+$scope.work.type);
+  WorkService.remove({id:$scope.work.id,type:$scope.work.type}, function (res, req){})
+  $location.path('/museum/'+$routeParams.id1);
+}
+
 
 })
 })
-$scope.delete = function(){
-  WorkService.remove({id:$scope.worker.id2}, function (res, req){})
-}
+
 
 }
 
@@ -548,6 +552,8 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
 ////////////////////////////////////////////////////////////////////////
 // PICTURE
 ////////////////////////////////////////////////////////////////////////
+
+
 appControllers.controller('pictureController', ['$scope','$routeParams', '$route', '$upload',
   function($scope, $resource, $routeParams, $route, $upload) {
 
