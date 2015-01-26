@@ -5,9 +5,9 @@
 
         <form name="form_edit_work">
 
-         <br>
-         <h4> Change Author </h4>
-         <div class="col-md-12">
+           <br>
+           <h4> Change Author </h4>
+           <div class="col-md-12">
             <fieldset class="scheduler-border col-md-6 fieldset-grey">
                 <br>
                 <label for="author_work"> Replacement author : </label>
@@ -28,11 +28,6 @@
             <br>
             <label for="description_work"> Description : </label>
             <input class="form-control" type="text" id="description_work" ng-model="description_work" required/>
-                <!--
-                <br>
-                <label for="author_work"> Author : </label>
-                <input class="form-control" type="text" id="author_work"  ng-model="author_work" required/>
-            -->
             <br>
             <label for="dimension_work"> Dimension : </label>
             <input class="form-control" type="text" id="dimension_work" ng-model="dimension_work" required/>
@@ -46,74 +41,39 @@
     </div>
 
 
-                 <div ng-repeat="particularity in particularities">
-                    <label> Speciality {{$index+1}} : {{particularity}}</label>
-                    <br>
-                </div>
-<!--
-            <h4> Work Type  ( Current : {{actual_type}} )</h4>
-            <div class="col-md-12">
-                <fieldset class="scheduler-border col-md-6 fieldset-grey">
-                    <br>
-                    <select ng-model="selected_type" ng-init="selected_type_init" required class='form-control'
-                    ng-options='spe.name as spe.name for spe in typeWork'>
-                </select>
-            </fieldset>
-        </div> -->
+    <h4> Work Type </h4>
+    <div class="col-md-12">
+        <fieldset class="scheduler-border col-md-6 fieldset-grey">
+<br>
+        <div class="switch"
+        ng-switch on="work.type">
 
-    <!--
-        <div class="col-md-12">
-            <br><br>
-            <label for="type_work"> Choose a type of Work  </label>
-            <div class="btn-group" dropdown is-open="status.isopen">
-                <button type="button form-control" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                   Work type<span class="caret"></span>
-               </button>
-               <ul class="dropdown-menu" id="type_work" role="menu">
-                <li><a href=""ng-click="painting()">Painting</a></li>
-                <li class="divider"></li>
-                <li><a href="" ng-click="sculture()">Sculture</a></li>
-                <li class="divider"></li>
-                <li><a href="" ng-click="drawing()">Drawing</a></li>
-                <li class="divider"></li>
-                <li><a href="" ng-click="photography()">Photography</a></li>
-            </ul>
-        </div>   
+        <div class="animate-switch" ng-switch-when="sculpture">
+            <label for="material_scul_work"> Material Work : </label>
+            <br>
+            <select class='form-control'  ng-model="$parent.material_scul_work"
+            ng-options='spe.name for spe in specialities_sculpture'>
+        </select>
     </div>
 
-    <div class="col-md-5">
-        <div  class="options" class="col-md-12" id="type_work_content"  ng-controller="forSce" > 
-            <div ng-bind-html="myHTML" id="type_work_content" ng-model="specialite"></div>
-            <br><br>
-        </div>
-    </div>
-
+    <div class="switch" ng-switch-when="paint">
+        <label for="material_paint_work"> Technical work : </label>
+        <br>
+        <select class='form-control'  ng-model="$parent.material_paint_work"
+        ng-options='spe.name for spe in specialities_paint_technical_work'>
+    </select>
     <br>
-    <div class="col-lg-12">
-        <h4> Tags </h4>
-        <div class="col-md-12">
-            <fieldset class="scheduler-border col-md-6 fieldset-grey">
-                <div ng-repeat="tag in tags">
-                    <br>
-                    <label> Tag {{$index+1}} : </label>
-                    <div class="col-lg-12">
-                        <input class="form-control" type="text" placeholder="a tag..." ng-model="tag.text" required>
-                    </div>
-                    <br>
-                </div>
-                <br><br><br>
-                <div class="col-lg-12">
-                    <button ng-click="addTag()" class="btn btn-default">
-                        <span caria-hidden="true"></span> <i class="fa fa-plus"></i> add tag
-                    </button>
-                    <button ng-click="removeTag()" class="btn btn-default">
-                        <span caria-hidden="true"></span> <i class="fa fa-plus"></i> remove tag
-                    </button>
-                </div>
-            </fieldset>
-        </div>
-    </div>
--->
+    <label for="sheld_work"> Sheld work : </label>
+    <br>
+    <select class='form-control'  ng-model="$parent.sheld_work"
+    ng-options='spe.name for spe in specialities_paint_sheld_work'>
+</select>
+</div>
+<div class="animate-switch" ng-switch-default>Choose a work type...</div>
+</div>
+</fieldset>
+</div>
+
 <div class="col-lg-12">
     <br>
     <div class="col-md-6 text-center">
