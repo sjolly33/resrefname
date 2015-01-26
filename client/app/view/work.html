@@ -1,72 +1,77 @@
 <div class="text-center">
-<h2> Work : {{work.name}} </h2>
+	<h2> Work : {{work.name}} </h2>
 </div>
 
 <div class="col-md-offset-1" ng-controller="workController">
 
-	<h3> Actions : </h3>
+	<div ng-controller="initViewWorkCtrl">
 
-	<fieldset class="scheduler-border col-md-4 fieldset-grey">
-		<div class="col-lg-12 text-center">
-			<br>
-			<a  href="#/edit_work/{{work.id}}" class="btn btn-primary" role="button"> Edit this work </a>
-			&nbsp;&nbsp;&nbsp;
-			<a  href="#/create_picture/{{work.id}}" class="btn btn-primary" role="button"> Add picture </a>
-			&nbsp;&nbsp;&nbsp;
-			<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> Delete this work </a>
-		</div>
-	</fieldset>
+		<h3> Actions : </h3>
 
-	<br><br><br><br>
-
-	<h3> General informations : </h3>
-
-	<div class="col-md-12">
 		<fieldset class="scheduler-border col-md-5 fieldset-grey">
-			<br>
-			<label> Title : {{work.title}} </label>
-			<br>
-			<label> Author : {{work.author}} </label>
-			<br>
-			<label> Dimension : {{work.dimension}} </label>
-			<br>
-			<label> Resume : {{work.resume}} </label>
-			<br>
-			<label> Date : {{work.date}} </label>
-			<br>
-			<label> Type : {{work.type}} </label>
-			<br>
-			<label> More : {{work.more}} </label>
-			<br>
-			<label> Tags : {{work.tags}} </label>
-			<br>
-		</fieldset>
-	</div>
-
-
-	<h3> Pictures : </h3>
-
-	<div class="col-md-12">
-		<fieldset class="scheduler-border col-md-4 fieldset-grey">
-			<br>
-			<img  width="400" height="300" ng-src="./img/test1.jpg"/>
-			<br>
-			<div class="col-lg-12">
+			<div class="col-lg-12 text-center">
 				<br>
-
-				<button ng-click="viewPreviousPicture()" class="btn bg-primary">
-					<span caria-hidden="true"></span> <i class="fa fa-arrow-left"></i> previous 
-				</button>
-				&nbsp;
-				<button ng-click="viewNextPicture()" class="btn bg-primary">
-					<span caria-hidden="true"></span> <i class="fa fa-arrow-right"></i> next
-				</button>
-				<div class="text-right">
-					<a  href="#/edit_picture/{{picture.id}}" class="btn btn-primary" role="button"> Edit picture </a>
-					</div>
-				<br>
+				<a  href="#/museum/{{museumInfo.id}}/edit_work/{{work.id}}" class="btn btn-primary" role="button"> Edit this work </a>
+				&nbsp;&nbsp;&nbsp;
+				<a  href="#/create_picture/{{work.id}}" class="btn btn-primary" role="button"> Add picture </a>
+				&nbsp;&nbsp;&nbsp;
+				<a  class="btn btn-primary btn-danger" ng-click="delete()" role="button"> Delete this work </a>
 			</div>
 		</fieldset>
-	</div>
 
+		<br><br><br><br>
+
+		<div class="col-md-12">
+			<h3> General informations : </h3>
+
+			<fieldset class="scheduler-border col-md-5 fieldset-grey">
+				<br>
+				<label> Title : {{work.title}} </label>
+				<br>
+				<label> Author : {{work.author}} </label>
+				<br>
+				<label> Dimension : {{work.dimension}} </label>
+				<br>
+				<label> Resume : {{work.resume}} </label>
+				<br>
+				<label> Date : {{work.date}} </label>
+				<br>
+				<label> Type : {{work.type}} </label>
+				<!--
+				<br>
+				<label> More : {{work.more}} </label>
+				<br>
+				<label> Tags : {{work.tags}} </label>
+				-->
+				<br>
+				<label> Description : {{work.description}} </label>
+				<br>
+			</fieldset>
+		</div>
+
+		<div class="col-md-12">
+			<h3> Pictures : </h3>
+
+			<fieldset class="scheduler-border col-md-5 fieldset-grey">
+				<br>
+				<img  width="400" height="300" ng-src="./img/test1.jpg"/>
+				<br>
+				<div class="col-lg-12">
+					<br>
+
+					<button ng-click="viewPreviousPicture()" class="btn bg-primary">
+						<span caria-hidden="true"></span> <i class="fa fa-arrow-left"></i> previous 
+					</button>
+					&nbsp;
+					<button ng-click="viewNextPicture()" class="btn bg-primary">
+						<span caria-hidden="true"></span> <i class="fa fa-arrow-right"></i> next
+					</button>
+					<div class="text-right">
+						<a  href="#/edit_picture/{{picture.id}}" class="btn btn-primary" role="button"> Edit picture </a>
+					</div>
+					<br>
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </div>

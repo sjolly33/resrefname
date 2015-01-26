@@ -47,7 +47,7 @@ MuseumServices.factory('SculptureService', ['$resource',
     });
   }]);
 
-MuseumServices.factory('Picture', ['$resource',
+MuseumServices.factory('PictureService', ['$resource',
   function($resource){
 
     return $resource('./../api/picture/:id', {id: '@id'}, {

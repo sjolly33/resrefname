@@ -1,36 +1,62 @@
 <div class="col-md-offset-1" ng-controller="workController">
 
     <h2>Edit  work</h2>
-    <div ng-controller="editWorkController">
+    <div ng-controller="editWorkCtrl">
 
         <form name="form_edit_work">
 
-           <br>
-
-           <h4> General Informations </h4>
-           <div class="col-md-12">
+         <br>
+         <h4> Change Author </h4>
+         <div class="col-md-12">
             <fieldset class="scheduler-border col-md-6 fieldset-grey">
                 <br>
-                <label for="title_work"> Title : </label>
-                <input class="form-control" type="text" id="title_work"  ng-model="title_work" required/>
+                <label for="author_work"> Replacement author : </label>
                 <br>
-                <label for="description_work"> Description : </label>
-                <input class="form-control" type="text" id="description_work" ng-model="description_work" required/>
+                <select class='form-control'  ng-model="author_work"
+                ng-options='author.id as author.name for author in museumInfo.authors'>
+            </select>
+            <br>
+        </fieldset>
+    </div>
+
+    <h4> General Informations </h4>
+    <div class="col-md-12">
+        <fieldset class="scheduler-border col-md-6 fieldset-grey">
+            <br>
+            <label for="title_work"> Title : </label>
+            <input class="form-control" type="text" id="title_work"  ng-model="title_work" required/>
+            <br>
+            <label for="description_work"> Description : </label>
+            <input class="form-control" type="text" id="description_work" ng-model="description_work" required/>
+                <!--
                 <br>
                 <label for="author_work"> Author : </label>
                 <input class="form-control" type="text" id="author_work"  ng-model="author_work" required/>
-                <br>
-                <label for="dimension_work"> Dimension : </label>
-                <input class="form-control" type="text" id="dimension_work" ng-model="dimension_work" required/>
-                <br>
-                <label for="resume_work"> Resume : </label>
-                <input class="form-control" type="text" id="resume_work" ng-model="resume_work" required/>
-                <br>
-                <label for="date_work"> Date : </label>
-                <input class="form-control" type="text" id="date_work" ng-model="date_work" required/>
-            </fieldset>
-        </div>
+            -->
+            <br>
+            <label for="dimension_work"> Dimension : </label>
+            <input class="form-control" type="text" id="dimension_work" ng-model="dimension_work" required/>
+            <br>
+            <label for="resume_work"> Resume : </label>
+            <input class="form-control" type="text" id="resume_work" ng-model="resume_work" required/>
+            <br>
+            <label for="date_work"> Date : </label>
+            <input class="form-control" type="text" id="date_work" ng-model="date_work" required/>
+        </fieldset>
+    </div>
 
+<!--
+            <h4> Work Type  ( Current : {{actual_type}} )</h4>
+            <div class="col-md-12">
+                <fieldset class="scheduler-border col-md-6 fieldset-grey">
+                    <br>
+                    <select ng-model="selected_type" ng-init="selected_type_init" required class='form-control'
+                    ng-options='spe.name as spe.name for spe in typeWork'>
+                </select>
+            </fieldset>
+        </div> -->
+
+    <!--
         <div class="col-md-12">
             <br><br>
             <label for="type_work"> Choose a type of Work  </label>
@@ -82,15 +108,15 @@
             </fieldset>
         </div>
     </div>
-
-    <div class="col-lg-12">
-        <br>
-        <div class="col-md-6 text-center">
-            <button ng-click="edit(form_edit_work)" class="btn bg-primary">
-                <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
-            </button>
-        </div>
+-->
+<div class="col-lg-12">
+    <br>
+    <div class="col-md-6 text-center">
+        <button ng-click="edit(form_edit_work)" class="btn bg-primary">
+            <span caria-hidden="true"></span> <i class="fa fa-floppy-o"></i> save 
+        </button>
     </div>
+</div>
 
 </form>
 </div>
