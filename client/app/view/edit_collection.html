@@ -29,7 +29,56 @@
 			</div>
 
 			<br>
+			<span ng-switch on="collection.type">
+	  		<span ng-switch-when="collectionWork">
+				<h4> Works in the collection </h4>
+				<div class="col-md-12">
+					<fieldset class="scheduler-border col-md-7 fieldset-grey">
+						<div ng-repeat="work in collection.refWork">
+							<div class="row"><li>
+								<div class="col-md-5">{{work.title}}</div><div class="col-md-3"><button ng-click="removeWork(work)" class="btn bg-primary">RemoveFromCollection</button></div>
+							</li></div>
+						</div>
+					</fieldset>
+				</div>
+				<h4> Works avaibles </h4>
+				<div class="col-md-12">
+					<fieldset class="scheduler-border col-md-7 fieldset-grey">
+						<div ng-repeat="work in work_list">
+						 	<div class="row"><li>
+								<div class="col-md-5">{{work.title}}</div><div class="col-md-3"><button ng-click="addWork(work)" class="btn bg-primary">AddToCollection</button></div>
+							</li></div>
+						</div>
+					</fieldset>
+				</div>
+			</span>
 
+		  	<span ng-switch-when="collectionPicture">
+		  		<h4> Pictures in the collection </h4>
+		  		<div class="col-md-12">
+					<fieldset class="scheduler-border col-md-7 fieldset-grey">
+						<div ng-repeat="picture in collection.refPicture">
+							<div class="row"><li>
+								<div class="col-md-5">{{picture.title}}</div><div class="col-md-3"><button ng-click="removePicture(picture)" class="btn bg-primary">RemoveFromCollection</button></div>
+							</li></div>
+						</div>
+					</fieldset>
+				</div>
+		  		<h4> Pictures avaibles </h4>
+		  		<div class="col-md-12">
+					<fieldset class="scheduler-border col-md-7 fieldset-grey">
+						<div ng-repeat="picture in picture_list">
+						 	<div class="row"><li>
+								<div class="col-md-5">{{picture.title}}</div><div class="col-md-3"><button ng-click="addPicture(picture)" class="btn bg-primary">AddToCollection</button></div>
+							</li></div>
+						</div>
+					</fieldset>
+				</div>
+		  	</span>
+
+		  	<span ng-switch-default> ERROR </span>
+			</span>
+			
 			<div class="col-lg-12">
 				<br>
 				<div class="col-md-7 text-center">
@@ -39,7 +88,8 @@
 				</div>
 			</div>
 
-
+			<br>
+	
 		</form>
 	</div>
 	</div>

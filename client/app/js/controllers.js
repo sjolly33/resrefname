@@ -536,9 +536,16 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
       }
 
       $scope.editCollectionController = function($scope){
-
+        $scope.work_list = []
+        $scope.picture_list = []
+        $scope.museum = MuseumService.get({id:$routeParams.id1}, function (res, req){
+          $scope.work_list = res.paints;
+          $scope.work_list.concat(res.sculptures);
+          $scope.picture_list = res.pictures;
+        });
         $scope.edit = function ($form){
           if($form.$valid){
+<<<<<<< HEAD
             var new_collection = new CollectionService();
             new_collection.id = $scope.collection.id;
             new_collection.title = $scope.collection.title;
@@ -548,9 +555,56 @@ appControllers.controller('collectionController', ['$scope', '$resource', '$rout
             new_collection.type = $scope.collection.type;
 
             CollectionService.put({id:new_collection.id}, new_collection, function (res, req){})
+=======
+          var new_collection = new CollectionService();
+          new_collection.id = $scope.collection.id;
+          new_collection.title = $scope.collection.title;
+          new_collection.description = $scope.collection.description;
+          new_collection.comment = $scope.collection.comment;
+          new_collection.tags =  $scope.collection.tags;
+          new_collection.type = $scope.collection.type;
+          
+          if($scope.collection.type == "collectionWork"){
+            new_collection.refPaint = [];
+            new_collection.refSculpture = [];
+            for(var i = 0; i < $scope.collection.refWork.length; ++i){
+              if($scope.collection.refWork[i].type == "paint")
+                new_collection.refPaint.push($scope.collection.refWork[i]);
+              else
+                new_collection.refSculpture.push($scope.collection.refWork[i]);
+            }
+          }
+          else{
+            new_collection.refPicture = $scope.collection.refPicture;
+          }
+
+          CollectionService.put({id:new_collection.id}, new_collection, function (res, req){})
+>>>>>>> ffb159e9d8db3fc59a4ec54eb922d3e51152ddae
             $location.path('/museum/'+$scope.museum.id);
           }
         }
+
+        $scope.addWork = function(work){
+           $scope.collection.refWork.push(work);
+        }
+
+        $scope.removeWork = function(work){
+          var index = $scope.collection.refWork.indexOf(work);
+          if(index > -1){
+            $scope.collection.refWork.splice(index, 1);
+          }
+        } 
+
+        $scope.addPicture = function(picture){
+           $scope.collection.refPicture.push(picture);
+        }
+
+        $scope.removePicture = function(picture){
+          var index = $scope.collection.refPicture.indexOf(picture);
+          if(index > -1){
+            $scope.collection.refPicture.splice(index, 1);
+          }
+        } 
       }
     }
 
