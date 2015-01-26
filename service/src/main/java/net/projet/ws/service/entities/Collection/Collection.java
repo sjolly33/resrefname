@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class Collection extends IMuseum{
 
 	@Id 
-	@Column(name="CollectionID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="CollectionID", nullable=false, unique=true)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int _collectionID;
 
 	@XmlElement

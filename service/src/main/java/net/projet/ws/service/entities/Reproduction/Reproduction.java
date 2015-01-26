@@ -18,8 +18,8 @@ import javax.persistence.*;
 public abstract class Reproduction extends IMuseum{
 
 	@Id 
-	@Column(name="REPRODUCTION_ID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="REPRODUCTION_ID", nullable=false, unique=true)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int _reproductionID;
 
 	@Column(name="price")	

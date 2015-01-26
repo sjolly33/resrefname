@@ -26,8 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public abstract class Work extends IMuseum{
 
 	@Id 
-	@Column(name="WORKID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="WORKID", nullable=false, unique=true)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int _workID;
 
 	@Column(name="Dimension")
