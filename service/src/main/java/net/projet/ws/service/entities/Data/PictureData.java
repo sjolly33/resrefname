@@ -39,7 +39,7 @@ public class PictureData{
 
 	public static List<Picture> getPictures(){
 		LOG.info("getPictures");
-		List<Picture> pictures = new ArrayList<Picture>();
+		List<Picture> pictures = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -65,7 +65,7 @@ public class PictureData{
 	public static Picture getPicture(List<Picture> pictures, int id){
 		LOG.info("getPicture");
 		int index = 0;
-		Picture picture = new Picture();
+		Picture picture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -84,7 +84,7 @@ public class PictureData{
 		if(index != -1)
 			return picture;
 		else
-			return new Picture();
+			return null;
 	}
 	
 	public static Response addPicture(Picture picture){
@@ -107,7 +107,7 @@ public class PictureData{
 	public static Picture getPicture(int id){
 		LOG.info("getPicture");
 		int index = 0;
-		Picture picture = new Picture();
+		Picture picture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{

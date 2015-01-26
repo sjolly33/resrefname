@@ -8,7 +8,6 @@ import net.projet.ws.service.entities.Data.CollectionData;
 import net.projet.ws.service.entities.Data.ReproductionData;
 
 import net.projet.ws.service.entities.Picture.Picture;
-import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.entities.Work.Sculpture;
 import net.projet.ws.service.entities.Worker.Author;
@@ -42,7 +41,9 @@ import javax.ws.rs.core.Response;
 
 public class MuseumRoot{
 
-	// GET to find entity. For a simplified uses, direct association to museum has been implemented
+
+// ------------------------------ GET -----------------------------------
+
 	
 	@GET
 	@Path("/museums")
@@ -58,8 +59,6 @@ public class MuseumRoot{
 		return MuseumData.getMuseum(museumID);
 	}
 
-
-	// Get a specific picture. ID is got from front-end so {id} is in a specific museum
 	@GET
 	@Path("/picture/{id}")
 	@Produces("application/json")
@@ -67,8 +66,6 @@ public class MuseumRoot{
 		return PictureData.getPicture(pictureID);
 	}
 
-
-	// Get all pictures but only in a museum otherwise it has no sense (picture of all museum not front)
 	@GET
 	@Path("/{id}/pictures")
 	@Produces("application/json")
@@ -225,9 +222,8 @@ public class MuseumRoot{
 
 
 
-///////////////////////////////////////////////////////////////////////////
+// ------------------------------ POST -----------------------------------
 
-	// POST to create entity. For a simplified uses, direct association to museum has been implemented
 
 
 	@POST
@@ -371,10 +367,11 @@ public class MuseumRoot{
 		return res;
 	}
 
-///////////////////////////////////////////////////////////////////////////
 
-	// PUT operation used to modify an existing entity
-	// Need to send directly an object to update
+
+// ------------------------------ PUT -----------------------------------
+
+
 
 	@PUT
 	@Path("/update/museum")
@@ -450,10 +447,9 @@ public class MuseumRoot{
 
 
 
-///////////////////////////////////////////////////////////////////////////
+// ------------------------------ DELETE -----------------------------------
 
-	// DELETE : It's only remove an entity into DB. No care about association
-	// Need to send directly an object to remove
+
 
 	@DELETE
 	@Path("/delete/museum/{id}")

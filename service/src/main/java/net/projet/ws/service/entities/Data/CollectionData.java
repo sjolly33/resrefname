@@ -87,7 +87,7 @@ public class CollectionData{
 
 	public static List<CollectionPicture> getCollectionsPictures(){
 		LOG.info("getcPicture");
-		List<CollectionPicture> collections = new ArrayList<CollectionPicture>();
+		List<CollectionPicture> collections = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -113,7 +113,7 @@ public class CollectionData{
 
 	public static List<CollectionWork> getCollectionsWorks(){
 		LOG.info("getcWork");
-		List<CollectionWork> collections = new ArrayList<CollectionWork>();
+		List<CollectionWork> collections = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -140,7 +140,7 @@ public class CollectionData{
 	public static CollectionPicture getCollectionPicture(int id){
 		LOG.info("getcPicture");
 		int index = 0;
-		CollectionPicture cPicture = new CollectionPicture();
+		CollectionPicture cPicture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -182,7 +182,7 @@ public class CollectionData{
 	public static CollectionPicture getCollectionPicture(List<CollectionPicture> cPictures, int id){
 		LOG.info("getcPicture");
 		int index = 0;
-		CollectionPicture cPicture = new CollectionPicture();
+		CollectionPicture cPicture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -201,13 +201,13 @@ public class CollectionData{
 		if(index != -1)
 			return cPicture;
 		else
-			return new CollectionPicture();
+			return null;
 	}
 
 	public static CollectionWork getCollectionWork(List<CollectionWork> cWorks, int id){
 		LOG.info("getcWork");
 		int index = 0;
-		CollectionWork cWork = new CollectionWork();
+		CollectionWork cWork = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -226,7 +226,7 @@ public class CollectionData{
 		if(index != -1)
 			return cWork;
 		else
-			return new CollectionWork();
+			return null;
 	}
 
 	public static Response addCollectionPicture(CollectionPicture cPicture){

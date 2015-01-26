@@ -37,8 +37,6 @@ public class WorkData{
 		Paint paint1 = new Paint();
 		paint1.setReproductions(ReproductionData.initReproductionPaints());
 		paint1.setTitle("Miku painting. Kawaii desu ne !");
-		//work1.setTitle("THE paint");
-		//work1.setDescription("Work en souvenir de qqchose");
 		paints.add(paint1);
 		Paint paint2 = new Paint();
 		paints.add(paint2);
@@ -48,7 +46,7 @@ public class WorkData{
 
 	public static List<Paint> getPaints(){
 		LOG.info("getPaints");
-		List<Paint> paints = new ArrayList<Paint>();
+		List<Paint> paints = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -74,7 +72,7 @@ public class WorkData{
 	public static Paint getPaint(int id){
 		LOG.info("getPaint");
 		int index = 0;
-		Paint paint = new Paint();
+		Paint paint = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -95,7 +93,7 @@ public class WorkData{
 	public static Paint getPaint(List<Paint> paints, int id){
 		LOG.info("getPaint");
 		int index = 0;
-		Paint paint = new Paint();
+		Paint paint = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -114,7 +112,7 @@ public class WorkData{
 		if(index != -1)
 			return paint;
 		else
-			return new Paint();
+			return null;
 	}
 
 	public static Response addPaint(Paint paint){
@@ -166,8 +164,6 @@ public class WorkData{
 	public static List<Sculpture> initSculptures(){
 		LOG.info("initSculptures");
 		Sculpture sculpture1 = new Sculpture();
-		//work1.setTitle("THE paint");
-		//work1.setDescription("Work en souvenir de qqchose");
 		sculptures.add(sculpture1);
 		Sculpture sculpture2 = new Sculpture();
 		sculptures.add(sculpture2);
@@ -176,7 +172,7 @@ public class WorkData{
 
 	public static List<Sculpture> getSculptures(){
 		LOG.info("getSculptures");
-		List<Sculpture> sculptures = new ArrayList<Sculpture>();
+		List<Sculpture> sculptures = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -202,7 +198,7 @@ public class WorkData{
 	public static Sculpture getSculpture(int id){
 		LOG.info("getSculpture");
 		int index = 0;
-		Sculpture sculpture = new Sculpture();
+		Sculpture sculpture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -223,7 +219,7 @@ public class WorkData{
 	public static Sculpture getSculpture(List<Sculpture> sculptures, int id){
 		LOG.info("getSculpture");
 		int index = 0;
-		Sculpture sculpture = new Sculpture();
+		Sculpture sculpture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -242,7 +238,7 @@ public class WorkData{
 		if(index != -1)
 			return sculpture;
 		else
-			return new Sculpture();
+			return null;
 	}
 
 	public static Response addSculpture(Sculpture sculpture){

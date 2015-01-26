@@ -40,7 +40,7 @@ public class ReproductionData{
 
 	public static List<ReproductionPaint> getReproductionPaints(){
 		LOG.info("getReproductionPaints");
-		List<ReproductionPaint> reproductionPaints = new ArrayList<ReproductionPaint>();
+		List<ReproductionPaint> reproductionPaints = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -84,7 +84,7 @@ public class ReproductionData{
 	public static ReproductionPaint getReproductionPaint(int id){
 		LOG.info("getReproductionPaint");
 		int index = 0;
-		ReproductionPaint reproductionPaint = new ReproductionPaint();
+		ReproductionPaint reproductionPaint = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -144,7 +144,7 @@ public class ReproductionData{
 
 	public static List<ReproductionSculpture> getReproductionSculptures(){
 		LOG.info("getReproductionSculptures");
-		List<ReproductionSculpture> reproductionSculptures = new ArrayList<ReproductionSculpture>();
+		List<ReproductionSculpture> reproductionSculptures = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -188,7 +188,7 @@ public class ReproductionData{
 	public static ReproductionSculpture getReproductionSculpture(int id){
 		LOG.info("getReproductionSculpture");
 		int index = 0;
-		ReproductionSculpture reproductionSculpture = new ReproductionSculpture();
+		ReproductionSculpture reproductionSculpture = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{

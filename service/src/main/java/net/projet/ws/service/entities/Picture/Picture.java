@@ -1,16 +1,9 @@
 package net.projet.ws.service.entities.Picture;
 
 import net.projet.ws.service.entities.IMuseum;
-import net.projet.ws.service.entities.Museum;
-import net.projet.ws.service.entities.Work.Work;
 import net.projet.ws.service.entities.Work.Paint;
 import net.projet.ws.service.entities.Work.Sculpture;
-import net.projet.ws.service.entities.Collection.CollectionPicture;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import java.io.*;
 import java.util.*;
 import org.apache.log4j.Logger;
@@ -24,7 +17,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement(name = "picture")
 @Entity
-//@Inheritance
 @Table(name="PICTURE")
 public class Picture extends IMuseum{
 

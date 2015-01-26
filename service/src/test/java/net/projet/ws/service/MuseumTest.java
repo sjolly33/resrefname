@@ -46,7 +46,6 @@ import java.sql.DriverManager;
 import org.apache.log4j.Logger;
 
 
-// Class to test the application with some simple tests
 public class MuseumTest
 {	
 
@@ -347,23 +346,6 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
-/*
-	@Test
-	public void findPictureByCollectionPicture() throws Exception {
-		LOG.info("findcPicture");
-		try{
-			tx.begin();
-  			CollectionPicture cPicture = em.find(CollectionPicture.class, 2);
-  			assertEquals(cPicture.getID(), 2);
-  			Picture picture = em.find(Picture.class, 1);
-  			assertTrue(cPicture.getRefPicture().indexOf(picture) > -1);
-		}catch (RuntimeException re) {
-			LOG.error("findcPicture failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-	}*/
 
 	@Test
 	public final void updatePicture() throws Exception

@@ -91,7 +91,7 @@ public class AuthorData{
 	public static Author getAuthor(List<Author> authors, int id){
 		LOG.info("getAuthor");
 		int index = 0;
-		Author author = new Author();
+		Author author = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -110,12 +110,12 @@ public class AuthorData{
 		if(index != -1)
 			return author;
 		else
-			return new Author();
+			return null;
 	}
 
 	public static Author getAuthor(int id){
 		LOG.info("getAuthor");
-		Author author = new Author();
+		Author author = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{

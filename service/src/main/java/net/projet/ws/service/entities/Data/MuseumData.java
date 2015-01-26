@@ -36,6 +36,8 @@ public class MuseumData{
 
 	static {
 
+		// --------------- Start data to test with the front-end ----------------
+
 		Museum museum1 = new Museum();
 		museum1.setName("Museum");
 		museum1.setTheme("Hazard");
@@ -122,7 +124,7 @@ public class MuseumData{
 
 	public static List<Museum> getMuseums(){
 		LOG.info("getMuseums");
-		List<Museum> museums = new ArrayList<Museum>();
+		List<Museum> museums = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
@@ -148,7 +150,7 @@ public class MuseumData{
 
 	public static Museum getMuseum(int id){
 		LOG.info("getMuseum");
-		Museum museum = new Museum();
+		Museum museum = null;
 		EntityManager em = JpaUtil.getEntityManager();
 		EntityTransaction tx = null;
 		try{
