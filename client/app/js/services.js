@@ -25,21 +25,10 @@ MuseumServices.factory('AuthorService', ['$resource',
     });
   }]);
 
-MuseumServices.factory('PaintService', ['$resource',
+MuseumServices.factory('WorkService', ['$resource',
   function($resource){
 
     return $resource('./../api/paint/:id', {id: '@id'}, {
-      get: {method:'GET', isArray:false},
-      post: {method:'POST', isArray:false},
-      put: {method:'PUT', isArray:false},
-      remove: {method:'DELETE', isArray:false}
-    });
-  }]);
-
-MuseumServices.factory('SculptureService', ['$resource',
-  function($resource){
-
-    return $resource('./../api/sculpture/:id', {id: '@id'}, {
       get: {method:'GET', isArray:false},
       post: {method:'POST', isArray:false},
       put: {method:'PUT', isArray:false},

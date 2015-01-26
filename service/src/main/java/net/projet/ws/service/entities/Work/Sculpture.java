@@ -21,11 +21,6 @@ import javax.persistence.*;
 @Table(name="SCULPTURE")
 public class Sculpture extends Work{
 
-	@Id 
-	@Column(name="SCULPTUREID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _sculptureID;
-
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="sculpture")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
@@ -38,15 +33,6 @@ public class Sculpture extends Work{
 
 	@Column(name="type")
 	private final String type = "sculpture";
-
-	@XmlElement
- 	public int getID() {
- 		return _sculptureID;
- 	}
-
- 	public void setID(int id){
- 		_sculptureID = id;
- 	}
 
  	@XmlElement
  	public List<Picture> getPictures(){

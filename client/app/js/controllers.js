@@ -118,8 +118,8 @@ appControllers.controller('searchController', ['$scope','$routeParams', '$route'
 // WORK
 ////////////////////////////////////////////////////////////////////////
 
-appControllers.controller('workController', ['$scope','$resource', '$routeParams', '$route', '$sce','MuseumService', 'PaintService', 'AuthorService', 'SculptureService', '$location',
-  function($scope, $resource, $routeParams, $route, $sce , MuseumService, PaintService, AuthorService, SculptureService, $location) {
+appControllers.controller('workController', ['$scope','$resource', '$routeParams', '$route', '$sce','MuseumService', 'WorkService', 'AuthorService', '$location',
+  function($scope, $resource, $routeParams, $route, $sce , MuseumService, WorkService, AuthorService, $location) {
 
     console.log('workController');
 
@@ -229,12 +229,13 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
         $scope.save = function($form){
 
           if($form.$valid){
-            if($scope.typeWork_model == "Painting"){
+          /*  if($scope.typeWork_model == "Painting"){
               var new_work = new PaintService();
             }
             if($scope.typeWork_model == "Sculpture"){
               var new_work = new SculptureService();
-            }
+            }*/
+            var new_work = new WorkService();
 
             new_work.title = $scope.title_work;
             new_work.description = $scope.description_work;
@@ -257,7 +258,7 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
               //new_work.tags = $scope.tags;
 
               console.log(new_work);
-              if($scope.typeWork_model == "Painting"){
+              /*if($scope.typeWork_model == "Painting"){
                 PaintService.save(new_work, function(){});
                 $scope.museumInfo.paints.push(new_work);
               }
@@ -265,6 +266,17 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
               if($scope.typeWork_model == "Sculpture"){
                 new_work.particularitiesSupport = [];
                 SculptureService.save(new_work, function(){});
+                $scope.museumInfo.sculptures.push(new_work);
+              }*/
+
+              if($scope.typeWork_model == "Painting"){
+                WorkService.save(new_work, function(){});
+                $scope.museumInfo.paints.push(new_work);
+              }
+
+              if($scope.typeWork_model == "Sculpture"){
+                new_work.particularitiesSupport = [];
+                WorkService.save(new_work, function(){});
                 $scope.museumInfo.sculptures.push(new_work);
               }
               
@@ -306,9 +318,7 @@ $location.path('/museum/'+$routeParams.id);
 
 
 $scope.initViewWorkCtrl = function($scope,$compile, $http){
-  // ???????????????????????? COMMENT SAVOIR AVEC QUEL SERVICE CHARGER LE WORK !!!!!! 
- //$scope.work = SculptureService.get({id:$routeParams.id2}, function (res, req){})
- $scope.work = PaintService.get({id:$routeParams.id2}, function (res, req){})
+ $scope.work = WorkService.get({id:$routeParams.id2}, function (res, req){})
  $scope.museumInfo = MuseumService.get({id:$routeParams.id1}, function (res, req){
 
 
@@ -346,15 +356,14 @@ console.log($scope.work.id);
 })
 
  $scope.delete = function(){
-  SculptureService.remove({id:$scope.worker.id2}, function (res, req){})
+  WorkService.remove({id:$scope.worker.id2}, function (res, req){})
 }
 
 }
 
 
 $scope.editWorkCtrl= function($scope){
-  // ???????????????????????? COMMENT SAVOIR AVEC QUEL SERVICE CHARGER LE WORK !!!!!! 
-  $scope.work = PaintService.get({id:$routeParams.id2}, function (res, req){})
+  $scope.work = WorkService.get({id:$routeParams.id2}, function (res, req){})
   $scope.museumInfo = MuseumService.get({id:$routeParams.id1}, function (res, req){
 
     $scope.typeWork =
@@ -406,7 +415,7 @@ $scope.editWorkCtrl= function($scope){
     alert($scope.author_work);
 
     if($form.$valid){
-      var edit_work = new PaintService();
+      var edit_work = new WorkService();
       edit_work.id = $routeParams.id2;
       edit_work.title = $scope.title_work;
       edit_work.description = $scope.description_work;
@@ -428,7 +437,7 @@ $scope.editWorkCtrl= function($scope){
       edit_work.date = $scope.date_work;
       edit_work.pictures = [];
       edit_work.type = $scope.typeWork_model;
-      PaintService.put(edit_work, function(res, req){});
+      WorkService.put(edit_work, function(res, req){});
 
       alert("edit work in editWorkController "+$routeParams.id2);
     }

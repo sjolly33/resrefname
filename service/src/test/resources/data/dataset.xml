@@ -9,15 +9,15 @@
 
  <COLLECTIONPICTURE CPICTUREID="1" TITLE="myCollectionPicture"/> 
 
- <PAINT PAINTID="1" Resume="work1" museum="1" COLLECTION_PAINT_REF="1" author="1"/>
- <PAINT PAINTID="2" Resume="work2" museum="1"/>
- <PAINT PAINTID="3" Resume="work3" TITLE="Title"/>
+ <PAINT WORKID="1" Resume="work1" museum="1" COLLECTION_PAINT_REF="1" author="1"/>
+ <PAINT WORKID="2" Resume="work2" museum="1"/>
+ <PAINT WORKID="3" Resume="work3" TITLE="Title"/>
  
- <SCULPTURE SCULPTUREID="1" Resume="work4" TITLE="Title" COLLECTION_SCULPTURE_REF="1"/>
+ <SCULPTURE WORKID="10" Resume="work4" TITLE="Title" COLLECTION_SCULPTURE_REF="1"/>
  
  <PICTURE PictureID="1" Resume="picture" TITLE="Title" COLLECTION_PICTURE_REF="1" Paint_ID="1"/> 
  
  <REPRODUCTIONPAINT REPRODUCTION_PAINTID="1" Reproductions="1"/>
  
- <REPRODUCTIONSCULPTURE REPRODUCTION_SCULPTUREID="1" Reproductions="1"/> 
+ <REPRODUCTIONSCULPTURE REPRODUCTION_SCULPTUREID="1" Reproductions="10"/> 
 </dataset>

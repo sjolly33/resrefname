@@ -20,11 +20,6 @@ import javax.persistence.*;
 @Table(name="PAINT")
 public class Paint extends Work{
 
-	@Id 
-	@Column(name="PAINTID", nullable=false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int _paintID;
-
 	@OneToMany(cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy="paint")
 	private List<Picture> _pictures = new ArrayList<Picture>();
 
@@ -40,15 +35,6 @@ public class Paint extends Work{
 
 	@Column(name="type")
 	private final String type = "paint";
-
-	@XmlElement
- 	public int getID() {
- 		return _paintID;
- 	}
-
- 	public void setID(int id){
- 		_paintID = id;
- 	}
 
  	@XmlElement
  	public List<Picture> getPictures(){

@@ -81,17 +81,27 @@ app.delete('/api/museum/:id', function(req,res) {
 
 // =========================== PAINT =============================
 
-app.get('/api/paint/:id', function(req,res) {
-  console.log('get paint ' + req.params.id)
-  var newurl = path+'paint/'+req.params.id;
+app.get('/api/work/:id', function(req,res) {
+  console.log('get work ' + req.params.id)
+  var newurl = "";
+  if(req.body.type == "paint"){
+     newurl = path+'paint/'+req.params.id;
+  }
+  else
+    newurl = path+'sculpture/'+req.params.id;
   request.get(newurl, function(error, response, body){
     res.send(body)
   })
 });
 
-app.post('/api/paint', function(req,res) {
-  console.log('post paint')
-  var newurl = path+'new/paint';
+app.post('/api/work', function(req,res) {
+  console.log('post work')
+  var newurl = "";
+  if(req.body.type == "paint"){
+    newurl = path+'new/paint';
+  }
+  else
+     newurl = path+'new/sculpture';
   request.post({
     headers: {'content-type' : 'application/json'},
     url: newurl,
@@ -102,9 +112,14 @@ app.post('/api/paint', function(req,res) {
   )
 })
 
-app.put('/api/paint/:id', function(req,res) {
-  console.log('put paint')
-  var newurl = path+'update/paint';
+app.put('/api/work/:id', function(req,res) {
+  console.log('put work')
+  var newurl = "";
+  if(req.body.type == "paint"){
+    newurl = path+'update/paint';
+  }
+  else
+    newurl = path+'update/sculpture';
   request({
     headers: {'content-type' : 'application/json'},
     method: 'PUT',
@@ -116,59 +131,14 @@ app.put('/api/paint/:id', function(req,res) {
   )
 })
 
-app.delete('/api/paint/:id', function(req,res) {
-  console.log('delete paint')
-  var newurl = path+'delete/paint/'+req.params.id;
-  request({
-    headers: {'content-type' : 'application/json'},
-    method: 'DELETE',
-    url: newurl
-    }, function(error, response, body){
-        console.log(body);
-    }
-  )
-})
-
-// =========================== SCULPTURE =============================
-
-app.get('/api/sculpture/:id', function(req,res) {
-  console.log('get sculpture ' + req.params.id)
-  var newurl = path+'sculpture/'+req.params.id;
-  request.get(newurl, function(error, response, body){
-    res.send(body)
-  })
-});
-
-app.post('/api/sculpture', function(req,res) {
-  console.log('post sculpture')
-  var newurl = path+'new/sculpture';
-  request.post({
-    headers: {'content-type' : 'application/json'},
-    url: newurl,
-    json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
-  )
-})
-
-app.put('/api/sculpture/:id', function(req,res) {
-  console.log('put sculpture')
-  var newurl = path+'update/sculpture';
-  request({
-    headers: {'content-type' : 'application/json'},
-    method: 'PUT',
-    url: newurl,
-    json: req.body
-    }, function(error, response, body){
-        console.log(body);
-    }
-  )
-})
-
-app.delete('/api/sculpture/:id', function(req,res) {
-  console.log('delete sculpture')
-  var newurl = path+'delete/sculpture/'+req.params.id;
+app.delete('/api/work/:id', function(req,res) {
+  console.log('delete work')
+  var newurl = "";
+  if(req.body.type == "paint"){
+    newurl = path+'delete/paint/'+req.params.id;
+  }
+  else
+    newurl = path+'delete/sculpture/'+req.params.id;
   request({
     headers: {'content-type' : 'application/json'},
     method: 'DELETE',

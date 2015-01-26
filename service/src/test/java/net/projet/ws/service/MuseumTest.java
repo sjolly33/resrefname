@@ -295,29 +295,6 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
-/*
-	@Test
-	public final void createWork() throws Exception
-	{
-		LOG.info("createWork");
-		try{
-			tx.begin();
-			Paint work = new Paint();
-			work.setID(42);
-			work.setTitle("lol");
-			work.setResume("toto");
-			work.setParticularityTech("pen");
-			work.setParticularitySupport("bomb !...??");
-			em.persist(work);
-			assertTrue(em.find(Work.class, 42) != null);
-		}catch (RuntimeException re) {
-			LOG.error("createWork failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-	}
-*/
 
 	@Test
 	public final void updateWork() throws Exception
@@ -336,23 +313,7 @@ public class MuseumTest
 			tx.commit();
 		}
 	}
-/*
-	@Test
-	public void deleteWork() throws Exception {
-		LOG.info("deleteWork");
-		try{
-			tx.begin();
-  			Paint work = em.find(Paint.class, 1);
-  			em.remove(work);
-  			assertEquals(em.find(Paint.class, 1), null);
-		}catch (RuntimeException re) {
-			LOG.error("deleteWork failed", re);
-			throw re;
-		}finally{
-			tx.commit();
-		}
-	}
-*/
+
 // ------------------------- Picture -----------------------------
 
 	@Test

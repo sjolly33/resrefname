@@ -25,6 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @MappedSuperclass
 public abstract class Work extends IMuseum{
 
+	@Id 
+	@Column(name="WORKID", nullable=false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int _workID;
+
 	@Column(name="Dimension")
 	private List<Float> _dimension = new ArrayList<Float>(3);
 
@@ -79,4 +84,14 @@ public abstract class Work extends IMuseum{
 	public void setAuthor(Author author){
 		this.author = author;
 	}
+
+	@XmlElement
+ 	public int getID() {
+ 		return _workID;
+ 	}
+
+ 	public void setID(int id){
+ 		_workID = id;
+ 	}
+
 }
