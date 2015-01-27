@@ -347,6 +347,7 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
             if($form.$valid){
 
             var edit_work = new WorkService();
+            edit_work.type = $scope.work.type;
             edit_work.id = $routeParams.id2;
             edit_work.title = $scope.title_work;
             edit_work.description = $scope.description_work;
@@ -362,14 +363,12 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
 
 
              if($scope.work.type == "paint"){
-              edit_work.particularityTech = $scope.work.particularityTech;
-              edit_work.particularitySupport = $scope.work.particularitySupport;
                 if(typeof($scope.material_paint_work.name) != "undefined"){
-               edit_work.particularityTech = $scope.work.material_paint_work;
-               edit_work.particularitySupport = $scope.work.sheld_work;
-             }else{
                edit_work.particularityTech = $scope.material_paint_work.name;
                edit_work.particularitySupport = $scope.sheld_work.name;
+             }else{
+               edit_work.particularityTech = $scope.work.particularityTech;
+               edit_work.particularitySupport = $scope.work.particularitySupport;
              }
              }
              if($scope.work.type == "sculpture"){
@@ -388,7 +387,19 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
                 author.paints.push(edit_work);
               }
               if($scope.work.type == "sculpture"){
+                var exist_or_not = false;
+                var id = null;
+                for(var i=0;i<author.sculptures.length;i++){
+                  if(author.sculptures[i].id == $scope.work.id){
+                     exist_or_not == true;
+                     id=i;
+                    }
+                  }
+                if(exist_or_not == false){
                 author.sculptures.push(edit_work);
+                }else{
+                  author.sculptures[id].particularitiesSupport.push($scope.material_scul_work.name);
+                }
               }
               AuthorService.put({id:$scope.author_work}, author, function(res, req){});
             }); 
