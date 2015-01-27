@@ -365,17 +365,19 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
               edit_work.particularityTech = $scope.work.particularityTech;
               edit_work.particularitySupport = $scope.work.particularitySupport;
                 if(typeof($scope.material_paint_work.name) != "undefined"){
-                  alert($scope.material_paint_work.name+'  '+$scope.sheld_work.name)
+               edit_work.particularityTech = $scope.work.material_paint_work;
+               edit_work.particularitySupport = $scope.work.sheld_work;
+             }else{
                edit_work.particularityTech = $scope.material_paint_work.name;
                edit_work.particularitySupport = $scope.sheld_work.name;
              }
              }
              if($scope.work.type == "sculpture"){
-             edit_work.particularitiesSupport = $scope.work.particularitiesSupport[0];
              if(typeof($scope.material_scul_work.name) != "undefined"){
-               alert('la')
               edit_work.particularitiesSupport = [];
               edit_work.particularitiesSupport.push($scope.material_scul_work.name);
+            }else{
+              edit_work.particularitiesSupport = $scope.work.particularitiesSupport[0];
             }
             }
           
@@ -383,16 +385,13 @@ appControllers.controller('workController', ['$scope','$resource', '$routeParams
             var author = new AuthorService();
             author = AuthorService.get({id:$scope.author_work}, function(res, req){
               if($scope.work.type == "paint"){
-                alert('PAINT');
                 author.paints.push(edit_work);
               }
               if($scope.work.type == "sculpture"){
-                alert('SCULPTURE');
                 author.sculptures.push(edit_work);
               }
               AuthorService.put({id:$scope.author_work}, author, function(res, req){});
             }); 
-
             WorkService.put(edit_work, function(res, req){});
           }
           $location.path('/museum/'+$routeParams.id1);
@@ -713,4 +712,3 @@ appControllers.controller('pictureController', ['$scope','$routeParams', '$route
       $location.path('/museum/'+$routeParams.id);
     }
 }]);
-

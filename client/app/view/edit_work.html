@@ -52,7 +52,7 @@
             <label for="material_scul_work"> Material Work : </label>
             <br>
             <select class='form-control'  ng-model="$parent.material_scul_work"
-            ng-options='spe.name for spe in specialities_sculpture'>
+            ng-options='spez.name for spez in specialities_sculpture'>
         </select>
     </div>
 
@@ -66,7 +66,7 @@
     <label for="sheld_work"> Sheld work : </label>
     <br>
     <select class='form-control'  ng-model="$parent.sheld_work"
-    ng-options='spe.name for spe in specialities_paint_sheld_work'>
+    ng-options='sped.name for sped in specialities_paint_sheld_work'>
 </select>
 </div>
 <div class="animate-switch" ng-switch-default>Choose a work type...</div>
